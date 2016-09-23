@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
-# gem 'omniauth-google-oauth2' #add later when everything else works with google
-# gem 'omniauth-twitter' #add later when everything else works with github
+# gem 'omniauth-google-oauth2' #add later when everything else works with github
+# gem 'omniauth-twitter' #add later when everything else works with github and google
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
