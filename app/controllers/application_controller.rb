@@ -4,4 +4,9 @@ class ApplicationController < ActionController::Base
   def current_game
     current_player.current_game
   end
+
+  def team_owner?(team)
+    current_player.id == team.player_id
+  end
+
 end
