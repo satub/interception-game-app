@@ -22,6 +22,15 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def join
+    @game = Game.find(params[:id])
+    GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
+    current_player.current_game = @game
+    redirect_to new_team_path
+    # binding.pry
+    #add direct somwhere else if this create fails
+  end
+
   def history
     #possible route to viewing the history of all games played
   end

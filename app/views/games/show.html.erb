@@ -6,6 +6,13 @@
 show status
 Possibly add option, 'choose map'</p>
 
+
 <p>
 <%= (link_to "Map", map_path(@game.map)) if !@game.map.nil? %>
 <%= (link_to "Create Map", new_map_path) if @game.map.nil? %>  </p>
+
+
+<p>
+  This link should only be visible for games with open status:
+  <%= (link_to "Join This", join_path(@game)) if true%>
+</p>
