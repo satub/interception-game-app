@@ -16,3 +16,9 @@ Possibly add option, 'choose map'</p>
   This link should only be visible for games with open status:
   <%= (link_to "Join This", join_path(@game)) if true%>
 </p>
+
+
+<p>
+  If game has enough teams, show this link:
+  <%= (button_to "Launch Game", {controller: :games, action: "start"}, method: :post, params: {id: @game.id, status: "active"}) if true %>
+</p>

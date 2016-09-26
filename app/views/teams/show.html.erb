@@ -10,4 +10,6 @@ Chracters in this team
 
 
 
-<%= link_to "Add character to this team", new_team_character_path(@team, @character = Character.new) %>
+<%= link_to "Add character to this team", new_team_character_path(@team, @character = Character.new) %><br>
+
+<%= link_to "Done adding characters?", game_path(current_game) %> <br>

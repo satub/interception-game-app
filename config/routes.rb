@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "welcome#home"
   get '/about' => "welcome#about"
   get '/games/:id/join' => "games#join", as: '/join'
+  post '/games/:id/start' => "games#start", as: '/start'
 
   resources :teams do
     resources :characters
