@@ -1,8 +1,13 @@
 <!-- TBA team partial that can be used in several places... or make a model_printer helper and partial that can be used everywhere-->
 
-<%= @team.name %>
+<%= @team.name %> <br>
 
-list characters here
-add button: add character =>
+Chracters in this team
+<% @team.characters.each do |character| %>
+  <%= link_to character.name, team_character_path(@team, character) %> <br>
+<% end %>
 
-<%= link_to "Add character to this team", new_team_character_path(@team, Character.new) %>
+
+
+
+<%= link_to "Add character to this team", new_team_character_path(@team, @character = Character.new) %>
