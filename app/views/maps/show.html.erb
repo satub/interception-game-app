@@ -1,0 +1,14 @@
+<h1> <%= @map.name %></h1>
+
+
+This needs to be formatted and styled into nice grid :D  <br>
+<p>
+  <% @map.locations.each_with_index do |location, i| %>
+
+    <%= link_to "Area #{i}", map_location_path(@map, location) %>
+  <% end %>
+
+</p>
+
+<%= link_to "Game home page", game_path(current_game)%>
+<br>

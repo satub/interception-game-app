@@ -1,22 +1,18 @@
 class LocationsController < ApplicationController
 
-  def new
+  def index
+    ##shows only the locations connected to a specific map
   end
 
-  def create
+  def show
+    # binding.pry
+    @location = Location.find(params[:id])
   end
 
   def edit
   end
 
   def update
-  end
-  
-  def index
-    ##shows only the locations connected to a specific map
-  end
-
-  def show
   end
 
 end
