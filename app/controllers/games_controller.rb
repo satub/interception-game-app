@@ -7,9 +7,9 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-    GamePlayers.create(player_id: current_player.id, game_id: @game.id, creator: true)
+    GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
     current_player.current_game = @game
-    binding.pry
+    # binding.pry
     redirect_to new_team_path
     #add direct somwhere else if this create fails
   end

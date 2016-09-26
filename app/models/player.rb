@@ -6,6 +6,7 @@ class Player < ApplicationRecord
 
   has_many :game_players
   has_many :games, through: :game_players
+  has_many :teams, through: :games
   has_one :current_game, class_name: :game
 
 
@@ -25,7 +26,7 @@ class Player < ApplicationRecord
   end
 
   def current_game
-    Game.find_by(game_id: self.current_game_id)
+    Game.find_by(id: self.current_game_id)
   end
 
 end

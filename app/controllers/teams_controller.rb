@@ -5,10 +5,10 @@ class TeamsController < ApplicationController
   end
 
   def create
-    binding.pry
     @team = Team.create(team_params)
-    current_game.teams << @team
-    redirect_to new_team_character_path(@team)
+        # binding.pry
+    # current_game.teams << @team   ##figure out how to link teams to current_game
+    redirect_to team_path(@team)
   end
 
   def show
@@ -22,6 +22,6 @@ class TeamsController < ApplicationController
 
   private
     def team_params
-      params.require(:game).permit(:player_id, :name, :motto, :troops, :image_link, :style_link, :theme_link)
+      params.require(:team).permit(:player_id, :name, :motto, :troops, :image_link, :style_link, :theme_link)
     end
 end
