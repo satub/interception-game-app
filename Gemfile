@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'faker'
 # gem 'omniauth-google-oauth2' #add later when everything else works with github
 # gem 'omniauth-twitter' #add later when everything else works with github and google
 

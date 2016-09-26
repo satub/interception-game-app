@@ -1,0 +1,11 @@
+<h1>Game Setup Page</h1>
+
+<%= @game.title %> <br>
+
+<p>show teams
+show status
+Possibly add option, 'choose map'</p>
+
+<p>
+<%= (link_to "Map", map_path(@game.map)) if !@game.map.nil? %>
+<%= (link_to "Create Map", new_map_path) if @game.map.nil? %>  </p>

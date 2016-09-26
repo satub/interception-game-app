@@ -1,0 +1,15 @@
+<%= form_for @map do |f|%>
+  <%= f.label "Name Your Map" %> <br>
+  <%= f.text_field :name %> <br>
+
+  <%= f.hidden_field :game_id, value: current_game.id %>
+  <!-- TBA add rest of the stuff-->
+
+  <%= f.label "Map width (max 5)" %><br>
+  <%= f.text_field :size_x %> <br>
+
+  <%= f.label "Map height (max 4)" %><br>
+  <%= f.text_field :size_y %> <br>
+
+  <%= f.submit "Create" %>
+<% end %>
