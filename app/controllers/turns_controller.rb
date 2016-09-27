@@ -28,7 +28,7 @@ class TurnsController < ApplicationController
 
   private
   def turn_params
-    params.require(:turn).permit(:player_id, :header, location_ids:[], actions_attributes: [:number_of_troops, :action_type, :character_id, :location_id], locations_attributes: [:content, :player_id])
+    params.require(:turn).permit(:player_id, :header, location_ids:[], schemes_attributes: [:number_of_troops, :action_type, :character_id, :location_id], locations_attributes: [:content, :player_id])
   end
 
 end

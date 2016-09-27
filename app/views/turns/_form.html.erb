@@ -5,11 +5,11 @@
   <%= f.text_field :header %>
 </p>
 <p>
-  <%= f.fields_for :actions, turn.actions.build do |actions_fields| %>
-    Send Troops  <%= actions_fields.text_field :number_of_troops %> <br>
-    Action Type  <%= actions_fields.text_field :action_type %> <br>
-    Choose Character <%= actions_fields.collection_select(:character_id, Character.all, :id, :name) %>
-    Choose Location  <%= actions_fields.collection_select(:location_id, Location.all, :id, :id) %><br>
+  <%= f.fields_for :schemes, turn.schemes.build do |schemes_fields| %>
+    Send Troops  <%= schemes_fields.text_field :number_of_troops %> <br>
+    Action Type  <%= schemes_fields.text_field :nature %> <br>
+    Choose Character <%= schemes_fields.collection_select(:character_id, Character.all, :id, :name) %>
+    Choose Location  <%= schemes_fields.collection_select(:location_id, Location.all, :id, :id) %><br>
     <% end %>
     <!-- Insert a model class method here for finding all Characters that are free and in this player's team-->
 
