@@ -56,9 +56,6 @@ class GamesController < ApplicationController
     redirect_to map_path(current_game.map)
   end
 
-  def history
-    #possible route to viewing the history of all games played
-  end
 
   private
 
