@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!, only: [:new, :create]
+  before_action :choose_game, only: [:join, :show, :start]
 
   def new
     @game = Game.new
@@ -19,11 +20,9 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
   end
 
   def join
-    @game = Game.find(params[:id])
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
     current_player.current_game = @game
     redirect_to new_team_path
@@ -32,12 +31,14 @@ class GamesController < ApplicationController
   end
 
   def start
-    binding.pry
-    @game = Game.find(params[:id])
-    game.update(game_params)
+    # binding.pry
+    turn = @game.players.sample.id  #randomly choose player
+    @game.update(status: params[:status], turn: turn)
+    # game.update(game_params)
     ## call instance method to divvy up the map locations between the teams and set turn.
     ## This should open up the map for both, the one with turn active gets to set their moves
     ## the other waits with chance to examine the map.
+    redirect_to map_path(@game.map)
   end
 
 
@@ -46,6 +47,11 @@ class GamesController < ApplicationController
   end
 
   private
+
+    def choose_game
+      @game = Game.find(params[:id])
+    end
+
     def game_params
       params.require(:game).permit(:title, :fandom, :status)
     end
