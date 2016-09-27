@@ -1,0 +1,23 @@
+<%= form_for turn do |f| %>
+  <%= f.hidden_field :player_id, value: current_player.id %>
+<p>
+  <%= f.label "Objective: " %>
+  <%= f.text_field :header %>
+</p>
+<p>
+  <%= f.fields_for :actions, turn.actions.build do |actions_fields| %>
+    Send Troops  <%= actions_fields.text_field :number_of_troops %> <br>
+    Action Type  <%= actions_fields.text_field :action_type %> <br>
+    <% end %>
+    <!-- Insert a model class method here for finding all Characters that are free and in this player's team-->
+  <!--  Choose Character: <%= f.collection_check_boxes :character_ids, Character.all, :id, :name%> -->
+    Choose Character <%= f.collection_check_boxes(:character_ids, Character.all, :id, :name) %>
+</p>
+<p>Choose Locations: <br>
+  <%= f.collection_check_boxes :location_ids, Location.all, :id, :id %><br>
+Leave a message:  <%= f.fields_for :locations, turn.locations.build do |locations_fields| %>
+      <%= locations_fields.text_field :content %>
+  <% end %>
+</p>
+ <%= f.submit %>
+ <% end %>

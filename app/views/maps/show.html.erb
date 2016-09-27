@@ -13,8 +13,8 @@ This needs to be formatted and styled into nice grid :D  <br>
 <%= link_to "Game home page", game_path(current_game)%>
 <%if @map.game.status == "active"%>
   <br>
-  <%= (link_to "Deploy troops (dummy)", about_path) if current_player.id == @map.game.turn %>
-  
+  <%= (link_to "Deploy troops (dummy)", new_turn_path) if current_player.id == @map.game.turn %>
+
   <%= "Waiting for turn..." if current_player.id != @map.game.turn %>
   <br>
 <%end%>

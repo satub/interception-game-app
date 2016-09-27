@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927011940) do
+ActiveRecord::Schema.define(version: 20160927032315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.string   "action_type"
+    t.integer  "location_id"
+    t.integer  "character_id"
+    t.integer  "number_of_troops"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "turn_id"
+  end
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
@@ -94,6 +104,14 @@ ActiveRecord::Schema.define(version: 20160927011940) do
     t.string   "image_link"
     t.string   "style_link"
     t.string   "theme_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "player_id"
+    t.string   "header"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
