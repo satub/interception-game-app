@@ -7,15 +7,15 @@ Rails.application.routes.draw do
   post '/games/:id/start' => "games#start", as: '/start'
   get '/games/:id/status' => "games#status", as: '/status'
 
-  resources :teams do
+  resources :players do
     resources :characters
   end
-  resources :teams
+  # resources :teams
   resources :games
 
-  resources :maps do
+  # resources :maps do
     resources :locations
-  end
+  # end
 
   resources :turns
 end
