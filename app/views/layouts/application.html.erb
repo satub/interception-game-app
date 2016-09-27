@@ -9,11 +9,12 @@
   </head>
 
   <body>
+    <%= render partial: 'layouts/navbar' %>
     <% if current_player %>
     <%= "Playing as #{current_player.alias}" %> <br>
     <%= "Game status: #{current_game.status}, Turn player_number (this needs a helper to show the name): #{current_game.turn}" if current_game %><br>
     <% end %>
     <%= yield %>
-    <%= link_to("Sign out", destroy_player_session_path,:method => :delete) %>
+
   </body>
 </html>

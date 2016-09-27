@@ -1,0 +1,16 @@
+<p>
+  <%= link_to "Home", root_path %>
+  <%= link_to "About", about_path %>
+
+  <% if !current_player %>
+    <%= link_to "Sign In", new_player_session_path %>
+    <%= link_to "Sign Up", new_player_registration_path %>
+  <% end %>
+
+  <% if current_player %>
+    <%= link_to "Sign Out", destroy_player_session_path,:method => :delete  %>
+    <%= link_to "Open Games", games_path %>
+    <%= link_to "New Game", new_game_path %>
+    <% link_to "Edit Profile", edit_player_path(current_player) %>
+  <% end %>
+</p>
