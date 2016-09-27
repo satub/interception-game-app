@@ -5,6 +5,7 @@ class TurnsController < ApplicationController
   end
   def create
     @turn = Turn.create(player_id: params[:turn][:player_id])
+    binding.pry
     @turn.update(turn_params)
     # binding.pry
     # @turn.update(turn_params)

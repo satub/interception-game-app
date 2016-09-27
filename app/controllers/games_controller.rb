@@ -45,6 +45,8 @@ class GamesController < ApplicationController
 
   def status
     ##check if all slots owned byt the same player/team. If so, gameover, otherwise forward to next turn
+    ##These checks need model methods, move logic there !!
+    binding.pry
     redirect_to map_path(current_game.map)
   end
 

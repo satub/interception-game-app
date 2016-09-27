@@ -13,9 +13,9 @@ class Turn < ApplicationRecord
 
   def actions_attributes=(action_attributes)
     # self.save
+      binding.pry
     action_attributes.values.each do |action_attribute|
       action_attribute[:turn_id] = self.id
-      # binding.pry
       action = Action.create(action_attribute)
       self.actions << action
     end
