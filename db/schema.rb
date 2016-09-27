@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927162547) do
+ActiveRecord::Schema.define(version: 20160927190841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "character_locations", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "location_id"
+    t.integer  "troops_sent"
+    t.string   "message"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "characters", force: :cascade do |t|
+    t.integer  "player_id"
     t.string   "name"
     t.string   "image_link"
     t.string   "personality"
@@ -25,7 +35,6 @@ ActiveRecord::Schema.define(version: 20160927162547) do
     t.integer  "level",       default: 1
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "team_id"
   end
 
   create_table "game_players", force: :cascade do |t|
@@ -38,31 +47,24 @@ ActiveRecord::Schema.define(version: 20160927162547) do
 
   create_table "games", force: :cascade do |t|
     t.string   "title"
-    t.string   "fandom"
-    t.string   "status"
+    t.string   "status",                default: "pending"
     t.integer  "turn"
     t.integer  "winner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "map_name",              default: "Endless Swamp"
+    t.integer  "map_size",              default: 12
+    t.string   "map_style_link"
+    t.string   "map_image_link"
+    t.string   "background_image_link"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "map_id"
-    t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "player_id"
-  end
-
-  create_table "maps", force: :cascade do |t|
+    t.integer  "controlled_by"
     t.integer  "game_id"
-    t.string   "name"
-    t.string   "style_link"
-    t.string   "background_image_link"
-    t.integer  "size_x"
-    t.integer  "size_y"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "players", force: :cascade do |t|
@@ -84,36 +86,6 @@ ActiveRecord::Schema.define(version: 20160927162547) do
     t.integer  "current_game_id"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "schemes", force: :cascade do |t|
-    t.string   "nature"
-    t.integer  "location_id"
-    t.integer  "character_id"
-    t.integer  "number_of_troops"
-    t.integer  "turn_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  create_table "teams", force: :cascade do |t|
-    t.integer  "player_id"
-    t.string   "name"
-    t.string   "motto"
-    t.integer  "troops"
-    t.string   "image_link"
-    t.string   "style_link"
-    t.string   "theme_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "turns", force: :cascade do |t|
-    t.integer  "team_id"
-    t.integer  "player_id"
-    t.string   "header"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

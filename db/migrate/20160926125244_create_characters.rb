@@ -1,6 +1,7 @@
 class CreateCharacters < ActiveRecord::Migration[5.0]
   def change
     create_table :characters do |t|
+      t.integer :player_id
       t.string :name
       t.string :image_link
       t.string :personality

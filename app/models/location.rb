@@ -1,9 +1,8 @@
 class Location < ApplicationRecord
-  belongs_to :map
-  belongs_to :player ## set for early testing purposes, should be team, not player
-  # belongs_to :team
+  belongs_to :game
+  #current owner set through player_id
 
-  has_many :schemes
-  has_many :turns, through: :schemes
-  has_many :characters, through: :schemes
+  has_many :character_locations
+  has_many :characters, through: :character_locations
+
 end

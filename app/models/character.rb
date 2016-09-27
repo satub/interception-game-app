@@ -1,8 +1,8 @@
 class Character < ApplicationRecord
-  belongs_to :team
+  belongs_to :player
 
-  has_many :schemes
-  has_many :locations, through: :schemes
+  has_many :character_locations
+  has_many :locations, through: :character_locations
 
-  enum role: [:leader, :ace, :elite]
+  enum role: [:elite, :loose_cannon]
 end

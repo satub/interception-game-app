@@ -1,13 +1,13 @@
 class Turn < ApplicationRecord
   # belongs_to :team
-  belongs_to :player #should be team
-  has_many :schemes
-  has_many :locations, through: :schemes
-  has_many :characters, through: :schemes
-
-  accepts_nested_attributes_for :locations
-  accepts_nested_attributes_for :schemes
-
+  # belongs_to :player #should be team
+  # has_many :schemes
+  # has_many :locations, through: :schemes
+  # has_many :characters, through: :schemes
+  #
+  # accepts_nested_attributes_for :locations
+  # accepts_nested_attributes_for :schemes
+  #
 
   ### By the way, Turn needs a status column for the intercepts to be implemented
 
