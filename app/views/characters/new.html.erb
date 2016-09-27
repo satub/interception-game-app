@@ -1,7 +1,7 @@
-<%= form_for [@team, @character] do |f|%>
+<%= form_for [@player, @character] do |f|%>
   <%= f.label "Name Your Character" %> <br>
   <%= f.text_field :name %> <br>
-  <%= f.hidden_field :team_id, value: @team.id %>
+  <%= f.hidden_field :player_id, value: @current_player.id %>
   <!-- TBA other attributes for the character-->
 
   <%= f.submit "Create" %>

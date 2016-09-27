@@ -10,8 +10,8 @@ class GamesController < ApplicationController
     @game = Game.create(game_params)
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
     current_player.current_game = @game
-    # binding.pry
-    redirect_to new_team_path
+
+    redirect_to new_player_character_path(current_player)
     #add direct somwhere else if this create fails
   end
 
@@ -25,7 +25,7 @@ class GamesController < ApplicationController
   def join
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
     current_player.current_game = @game
-    redirect_to new_team_path
+    redirect_to new_player_character_path(current_player)
     # binding.pry
     #add direct somwhere else if this create fails
   end
@@ -64,6 +64,6 @@ class GamesController < ApplicationController
     end
 
     def game_params
-      params.require(:game).permit(:title, :fandom, :status)
+      params.require(:game).permit(:title, :status)
     end
 end

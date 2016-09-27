@@ -1,18 +1,15 @@
 class CharactersController < ApplicationController
 
   def new
-    @team = Team.find(params[:team_id])
+    @player = current_player
     @character = Character.new
   end
 
   def create
     # binding.pry
-    @character = Character.create(character_params)
-    binding.pry
-    @team = Team.find(params[:character][:team_id])
+    @character = Character.find_or_create_by(character_params)
 
-    # @character.team = @team
-    redirect_to team_path(@team)
+    redirect_to player_characters_path(current_player)
     ##add path to failed creation
   end
 
@@ -32,7 +29,7 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :team_id, :image_link, :role, :deployed, :personality, :status, :level)
+    params.require(:character).permit(:name, :player_id, :role)
   end
 
 end

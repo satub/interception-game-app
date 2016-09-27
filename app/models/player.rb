@@ -6,7 +6,7 @@ class Player < ApplicationRecord
 
   has_many :game_players
   has_many :games, through: :game_players
-  has_many :teams, through: :games
+  has_many :characters
   has_one :current_game, class_name: :game
 
 
