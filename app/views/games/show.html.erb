@@ -2,14 +2,10 @@
 
 <%= @game.title %> <br>
 
-<p>show teams
-show status
-Possibly add option, 'choose map'</p>
-
-
 <p>
-<%= (link_to "Map", map_path(@game.map)) if !@game.map.nil? %>
-<%= (link_to "Create Map", new_map_path) if @game.map.nil? %>  </p>
+  <%= (link_to "Show Locations", game_locations_path(@game)) if !@game.locations.empty? %>
+  <%= (link_to "Create Locations", setup_path(@game) ) if @game.locations.empty? %>
+</p>
 
 
 <p>

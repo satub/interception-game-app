@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!, only: [:new, :create]
-  before_action :choose_game, only: [:join, :show, :start, :status]
+  before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
 
   def new
     @game = Game.new
@@ -22,6 +22,11 @@ class GamesController < ApplicationController
   def show
   end
 
+  def generate_locations
+    @game.assign_locations([current_player])
+    redirect_to game_path(@game)
+  end
+
   def join
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
     current_player.current_game = @game
@@ -31,10 +36,10 @@ class GamesController < ApplicationController
   end
 
   def start
-    # binding.pry
+    binding.pry
     turn = @game.players.sample.id  #randomly choose player
     @game.update(status: params[:status], turn: turn)
-    @game.map.assign_locations(@game.players)
+    @game.assign_locations(@game.players)
     # game.update(game_params)
     ## call instance method to divvy up the map locations between the teams and set turn.
     ## This should open up the map for both, the one with turn active gets to set their moves
