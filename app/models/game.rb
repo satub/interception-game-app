@@ -4,6 +4,9 @@ class Game < ApplicationRecord
   has_many :locations
 
 
+  def self.pending_games
+    Games.where(status: "pending")
+  end
 
   def no_locations?
     self.locations.empty?

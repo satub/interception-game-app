@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
 
   def index
-    ##shows only the locations connected to a specific map
+    @locations = Location.where(game_id: current_game.id)
   end
 
   def show
