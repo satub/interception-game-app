@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/about' => "welcome#about"
   get '/games/:id/join' => "games#join", as: '/join'
   post '/games/:id/start' => "games#start", as: '/start'
+  get '/games/:id/status' => "games#status", as: '/status'
 
   resources :teams do
     resources :characters

@@ -43,6 +43,11 @@ class GamesController < ApplicationController
   end
 
 
+  def status
+    ##check if all slots owned byt the same player/team. If so, gameover, otherwise forward to next turn
+    redirect_to map_path(current_game.map)
+  end
+
   def history
     #possible route to viewing the history of all games played
   end
