@@ -8,7 +8,7 @@ class MapsController < ApplicationController
     # binding.pry
     @map = Map.create(map_params)
     ###MAP NEEDS A VALIDATION AGAINST LETTERS AND EMPTY VALUES IN THE SIZE BOXES!!!
-    @map.assign_locations if @map.no_locations?
+    @map.assign_locations([current_player]) if @map.no_locations?
     redirect_to map_path(@map)
   end
 

@@ -34,6 +34,7 @@ class GamesController < ApplicationController
     # binding.pry
     turn = @game.players.sample.id  #randomly choose player
     @game.update(status: params[:status], turn: turn)
+    @game.map.assign_locations(@game.players)
     # game.update(game_params)
     ## call instance method to divvy up the map locations between the teams and set turn.
     ## This should open up the map for both, the one with turn active gets to set their moves
