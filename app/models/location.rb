@@ -4,6 +4,8 @@ class Location < ApplicationRecord
   has_many :character_locations
   has_many :characters, through: :character_locations
 
+  validates :content, presence: true
+  
   accepts_nested_attributes_for :characters
   accepts_nested_attributes_for :character_locations
 

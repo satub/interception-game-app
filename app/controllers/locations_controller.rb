@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_action :choose_location, only: [:show, :edit, :update]
 
   def index
-    @locations = Location.where(game_id: current_game.id)
+    @locations = Location.where(game_id: current_game.id).order(:id)
   end
 
   def show
@@ -16,15 +16,16 @@ class LocationsController < ApplicationController
     game = Game.find(params[:game_id])
     binding.pry
     ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
-
     @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
 
-    
+    #on failed attempt:
+    #@location.update(location_params.TAKEOFF(controlled_by))
+
     ##switch turn  =>>>> this needs to be a method of the game class
     switch_turn = current_game.players.detect {|player| player.id != current_game.turn }
     game.update(turn: switch_turn.id)
 
-    redirect_to game_locations_path(current_game)
+    redirect_to status_path(current_game)
   end
 
   private

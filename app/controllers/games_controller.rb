@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_player!, only: [:new, :create]
+  before_action :authenticate_player! #, only: [:new, :create]
   before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
 
   def new
@@ -8,6 +8,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
+    binding.pry
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
     current_player.current_game = @game
     redirect_to new_player_character_path(current_player)
@@ -18,6 +19,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    binding.pry
   end
 
   def generate_locations
@@ -46,20 +48,20 @@ class GamesController < ApplicationController
     ##check if all slots owned byt the same player/team. If so, gameover, otherwise forward to next turn
     ##These checks need model methods, move logic there !!
     binding.pry
-    if current_game.players.collect {|player| current_game.map.locations.all?{|location| location.player == player.id}}.any?
+    if current_game.players.collect {|player| current_game.locations.all?{|location| location.controlled_by == player.id}}.any?
       @game.update(status: "finished")
       ###add winner here, too
     else
       ###print a message here?
     end
-    redirect_to map_path(current_game.map)
+    redirect_to game_locations_path(current_game)
   end
 
 
   private
 
     def choose_game
-      @game = Game.find(params[:id])
+      params[:game_id].exist? ? @game = Game.find(params[:game_id]) : @game = Game.find(params[:id])
     end
 
     def game_params

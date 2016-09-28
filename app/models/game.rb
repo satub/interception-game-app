@@ -3,6 +3,11 @@ class Game < ApplicationRecord
   has_many :players, through: :game_players
   has_many :locations
 
+  has_many :game_characters
+  has_many :characters, through: :game_characters
+
+  validates :title, presence: true
+  validates :map_size, numericality: {only_integer: true}, inclusion: {in: (4..20)}
 
   def self.pending_games
     Games.where(status: "pending")

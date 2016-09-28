@@ -10,4 +10,4 @@ Your characters:
 
 <%= link_to "Add character", new_player_character_path(current_player, @character = Character.new) %><br>
 
-<%= link_to "Done adding characters?", game_path(current_game) %> <br>
+<%= link_to "Done adding characters?", game_path(current_player.current_game) %> <br>
