@@ -1,11 +1,11 @@
 <h1> <%= current_game.map_name %></h1>
 
 
-This needs to be formatted and styled into nice grid :D  <br>
+This needs to be formatted and styled into a nice grid :D  <br>
 <p>
   <% @locations.each_with_index do |location, i| %>
 
-    <%= link_to "Area #{i+1}", game_location_path(current_game, location) %>
+    <%= link_to "Area #{i+1}, Controlled_by: #{location.player_in_control}", game_location_path(current_game, location) %>
     <%if current_game.status == "active" %>
       <br>
       <%= (link_to "Attack", edit_game_location_path(current_game, location)) if current_player.id == current_game.turn %>

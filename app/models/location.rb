@@ -5,12 +5,12 @@ class Location < ApplicationRecord
   has_many :characters, through: :character_locations
 
   validates :content, presence: true
-  
+
   accepts_nested_attributes_for :characters
   accepts_nested_attributes_for :character_locations
 
   def player_in_control
-    Player.find(self.controlled_by)
+    Player.find(self.controlled_by).alias
   end
 
   def characters_attributes=(character_attributes)

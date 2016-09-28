@@ -12,14 +12,14 @@
     <div class = "nav">
       <%= render partial: 'layouts/navbar' %>
     </div>
-    <div class="messages">
+    <div class = "messages">
       <%= render partial: 'layouts/messages' %>
     </div>
     <div class = "status">
       <p>
         <% if current_player %>
           <%= "Playing as #{current_player.alias}" %> <br>
-          <%= "Game status: #{current_game.status}, Turn player_number (this needs a helper to show the name): #{current_game.turn}" if current_game %><br>
+          <%= "Game: #{current_game.title}; Status: #{current_game.status}; #{current_game.whose_turn_is_it_anyway}'s turn." if current_game %><br>
         <% end %>
       </p>
     </div>

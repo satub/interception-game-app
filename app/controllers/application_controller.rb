@@ -5,5 +5,7 @@ class ApplicationController < ActionController::Base
     current_player.current_game
   end
 
+  def housekeeping
     
+  end
 end

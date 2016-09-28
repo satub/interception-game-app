@@ -25,11 +25,14 @@ class Game < ApplicationRecord
   def launchable?
     self.players.size > 1
   end
-  # 
+  #
   # def full_game?
   #   binding.pry
   #   Game.joins(:game_characters)
   # end
+  def whose_turn_is_it_anyway
+    self.players.detect{|player| player.id == self.turn}.alias
+  end
 
   def game_over?
   end
@@ -45,7 +48,7 @@ class Game < ApplicationRecord
       end
     else
       i = 0
-      until i > self.map_size/2
+      until i >= self.map_size/2
         self.locations[i].update(controlled_by: player_array[1].id, content: Faker::StarWars.quote)
         i += 1
       end
