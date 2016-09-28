@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def housekeeping
-    
+    ##Add some method here to clean the flash messages, errors, etc upon redirects
   end
 end

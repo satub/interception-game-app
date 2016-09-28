@@ -1,18 +1,18 @@
 <%= form_for [current_game, location] do |f| %>
 
   <%= f.hidden_field :controlled_by, value: current_player.id %>
-  Current message: <%= location.content%>
+  <h4>Current message: <%= location.content%></h4>
 <p>
 
 </p>
 <%= f.fields_for :characters, location.characters.build do |characters_fields| %>
-  <!-- Troops Left: <%= characters_fields.text_field :energy, readonly: true %> -->
+
 <% end %> <br>
 <p>
   <%= f.fields_for :character_locations, location.character_locations.build do |character_locations_fields| %>
-  Choose your character:  <%= character_locations_fields.collection_select :character_id, current_player.characters, :id, :name %>
-  Send Troops:    <%= character_locations_fields.text_field :troops_sent, placeholder: character_locations.errors.full_messages_for(:troops_sent).first || "" , class: "field_with_errors" %><br>
-    New Message: <%= character_locations_fields.text_field :message, placeholder: character_locations.errors.full_messages_for(:message).first || "" , class: "field_with_errors" %> <br>
+  Choose your character:  <%= character_locations_fields.collection_select :character_id, current_player.characters, :id, :name %><br>
+  Send Troops:  <%= character_locations_fields.text_field :troops_sent, class: "field_with_errors" %><br>
+    New Message: <%= character_locations_fields.text_field :message, class: "field_with_errors" %><br>
   <% end %>
 </p>
   <%= f.submit "Overtake!" %>
