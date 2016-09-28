@@ -7,10 +7,15 @@ class CharactersController < ApplicationController
 
   def create
     # binding.pry
+    @player = current_player
     @character = Character.find_or_create_by(character_params)
 
-    redirect_to player_characters_path(current_player)
-    ##add path to failed creation
+    if @character.errors.empty?
+      redirect_to player_characters_path(current_player)
+    else
+      flash[:error] = "Character creation failed."
+      render :new
+    end
   end
 
   def edit

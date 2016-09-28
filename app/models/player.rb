@@ -9,6 +9,8 @@ class Player < ApplicationRecord
   has_many :characters
   has_one :current_game, class_name: :game
 
+  ##Custom validation:
+  ####validates that alias is not a direct substring of email
 
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |player|

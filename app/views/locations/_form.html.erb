@@ -12,7 +12,9 @@
   <%= f.fields_for :character_locations, location.character_locations.build do |character_locations_fields| %>
   Choose your character:  <%= character_locations_fields.collection_select :character_id, current_player.characters, :id, :name %>
   Send Troops:    <%= character_locations_fields.text_field :troops_sent %><br>
-  New Message: <%= character_locations_fields.text_field :message %> <br>
+  <div class="field_with_errors">
+    New Message: <%= character_locations_fields.text_field :message %> <br>
+  </div>
   <% end %>
 </p>
   <%= f.submit "Overtake!" %>

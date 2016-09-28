@@ -1,4 +1,7 @@
+<p>
+<%= image_tag("http://img-cache.cdn.gaiaonline.com/ca65c057a6a1ff00665c7fe6b0379302/http://i618.photobucket.com/albums/tt266/goku14139268520/doublefacepalm.jpg", width: 200) if flash[:error]%>
 <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
 <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
 <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
 <%= content_tag(:div, flash[:message], :id => "flash_message") if flash[:message] %>
+</p>

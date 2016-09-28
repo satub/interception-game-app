@@ -1,6 +1,6 @@
 <%= form_for [@player, @character] do |f|%>
-  <%= f.label "Name Your Character" %> <br>
-  <%= f.text_field :name %> <br>
+  <%= f.label "Name Your Character: " %> <br>
+  <%= f.text_field :name, placeholder: @character.errors.full_messages_for(:name).first || "" , class: "field_with_errors" %> <br>
   <%= f.hidden_field :player_id, value: @current_player.id %>
   <!-- TBA other attributes for the character-->
 

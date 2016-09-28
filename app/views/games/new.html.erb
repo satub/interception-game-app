@@ -1,6 +1,9 @@
 <%= form_for @game do |f|%>
-  <%= f.label "Name Your Game" %> <br>
-  <%= f.text_field :title %> <br>
+
+  <%= f.label "Your Game Title: " %> <br>
+
+  <%= f.text_field :title, placeholder: @game.errors.full_messages_for(:title).first || "" , class: "field_with_errors"%> <br>
+
 
   <!-- TBA choose fandom/universe-->
 

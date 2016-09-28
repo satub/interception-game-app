@@ -6,8 +6,12 @@ class Character < ApplicationRecord
 
   has_many :game_characters
   has_many :games, through: :game_characters
-  
+
   enum role: [:elite, :loose_cannon]
 
   validates :name, presence: true
+
+
+  ##Custom validation: same player shouldn't have multiple charaters with the same name
+  
 end

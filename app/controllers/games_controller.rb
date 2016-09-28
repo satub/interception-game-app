@@ -8,10 +8,15 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-    binding.pry
-    GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
-    current_player.current_game = @game
-    redirect_to new_player_character_path(current_player)
+
+    if @game.errors.empty?
+      GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
+      current_player.current_game = @game
+      redirect_to new_player_character_path(current_player)
+    else
+      flash[:error] = "Game creation failed."
+      render :new
+    end
   end
 
   def index
