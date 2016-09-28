@@ -10,9 +10,7 @@ class GamesController < ApplicationController
     @game = Game.create(game_params)
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
     current_player.current_game = @game
-
     redirect_to new_player_character_path(current_player)
-    #add direct somwhere else if this create fails
   end
 
   def index
@@ -32,12 +30,11 @@ class GamesController < ApplicationController
     current_player.current_game = @game
     redirect_to new_player_character_path(current_player)
     # binding.pry
-    #add direct somwhere else if this create fails
   end
 
   def start
     # binding.pry
-    turn = @game.players.sample.id  #randomly choose player
+    turn = @game.players.sample.id  #randomly choose first player
     @game.update(status: params[:status], turn: turn)
     @game.assign_locations(@game.players)
 

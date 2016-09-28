@@ -6,15 +6,13 @@ This needs to be formatted and styled into nice grid :D  <br>
   <% @locations.each_with_index do |location, i| %>
 
     <%= link_to "Area #{i+1}", game_location_path(current_game, location) %>
+    <%if current_game.status == "active" %>
+      <br>
+      <%= (link_to "Attack", edit_game_location_path(current_game, location)) if current_player.id == current_game.turn %>
+      <br>
+    <%end%>
   <% end %>
-
+<%= "Waiting for turn..." if current_player.id != current_game.turn %>
 </p>
 
 <%= link_to "Game home page", game_path(current_game)%>
-<%if current_game.status == "active" %>
-  <br>
-  <%= (link_to "Make War (dummy)", root_path) if current_player.id == current_game.turn %>
-
-  <%= "Waiting for turn..." if current_player.id != current_game.turn %>
-  <br>
-<%end%>

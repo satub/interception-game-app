@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927190841) do
+ActiveRecord::Schema.define(version: 20160928025354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20160927190841) do
     t.boolean  "deployed"
     t.string   "status"
     t.integer  "level",       default: 1
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "energy",      default: 1000
   end
 
   create_table "game_players", force: :cascade do |t|

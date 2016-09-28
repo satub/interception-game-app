@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   #Routes for Game Controller
   resources :games, only: [:index, :show, :new, :create] do
-    resources :locations, only: [:show, :index]
+    resources :locations, only: [:show, :index, :edit, :update]
   end
   get '/games/:id/join' => "games#join", as: '/join'
   post '/games/:id/start' => "games#start", as: '/start'
@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :players, only: [:show, :edit, :update] do
     resources :characters, except: :destroy
   end
+
 end
