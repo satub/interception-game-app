@@ -6,11 +6,13 @@ class CharactersController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     @player = current_player
     @character = Character.create(character_params)
 
     if @character.errors.empty?
+      binding.pry
+      GameCharacter.create(game_id: current_game.id, character_id: @character.id)
       redirect_to player_characters_path(current_player)
     else
       flash[:error] = "Character creation failed. #{@character.errors.full_messages_for(:name).first}"

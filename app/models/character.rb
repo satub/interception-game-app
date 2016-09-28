@@ -15,10 +15,10 @@ class Character < ApplicationRecord
   validate :unique_for_this_player
 
   def unique_for_this_player
-    if self.player.characters.detect {|character| character.name = self.name}
+    if self.player.characters.detect {|character| character.name == self.name}
        errors.add(:name, "not unique. All your character names need to be unique.")
     end
   end
 
-  
+
 end
