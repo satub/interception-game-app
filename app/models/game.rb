@@ -31,7 +31,8 @@ class Game < ApplicationRecord
   #   Game.joins(:game_characters)
   # end
   def whose_turn_is_it_anyway
-    self.players.detect{|player| player.id == self.turn}.alias
+    yours = self.players.detect{|player| player.id == self.turn}
+    yours.alias unless yours.nil?
   end
 
   def game_over?

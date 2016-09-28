@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
+    before_action :housekeeping
+    
   def current_game
     current_player.current_game
   end
 
   def housekeeping
-    ##Add some method here to clean the flash messages, errors, etc upon redirects
+    flash.clear
   end
 end
