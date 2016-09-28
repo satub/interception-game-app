@@ -9,14 +9,20 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/navbar' %>
+    <div class = "nav">
+      <%= render partial: 'layouts/navbar' %>
+    </div>
     <div class="messages">
       <%= render partial: 'layouts/messages' %>
     </div>
-    <% if current_player %>
-      <%= "Playing as #{current_player.alias}" %> <br>
-      <%= "Game status: #{current_game.status}, Turn player_number (this needs a helper to show the name): #{current_game.turn}" if current_game %><br>
-    <% end %>
+    <div class = "status">
+      <p>
+        <% if current_player %>
+          <%= "Playing as #{current_player.alias}" %> <br>
+          <%= "Game status: #{current_game.status}, Turn player_number (this needs a helper to show the name): #{current_game.turn}" if current_game %><br>
+        <% end %>
+      </p>
+    </div>
     <%= yield %>
 
   </body>

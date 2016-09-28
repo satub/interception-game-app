@@ -1,11 +1,16 @@
-<%= form_for @game do |f|%>
+<p>
+  <%= form_for @game do |f|%>
 
-  <%= f.label "Your Game Title: " %> <br>
-
-  <%= f.text_field :title, placeholder: @game.errors.full_messages_for(:title).first || "" , class: "field_with_errors"%> <br>
-
-
-  <!-- TBA choose fandom/universe-->
-
-  <%= f.submit "Create" %>
-<% end %>
+    <p>
+    <%= f.label "Your Game Title: " %> <br>
+    <%= f.text_field :title, placeholder: @game.errors.full_messages_for(:title).first || "" , class: "field_with_errors"%> <br>
+    </p><p>
+    <%= f.label "Enter map size (between 4 and 20): " %> <br>
+    <%= f.text_field :map_size, placeholder: @game.errors.full_messages_for(:map_size).first || "" , class: "field_with_errors"%> <br>
+    </p><p>
+    <%= f.label "Custom map name: " %> <br>
+    <%= f.text_field :map_name, placeholder: "Default: 'Endless Swamp'" %> <br>
+    </p>
+    <%= f.submit "Create" %>
+  <% end %>
+</p>

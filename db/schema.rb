@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(version: 20160928123621) do
     t.string   "status",                default: "pending"
     t.integer  "turn"
     t.integer  "winner"
-    t.string   "map_name",              default: "Endless Swamp"
-    t.integer  "map_size",              default: 12
+    t.string   "map_name"
+    t.integer  "map_size"
     t.string   "map_style_link"
     t.string   "map_image_link"
     t.string   "background_image_link"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   create_table "locations", force: :cascade do |t|

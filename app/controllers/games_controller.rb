@@ -8,7 +8,6 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-
     if @game.errors.empty?
       GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
       current_player.current_game = @game
@@ -18,6 +17,7 @@ class GamesController < ApplicationController
       render :new
     end
   end
+
 
   def index
     @games = Game.all
@@ -63,13 +63,13 @@ class GamesController < ApplicationController
   end
 
 
-  private
 
+  private
     def choose_game
       params[:game_id].exist? ? @game = Game.find(params[:game_id]) : @game = Game.find(params[:id])
     end
 
     def game_params
-      params.require(:game).permit(:title, :status)
+      params.require(:game).permit(:title, :status, :map_size, :map_name)
     end
 end
