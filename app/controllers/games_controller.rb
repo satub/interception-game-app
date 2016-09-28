@@ -22,7 +22,7 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.pending_games
-    flash[:notice] = "No games found" if @games.empty?
+    flash[:notice] = "No open games found" if @games.empty?
   end
 
   def show

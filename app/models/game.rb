@@ -18,10 +18,18 @@ class Game < ApplicationRecord
     Game.where(status: "pending").order(:id)
   end
 
-  def full_game?
-    binding.pry
-    Game.joins(:game_characters)
+  def joinable?
+    self.status == "pending"
   end
+
+  def launchable?
+    self.players.size > 1
+  end
+  # 
+  # def full_game?
+  #   binding.pry
+  #   Game.joins(:game_characters)
+  # end
 
   def game_over?
   end

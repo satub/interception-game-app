@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 20160928123621) do
     t.string   "image_link"
     t.string   "personality"
     t.integer  "role",        default: 0
-    t.boolean  "deployed"
-    t.string   "status"
     t.integer  "level",       default: 1
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -42,6 +40,8 @@ ActiveRecord::Schema.define(version: 20160928123621) do
     t.integer  "game_id"
     t.integer  "character_id"
     t.integer  "troops",       default: 1000
+    t.boolean  "deployed"
+    t.string   "status"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end

@@ -27,6 +27,7 @@ class CharactersController < ApplicationController
   end
 
   def show
+    @player = current_player
     @character = Character.find(params[:id])
   end
 
@@ -36,7 +37,7 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :player_id, :role)
+    params.require(:character).permit(:name, :player_id, :role, :image_link, :personality)
   end
 
 end

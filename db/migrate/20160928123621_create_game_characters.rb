@@ -4,7 +4,8 @@ class CreateGameCharacters < ActiveRecord::Migration[5.0]
       t.integer :game_id
       t.integer :character_id
       t.integer :troops, default: 1000
-
+      t.boolean :deployed
+      t.string :status
       t.timestamps
     end
   end

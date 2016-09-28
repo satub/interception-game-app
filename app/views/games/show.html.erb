@@ -9,12 +9,10 @@
 
 
 <p>
-  This link should only be visible for games with pending status:
-  <%= (link_to "Join This", join_path(@game)) if true%>
+  <%= (link_to "Join This Game", join_path(@game)) if @game.joinable?%>
 </p>
 
 
 <p>
-  If game has enough teams, show this link:
-  <%= (button_to "Launch Game", {controller: :games, action: "start"}, method: :post, params: {id: @game.id, status: "active"}) if true %>
+  <%= (button_to "Launch Game", {controller: :games, action: "start"}, method: :post, params: {id: @game.id, status: "active"}) if @game.launchable? %>
 </p>

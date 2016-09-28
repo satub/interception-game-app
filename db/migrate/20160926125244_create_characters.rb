@@ -6,8 +6,6 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.string :image_link
       t.string :personality
       t.integer :role, default: 0
-      t.boolean :deployed
-      t.string :status
       t.integer :level, default: 1
       t.timestamps
     end
