@@ -2,6 +2,7 @@ class Location < ApplicationRecord
   belongs_to :game
 
   validates :content, presence: true
+  
   validates_associated :character_locations
 
   has_many :character_locations
