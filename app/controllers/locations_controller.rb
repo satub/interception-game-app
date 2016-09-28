@@ -10,11 +10,19 @@ class LocationsController < ApplicationController
 
   def edit
   end
+    # @turn = Turn.create(turn_params.merge(player_id: params[:turn][:player_id]))
 
   def update
+    game = Game.find(params[:game_id])
     binding.pry
     ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
-    @location.update(location_params)
+
+    @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
+
+    
+    ##switch turn  =>>>> this needs to be a method of the game class
+    switch_turn = current_game.players.detect {|player| player.id != current_game.turn }
+    game.update(turn: switch_turn.id)
 
     redirect_to game_locations_path(current_game)
   end

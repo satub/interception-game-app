@@ -13,20 +13,18 @@ class Location < ApplicationRecord
 
   def characters_attributes=(character_attributes)
     # self.save
-      binding.pry
+      # binding.pry
     character_attributes.values.each do |character_attribute|
-      binding.pry
+      # binding.pry
       # find character and update it
     end
   end
 
   def character_locations_attributes=(character_location_attributes)
-    binding.pry
-    # self.locations.each do |location|
-    #   location_attributes.values.each do |location_attribute|
-      # #update location if stuff fits
-    #   # end
-    # end
+    # binding.pry
+      character_location_attributes.values.each do |character_location_attribute|
+      CharacterLocation.create(character_location_attribute.merge(location_id: self.id, success: true))
+    end
   end
 
 

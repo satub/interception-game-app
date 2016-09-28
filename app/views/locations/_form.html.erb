@@ -1,19 +1,18 @@
 <%= form_for [current_game, location] do |f| %>
 
-<p>
-  <%= f.label "New Content:" %>
-  <%= f.text_field :content %>
-</p>
   <%= f.hidden_field :controlled_by, value: current_player.id %>
+  Current message: <%= location.content%>
 <p>
-  <%= f.collection_select :character_ids, current_player.characters, :id, :name %>
+
 </p>
 <%= f.fields_for :characters, location.characters.build do |characters_fields| %>
-     <%= characters_fields.text_field :energy %>
+  <!-- Troops Left: <%= characters_fields.text_field :energy, readonly: true %> -->
 <% end %> <br>
 <p>
   <%= f.fields_for :character_locations, location.character_locations.build do |character_locations_fields| %>
-  Power To Overtake:    <%= character_locations_fields.text_field :troops_sent %>
+  Choose your character:  <%= character_locations_fields.collection_select :character_id, current_player.characters, :id, :name %>
+  Send Troops:    <%= character_locations_fields.text_field :troops_sent %><br>
+  New Message: <%= character_locations_fields.text_field :message %> <br>
   <% end %>
 </p>
   <%= f.submit "Overtake!" %>
