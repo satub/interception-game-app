@@ -11,6 +11,7 @@ class GamesController < ApplicationController
     if @game.errors.empty?
       GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
       current_player.current_game = @game
+      flash[:error].clear unless flash[:error].nil?
       redirect_to new_player_character_path(current_player)
     else
       flash[:error] = "Game creation failed."
@@ -20,11 +21,12 @@ class GamesController < ApplicationController
 
 
   def index
-    @games = Game.all
+    @games = Game.pending_games
+    flash[:notice] = "No games found" if @games.empty?
   end
 
   def show
-    binding.pry
+    # binding.pry
   end
 
   def generate_locations
@@ -66,7 +68,7 @@ class GamesController < ApplicationController
 
   private
     def choose_game
-      params[:game_id].exist? ? @game = Game.find(params[:game_id]) : @game = Game.find(params[:id])
+      !params[:game_id].nil? ? @game = Game.find(params[:game_id]) : @game = Game.find(params[:id])
     end
 
     def game_params

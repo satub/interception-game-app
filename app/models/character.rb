@@ -9,9 +9,16 @@ class Character < ApplicationRecord
 
   enum role: [:elite, :loose_cannon]
 
+  accepts_nested_attributes_for :game_characters
+
   validates :name, presence: true
+  validate :unique_for_this_player
 
+  def unique_for_this_player
+    if self.player.characters.detect {|character| character.name = self.name}
+       errors.add(:name, "not unique. All your character names need to be unique.")
+    end
+  end
 
-  ##Custom validation: same player shouldn't have multiple charaters with the same name
   
 end

@@ -15,7 +15,15 @@ class Game < ApplicationRecord
   ###be able to shut off joining in function after 2 players in a game
 
   def self.pending_games
-    Games.where(status: "pending").order(:id)
+    Game.where(status: "pending").order(:id)
+  end
+
+  def full_game?
+    binding.pry
+    Game.joins(:game_characters)
+  end
+
+  def game_over?
   end
 
   def no_locations?

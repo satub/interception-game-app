@@ -6,3 +6,8 @@ div.field_with_errors input[type="text"]{
   border: 2px solid red;
   color: red;
 }
+
+#flash_notice {
+  border: 2px solid orange;
+  color: orange;
+}

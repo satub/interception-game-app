@@ -4,5 +4,9 @@
   <%= f.hidden_field :player_id, value: @current_player.id %>
   <!-- TBA other attributes for the character-->
 
+  TBA:: Choose from existing characters (Choose max 2): <br>
+
+  <%= f.collection_check_boxes :id, current_player.characters, :id, :name %> <br>
+
   <%= f.submit "Create" %>
 <% end %>
