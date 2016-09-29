@@ -20,6 +20,10 @@ module ApplicationHelper
     Character.active_characters(current_game, current_player)
   end
 
+  def who(player_id)
+    Player.player_who(player_id)
+  end
+
   def who_am_i(id)
     Character.who_am_i(id)
   end

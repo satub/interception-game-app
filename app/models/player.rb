@@ -21,6 +21,9 @@ class Player < ApplicationRecord
     end
   end
 
+  def self.player_who(id)
+    Player.find(id).alias
+  end
 
   def current_game=(game)
     game.nil? ? self.current_game_id = nil : self.current_game_id = game.id

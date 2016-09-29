@@ -43,11 +43,9 @@ class GamesController < ApplicationController
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
     current_player.current_game = @game
     redirect_to new_player_character_path(current_player)
-    # binding.pry
   end
 
   def start
-    # binding.pry
     turn = @game.players.sample.id  #randomly choose first player
     @game.update(status: params[:status], turn: turn)
     @game.assign_locations(@game.players)
@@ -57,18 +55,11 @@ class GamesController < ApplicationController
 
 
   def status
-    ##check if all slots owned byt the same player/team. If so, gameover, otherwise forward to next turn
-    ##These checks need model methods, move logic there !!
-    binding.pry
-    if current_game.players.collect {|player| current_game.locations.all?{|location| location.controlled_by == player.id}}.any?
-      @game.update(status: "finished")
-      ###add winner here, too
-    else
-      ###print a message here?
+    if game_over?
+      @game.update(status: "finished", winner: winner_id)
     end
     redirect_to game_locations_path(current_game)
   end
-
 
 
   private
@@ -77,6 +68,6 @@ class GamesController < ApplicationController
     end
 
     def game_params
-      params.require(:game).permit(:title, :status, :map_size, :map_name)
+      params.require(:game).permit(:title, :status, :map_size, :map_name, :winner)
     end
 end

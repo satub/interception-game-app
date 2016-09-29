@@ -1,8 +1,7 @@
 class Game < ApplicationRecord
+  has_many :locations
   has_many :game_players
   has_many :players, through: :game_players
-  has_many :locations
-
   has_many :game_characters
   has_many :characters, through: :game_characters
 
@@ -31,8 +30,8 @@ class Game < ApplicationRecord
   end
 
   def whose_turn_is_it_anyway
-    yours = self.players.detect{|player| player.id == self.turn}
-    yours.alias unless yours.nil?
+    theirs = self.players.detect{|player| player.id == self.turn}
+    theirs.alias unless theirs.nil?
   end
 
   def switch_turn
@@ -41,6 +40,11 @@ class Game < ApplicationRecord
   end
 
   def game_over?
+    self.players.collect {|player| self.locations.all?{|location| location.controlled_by == player.id}}.any?
+  end
+
+  def winner_id
+    self.locations.first.player_id if game_over?
   end
 
   def no_locations?
