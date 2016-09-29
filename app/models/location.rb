@@ -20,13 +20,15 @@ class Location < ApplicationRecord
     self.character_locations.order(id: :desc)
   end
 
-
+  ##This might not be needed at all, remove if this can be done with model methods instead :P
   def characters_attributes=(character_attributes)
     character_attributes.values.each do |character_attribute|
     end
   end
 
+
   def character_locations_attributes=(character_location_attributes)
+    ## create charlocation, check for success, update success field, and other models dependent on it by calling model methods
     # binding.pry
       character_location_attributes.values.each do |character_location_attribute|
         cl = CharacterLocation.create(character_location_attribute.merge(location_id: self.id, success: true))

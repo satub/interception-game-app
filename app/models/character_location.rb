@@ -4,7 +4,7 @@ class CharacterLocation < ApplicationRecord
 
   validates :message, presence: true
   validates :troops_sent, numericality: {only_integer: true, allow_nil: true}
-  
+
 
   def has_enough_troops  ### this needs a function that sets the attempt failed or succeeded, not a validation
     binding.pry
@@ -16,4 +16,16 @@ class CharacterLocation < ApplicationRecord
       self.location.errors.add(:troops_sent, "You can't send more troops than you have available")
     end
   end
+
+
+  def valid_action?
+  end
+
+  def successful_action?
+  end
+
+  def log_it
+  end
+
+
 end
