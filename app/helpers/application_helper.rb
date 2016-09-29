@@ -16,4 +16,8 @@ module ApplicationHelper
     end
   end
 
+  def active_characters
+    Character.active_characters(current_game, current_player)
+  end
+
 end

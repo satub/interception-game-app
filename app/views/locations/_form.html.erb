@@ -10,7 +10,7 @@
 <% end %> <br>
 <p>
   <%= f.fields_for :character_locations, location.character_locations.build do |character_locations_fields| %>
-  Choose your character:  <%= character_locations_fields.collection_select :character_id, current_player.characters, :id, :name %><br>
+  Choose your character:  <%= character_locations_fields.collection_select :character_id, active_characters, :id, :name %><br>
   Send Troops:  <%= character_locations_fields.text_field :troops_sent, class: "field_with_errors" %><br>
     New Message: <%= character_locations_fields.text_field :message, class: "field_with_errors" %><br>
   <% end %>

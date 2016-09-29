@@ -20,13 +20,13 @@ GamePlayer.create(game_id: game2.id, player_id: major.id, creator: true)
 game1.update(turn: integra.id)
 
 4.times do
-  Location.create(controlled_by: integra.id, game_id: game1.id, content: Faker::ChuckNorris.fact)
+  Location.create(controlled_by: integra.id, game_id: game1.id, content: Faker::ChuckNorris.fact, defense: 100)
 end
 4.times do
-  Location.create(controlled_by: enrico.id, game_id: game1.id, content: Faker::StarWars.quote)
+  Location.create(controlled_by: enrico.id, game_id: game1.id, content: Faker::StarWars.quote, defense: 100)
 end
 12.times do
-    Location.create(controlled_by: major.id, game_id: game2.id, content: Faker::StarWars.quote)
+    Location.create(controlled_by: major.id, game_id: game2.id, content: Faker::StarWars.quote, defense: 100)
 end
 
 alu = Character.create(player_id: integra.id, name: 'Alucard', image_link: 'http://4.bp.blogspot.com/-USFVX_GxATQ/UP6Y7Z3dXNI/AAAAAAAAClk/KcXutQoUoUA/s1600/Alucard-Hellsing-Ultimate.jpg', personality: 'devil-may-care', role: 1)

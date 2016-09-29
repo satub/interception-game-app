@@ -14,7 +14,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    # binding.pry
+    binding.pry
     ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
     @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
       binding.pry

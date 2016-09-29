@@ -14,7 +14,9 @@ class Character < ApplicationRecord
   validates :name, presence: true
   validate :unique_for_this_player
 
-
+  def self.active_characters(game, player)
+     self.joins(:games, :player).where("games.id = ? AND players.id = ?", game.id, player.id)
+  end
 
   def unique_for_this_player
     if !self.player.characters.empty?

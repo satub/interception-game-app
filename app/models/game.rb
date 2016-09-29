@@ -29,11 +29,7 @@ class Game < ApplicationRecord
   def launchable?
     self.players.size > 1
   end
-  #
-  # def full_game?
-  #   binding.pry
-  #   Game.joins(:game_characters)
-  # end
+
   def whose_turn_is_it_anyway
     yours = self.players.detect{|player| player.id == self.turn}
     yours.alias unless yours.nil?
@@ -49,12 +45,12 @@ class Game < ApplicationRecord
   def assign_locations(player_array)
     if player_array.size == 1
       self.map_size.times do
-        location = Location.create(game_id: self.id, controlled_by: player_array[0].id, content: Faker::ChuckNorris.fact)
+        location = Location.create(game_id: self.id, controlled_by: player_array[0].id, content: Faker::ChuckNorris.fact, defense: 100)
       end
     else
       i = 0
       until i >= self.map_size/2
-        self.locations[i].update(controlled_by: player_array[1].id, content: Faker::StarWars.quote)
+        self.locations[i].update(controlled_by: player_array[1].id, content: Faker::StarWars.quote, defense: 100)
         i += 1
       end
     end
