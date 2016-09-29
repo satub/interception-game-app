@@ -15,6 +15,12 @@ class Location < ApplicationRecord
     Player.find(self.controlled_by).alias
   end
 
+
+  def history
+    self.character_locations
+  end
+
+
   def characters_attributes=(character_attributes)
     character_attributes.values.each do |character_attribute|
     end

@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
 
   def show
     ###show the whole history for this location
+    @history = @location.history
   end
 
   def edit
@@ -19,15 +20,14 @@ class LocationsController < ApplicationController
     ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
     @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
       binding.pry
-    if @location.errors.empty?
-      #on failed attempt:
+    if @location.errors.empty?  ##but how do I check for the numericality error in  CharacterLocation model?????
+      #Attempt failures need to be model methods in character locations
       #@location.update(location_params.TAKEOFF(controlled_by))
-      ##switch turn  =>>>> this needs to be a method of the game class
       @game.switch_turn
 
       redirect_to status_path(current_game)
     else
-      ### ohmigod, this path works at least on some level!! :o
+      ### ohmigod, this path works  only on locations-level some level!! :o
       binding.pry
       flash[:error] = "Something went oh-so wrong."
       render :edit

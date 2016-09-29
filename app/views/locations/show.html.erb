@@ -1,10 +1,14 @@
 <h1><%= @location.content %></h1>
-
-<!-- This should be the team name-->
 <h3>Current Owner: <%= @location.player_in_control %> </h3>
-Edits to content, editors, current owner and the original owner will be printed here
 
 
 <br>
 <%= link_to "Back to Locations Index", game_locations_path(current_game)%>
 <br>
+
+
+<% if @history %>
+  <% @history.each do |history|%>
+    <%= render partial: 'locations/history', locals: {event: history}%>
+  <% end %>
+<% end %>

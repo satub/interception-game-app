@@ -47,7 +47,7 @@ class Game < ApplicationRecord
     self.locations.empty?
   end
 
-  def assign_locations(player_array)
+  def assign_locations(player_array)  ##works only for 2-players atm
     if player_array.size == 1
       self.map_size.times do
         location = Location.create(game_id: self.id, controlled_by: player_array[0].id, content: Faker::ChuckNorris.fact, defense: 100)
