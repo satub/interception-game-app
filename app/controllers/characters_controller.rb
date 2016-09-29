@@ -1,13 +1,12 @@
 class CharactersController < ApplicationController
-
+  before_action :set_player
+  
   def new
-    @player = current_player
     @character = Character.new
   end
 
   def create
     # binding.pry
-    @player = current_player
     @character = Character.create(character_params)
 
     if @character.errors.empty?
@@ -27,19 +26,21 @@ class CharactersController < ApplicationController
   end
 
   def show
-    @player = current_player
     @character = Character.find(params[:id])
   end
 
   def index
-    @player = current_player
-    ##only shows the characters for the player
-    @characters = current_player.characters
+    ##only shows the characters for the current player
+    @characters = @player.characters
   end
 
   private
   def character_params
     params.require(:character).permit(:name, :player_id, :role, :image_link, :personality)
+  end
+
+  def set_player
+    @player = current_player
   end
 
 end
