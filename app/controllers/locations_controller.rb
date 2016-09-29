@@ -16,19 +16,20 @@ class LocationsController < ApplicationController
   end
 
   def update
-    binding.pry
     ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
-    @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
-      binding.pry
-    if @location.errors.empty?  ##but how do I check for the numericality error in  CharacterLocation model?????
+
+    # if !Location.new(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"])).errors.any?
+    if valid_takeover?
+      @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
+      # binding.pry
+    # if @location.errors.empty? ##but how do I check for the numericality error in  CharacterLocation model?????
       #Attempt failures need to be model methods in character locations
       #@location.update(location_params.TAKEOFF(controlled_by))
       @game.switch_turn
-
       redirect_to status_path(current_game)
     else
       ### ohmigod, this path works  only on locations-level some level!! :o
-      binding.pry
+      # binding.pry
       flash[:error] = "Something went oh-so wrong."
       render :edit
     end
@@ -42,10 +43,17 @@ class LocationsController < ApplicationController
       @game = Game.find(params[:game_id])
       @location = Location.find(params[:id])
     end
+
     def location_params
       params.require(:location).permit(:content, :controlled_by, :character_ids, characters_attributes: [:energy, :status], character_locations_attributes: [:message, :character_id, :location_id, :troops_sent])
     end
+
     def choose_game
       @game = Game.find(params[:game_id])
+    end
+
+    def valid_takeover?
+      c_l_params = params[:location][:character_locations_attributes]
+      CharacterLocation.new(message: c_l_params[:message], troops_sent: c_l_params[:troops_sent]).valid?
     end
 end

@@ -12,6 +12,11 @@ div.field_with_errors input[type="text"]{
   color: orange;
 }
 
+#flash_message {
+  border: 2px solid purple;
+  color: purple;
+}
+
 div.status {
   border: 1px dotted blue;
 }

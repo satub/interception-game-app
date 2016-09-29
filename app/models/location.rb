@@ -3,10 +3,9 @@ class Location < ApplicationRecord
 
   validates :content, presence: true
 
-  validates_associated :character_locations
-
   has_many :character_locations
   has_many :characters, through: :character_locations
+  validates_associated :character_locations
 
   accepts_nested_attributes_for :characters
   accepts_nested_attributes_for :character_locations
@@ -31,10 +30,14 @@ class Location < ApplicationRecord
     ## create charlocation, check for success, update success field, and other models dependent on it by calling model methods
     # binding.pry
       character_location_attributes.values.each do |character_location_attribute|
-        cl = CharacterLocation.create(character_location_attribute.merge(location_id: self.id, success: true))
-        cg = cl.character.game_characters.detect{|gc| gc.game_id == self.game_id}
-        troops_left = cg.troops - character_location_attribute[:troops_sent].to_i
-      cg.update(troops: troops_left)
+        cl = CharacterLocation.new(character_location_attribute.merge(location_id: self.id, success: true))
+          if cl.save
+            cg = cl.character.game_characters.detect{|gc| gc.game_id == self.game_id}
+            troops_left = cg.troops - character_location_attribute[:troops_sent].to_i
+            cg.update(troops: troops_left)
+          else
+            errors.add(:character_location, cl.errors.messages[:troops_sent])
+          end
     end
   end
 

@@ -3,6 +3,6 @@
 <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
 <%= image_tag("http://37.media.tumblr.com/7a01fad56d40a67d366fb58cabe71f77/tumblr_mq4z97dX0h1s9ctlvo1_500.gif", width: 200) if flash[:notice] %>
 <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+<%= image_tag("https://66.media.tumblr.com/dbe1a42d8d528f7bcf47d160ab844020/tumblr_nkljtzLVgn1ql3vujo3_500.gif", width: 200) if flash[:message] %>
 <%= content_tag(:div, flash[:message], :id => "flash_message") if flash[:message] %>
 </p>
