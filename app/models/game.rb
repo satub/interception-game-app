@@ -44,7 +44,7 @@ class Game < ApplicationRecord
   end
 
   def winner_id
-    self.locations.first.player_id if game_over?
+    self.locations.first.controlled_by if game_over?
   end
 
   def no_locations?

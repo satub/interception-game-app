@@ -55,8 +55,8 @@ class GamesController < ApplicationController
 
 
   def status
-    if game_over?
-      @game.update(status: "finished", winner: winner_id)
+    if @game.game_over?
+      @game.update(status: "finished", winner: @game.winner_id, turn: nil)
     end
     redirect_to game_locations_path(current_game)
   end

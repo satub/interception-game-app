@@ -44,7 +44,7 @@ class LocationsController < ApplicationController
     end
 
     def valid_takeover?
-      c_l_params = params[:location][:character_locations_attributes]
+      c_l_params = params[:location][:character_locations_attributes]["0"]
       CharacterLocation.new(message: c_l_params[:message], troops_sent: c_l_params[:troops_sent]).valid?
     end
 end
