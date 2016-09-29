@@ -17,7 +17,7 @@ class Location < ApplicationRecord
 
 
   def history
-    self.character_locations
+    self.character_locations.order(id: :desc)
   end
 
 
