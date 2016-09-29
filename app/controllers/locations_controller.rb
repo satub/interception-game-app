@@ -28,9 +28,7 @@ class LocationsController < ApplicationController
       @game.switch_turn
       redirect_to status_path(current_game)
     else
-      ### ohmigod, this path works  only on locations-level some level!! :o
-      # binding.pry
-      flash[:error] = "Something went oh-so wrong."
+      flash[:error] = "Something went oh-so wrong. Check the following: 1) Message can't be empty. 2) Number of troops must be a number."
       render :edit
     end
   end
