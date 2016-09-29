@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
   end
 
   def show
+    ###show the whole history for this location
   end
 
   def edit
@@ -21,17 +22,20 @@ class LocationsController < ApplicationController
     if @location.errors.empty?
       #on failed attempt:
       #@location.update(location_params.TAKEOFF(controlled_by))
-
       ##switch turn  =>>>> this needs to be a method of the game class
-      switch_turn = current_game.players.detect {|player| player.id != current_game.turn }
-      @game.update(turn: switch_turn.id)
+      @game.switch_turn
+
       redirect_to status_path(current_game)
     else
+      ### ohmigod, this path works at least on some level!! :o
       binding.pry
-      flash[:error] = "not right"
+      flash[:error] = "Something went oh-so wrong."
       render :edit
     end
   end
+
+
+
 
   private
     def choose_location

@@ -2,7 +2,7 @@ class Location < ApplicationRecord
   belongs_to :game
 
   validates :content, presence: true
-  
+
   validates_associated :character_locations
 
   has_many :character_locations
@@ -16,11 +16,7 @@ class Location < ApplicationRecord
   end
 
   def characters_attributes=(character_attributes)
-    # self.save
-      # binding.pry
     character_attributes.values.each do |character_attribute|
-      # binding.pry
-      # find character and update it
     end
   end
 

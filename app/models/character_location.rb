@@ -4,10 +4,9 @@ class CharacterLocation < ApplicationRecord
 
   validates :message, presence: true
   validates :troops_sent, numericality: {only_integer: true, allow_nil: true}
+  
 
-  validate :has_enough_troops
-
-  def has_enough_troops
+  def has_enough_troops  ### this needs a function that sets the attempt failed or succeeded, not a validation
     binding.pry
     game = self.location.game_id
     status = self.character.game_characters.detect {|game_character| game_character.game_id == game }

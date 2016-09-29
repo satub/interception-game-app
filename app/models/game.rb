@@ -27,12 +27,17 @@ class Game < ApplicationRecord
   end
 
   def launchable?
-    self.players.size > 1
+    self.players.size > 1 && self.status == "pending"
   end
 
   def whose_turn_is_it_anyway
     yours = self.players.detect{|player| player.id == self.turn}
     yours.alias unless yours.nil?
+  end
+
+  def switch_turn
+    next_player = self.players.detect {|player| player.id != self.turn }  ##note: currently works only with 2-player game
+    self.update(turn: next_player.id)
   end
 
   def game_over?

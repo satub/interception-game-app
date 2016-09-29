@@ -2,10 +2,8 @@ class GameCharacter < ApplicationRecord
   belongs_to :character
   belongs_to :game
 
-  validates :troops, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  # validates :troops, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  # replace this with a custom method, not validation
 
 
-  def self.current_characters(game, player)
-    binding.pry
-  end
 end
