@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post '/games/:id/start' => "games#start", as: '/start'
   get '/games/:id/status' => "games#status", as: '/status'
   get '/games/:id/setup' => "games#generate_locations", as: '/setup'
+  get '/mygames' => "games#my_games", as: '/mygames'
 
   #Routes for Characters
   resources :players, only: [:show, :edit, :update] do

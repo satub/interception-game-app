@@ -25,6 +25,11 @@ class GamesController < ApplicationController
     flash[:notice] = "No open games found" if @games.empty?
   end
 
+  def my_games
+    @games = Game.my_games(current_player)
+    flash[:notice] = "You don'thave any games yet" if @games.empty?
+  end
+
   def show
     # binding.pry
   end

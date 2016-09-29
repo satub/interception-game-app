@@ -18,6 +18,10 @@ class Game < ApplicationRecord
     Game.where(status: "pending").order(:id)
   end
 
+  def self.my_games(player)
+    self.joins(:players).where("players.id = ?", player.id)
+  end
+
   def joinable?
     self.status == "pending"
   end

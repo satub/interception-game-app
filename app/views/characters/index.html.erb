@@ -1,11 +1,9 @@
-<%= current_player.alias %> <br>
+Characters found: <br>
 
-Your characters:<br>
-<% current_player.characters.each do |character| %>
+<p>
+<% @characters.each do |character| %>
   <%= link_to character.name, player_character_path(current_player, character) %> <br>
 <% end %>
-
+</p>
 
 <%= link_to "Add character", new_player_character_path(current_player, @character = Character.new) %><br>
-
-<%= link_to "Done adding characters?", game_path(current_player.current_game) %> <br>

@@ -15,3 +15,14 @@ div.field_with_errors input[type="text"]{
 div.status {
   border: 1px dotted blue;
 }
+
+div.location {
+  border: 1px dotted blue;
+  display: inline;
+  float: left;
+  width: 20%
+}
+
+div.game_status_message {
+  clear: left;
+}

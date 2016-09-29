@@ -1,8 +1,10 @@
 class LocationsController < ApplicationController
   before_action :choose_location, only: [:show, :edit, :update]
+  before_action :choose_game, only: [:index]
 
   def index
-    @locations = Location.where(game_id: current_game.id).order(:id)
+    @locations = Location.where(game_id: params[:game_id]).order(:id)
+    current_player.current_game = @game
   end
 
   def show
@@ -10,7 +12,6 @@ class LocationsController < ApplicationController
 
   def edit
   end
-    # @turn = Turn.create(turn_params.merge(player_id: params[:turn][:player_id]))
 
   def update
     # binding.pry
@@ -39,5 +40,8 @@ class LocationsController < ApplicationController
     end
     def location_params
       params.require(:location).permit(:content, :controlled_by, :character_ids, characters_attributes: [:energy, :status], character_locations_attributes: [:message, :character_id, :location_id, :troops_sent])
+    end
+    def choose_game
+      @game = Game.find(params[:game_id])
     end
 end

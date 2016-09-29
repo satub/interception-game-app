@@ -32,7 +32,9 @@ class CharactersController < ApplicationController
   end
 
   def index
-    ##only shows the characters within the given team
+    @player = current_player
+    ##only shows the characters for the player
+    @characters = current_player.characters
   end
 
   private

@@ -4,14 +4,17 @@
 This needs to be formatted and styled into a nice grid :D  <br>
 <p>
   <% @locations.each_with_index do |location, i| %>
-
+    <div class="location">
     <%= link_to "Area #{i+1}, Controlled_by: #{location.player_in_control}", game_location_path(current_game, location) %><br>
     <%if current_game.status == "active" %>
       <%= (link_to "Attack", edit_game_location_path(current_game, location)) if current_player.id == current_game.turn %>
       <br>
     <%end%>
+  </div>
   <% end %>
+  <div class = "game_status_message">
 <%= game_status_message %>
+  </div>
 </p>
 
 <%= link_to "Game home page", game_path(current_game)%>
