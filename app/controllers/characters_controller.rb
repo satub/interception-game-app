@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
   before_action :set_player
-  
+
   def new
     @character = Character.new
   end
@@ -9,9 +9,16 @@ class CharactersController < ApplicationController
     # binding.pry
     @character = Character.create(character_params)
 
-    if @character.errors.empty?
-      binding.pry
-      GameCharacter.create(game_id: current_game.id, character_id: @character.id)
+    #######Refactor this hack########
+    if @character.errors.empty? || params[:character][:id].last != ""
+      if current_game
+        GameCharacter.find_or_create_by(game_id: current_game.id, character_id: @character.id)
+        if !params[:character][:id].empty?
+          params[:character][:id].each do |assign|
+            GameCharacter.find_or_create_by(game_id: current_game.id, character_id: assign)
+          end
+        end
+      end
       redirect_to player_characters_path(current_player)
     else
       flash[:error] = "Character creation failed. #{@character.errors.full_messages_for(:name).first}"
@@ -36,7 +43,7 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :player_id, :role, :image_link, :personality)
+    params.require(:character).permit(:name, :player_id, :role, :image_link, :personality, :id)
   end
 
   def set_player

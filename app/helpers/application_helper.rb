@@ -24,4 +24,10 @@ module ApplicationHelper
     Character.who_am_i(id)
   end
 
+  def can_be_added?
+    if current_game
+      current_game.joinable?
+    end
+  end
+
 end

@@ -12,7 +12,13 @@
   TBA:: Choose role <br>
   TBA:: Choose from existing characters (Choose max 2): <br>
 
-  <%= f.collection_check_boxes :id, current_player.characters, :id, :name %> <br> 
+  <% if !can_be_added? %>
+    <%= (f.submit "Create character") %>
+  <% else %>
 
-  <%= f.submit "Assign to this game" %>
+    <%= f.collection_check_boxes :id, current_player.characters, :id, :name %> <br>
+    <%= (f.submit "Assign to this game") if can_be_added? %>
+    
+  <% end %>
+
 <% end %>

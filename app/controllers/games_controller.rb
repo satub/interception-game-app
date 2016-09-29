@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_player! #, only: [:new, :create]
+  before_action :authenticate_player!
   before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
 
   def new
