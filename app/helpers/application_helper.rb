@@ -34,4 +34,12 @@ module ApplicationHelper
     end
   end
 
+  def possible_target?(location)
+    current_player.id == current_game.turn && location.controlled_by != current_player.id
+  end
+
+  def game_active?
+    current_game.status == "active"
+  end
+
 end
