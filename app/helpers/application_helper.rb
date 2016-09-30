@@ -45,4 +45,8 @@ module ApplicationHelper
   def successful?(event)
      event.success ? "success" : "failure"
   end
+
+  def defense(location)
+    "Current defense: #{location.defense}" if location.controlled_by == current_player.id
+  end
 end

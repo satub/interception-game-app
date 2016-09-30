@@ -1,11 +1,8 @@
 <h1><%= @location.content %></h1>
 <h3>Current Owner: <%= @location.player_in_control %> </h3>
+<h5><%= defense(@location) %></h5>
 
-
-<br>
-<%= link_to "Back to Locations Index", game_locations_path(current_game)%>
-<br>
-
+<%= link_to "Back to Locations Index", game_locations_path(current_game)%><br>
 
 <% if @history %>
   <% @history.each do |history|%>
