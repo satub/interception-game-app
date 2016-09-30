@@ -17,30 +17,17 @@ class Location < ApplicationRecord
     self.character_locations.order(id: :desc)
   end
 
-
-  def take_over?
-    binding.pry
+  def set_defense(troops_sent)
+    new_defense = self.defense - troops_sent
+    self.update(defense: new_defense.abs)
   end
-
-  def set_defense
-    binding.pry
-  end
-
 
   def character_locations_attributes=(character_location_attributes)
-    ## create charlocation, check for success, update success field, and other models dependent on it by calling model methods
-    # binding.pry
-      character_location_attributes.values.each do |character_location_attribute|
-        cl = CharacterLocation.new(character_location_attribute.merge(location_id: self.id))
-          if cl.save
-            cg = cl.character.game_characters.detect{|gc| gc.game_id == self.game_id}
-            troops_left = cg.troops - character_location_attribute[:troops_sent].to_i
-            cg.update(troops: troops_left)
-            new_defense = cl.location.defense - cl.troops_sent
-            cl.location.update(defense: new_defense.abs)
-          else
-            errors.add(:character_location, cl.errors.messages[:troops_sent])
-          end
+    character_location_attributes.values.each do |character_location_attribute|
+      cl = CharacterLocation.create(character_location_attribute.merge(location_id: self.id))
+      cg = cl.character.game_characters.detect{|gc| gc.game_id == self.game_id}
+      cg.troops_left(cl.troops_sent)
+      self.set_defense(cl.troops_sent)
     end
   end
 

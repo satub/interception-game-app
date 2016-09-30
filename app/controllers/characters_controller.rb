@@ -6,7 +6,6 @@ class CharactersController < ApplicationController
   end
 
   def create
-    # binding.pry
     @character = Character.create(character_params)
 
     #######Refactor this hack########
