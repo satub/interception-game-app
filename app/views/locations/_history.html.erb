@@ -1,8 +1,6 @@
-<p>
-
-<h4> <%= event.message %> </h4>
-<h5> by <%= who_am_i(event.character_id) %> </h5>
-this takeover on <%= event.updated_at %> was a <%= "success" if event.success %> <%= "failure" if !event.success %>
-with <%= event.troops_sent %> troops sent
-
-</p>
+<div class="history">
+  <h4> <%= event.message %> </h4>
+  <h5> <%= who_am_i(event.character_id) %> </h5>
+  This takeover on <%= event.updated_at %> was a <%= successful?(event) %>
+  with <%= event.troops_sent %> troops sent.
+</div>

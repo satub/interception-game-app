@@ -17,7 +17,7 @@ div.field_with_errors input[type="text"]{
   color: purple;
 }
 
-div.status {
+div.status, div.history {
   border: 1px dotted blue;
 }
 

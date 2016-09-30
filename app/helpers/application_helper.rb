@@ -42,4 +42,7 @@ module ApplicationHelper
     current_game.status == "active"
   end
 
+  def successful?(event)
+     event.success ? "success" : "failure"
+  end
 end
