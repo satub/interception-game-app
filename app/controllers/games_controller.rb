@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :housekeeping, except: :status
   before_action :authenticate_player!
   before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
 
@@ -58,6 +59,7 @@ class GamesController < ApplicationController
     if @game.game_over?
       @game.update(status: "finished", winner: @game.winner_id, turn: nil)
     end
+    flash.keep(:message)
     redirect_to game_locations_path(current_game)
   end
 

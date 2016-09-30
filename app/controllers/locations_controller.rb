@@ -1,6 +1,8 @@
 class LocationsController < ApplicationController
+  before_action :housekeeping, except: :index
   before_action :choose_location, only: [:show, :edit, :update]
   before_action :choose_game, only: [:index]
+  before_action :quick_hash_access, only: [:update]
 
   def index
     @locations = Location.where(game_id: params[:game_id]).order(:id)
@@ -15,9 +17,17 @@ class LocationsController < ApplicationController
   end
 
   def update
-    ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
-    if valid_takeover?
-      @location.update(location_params.merge(content: location_params[:character_locations_attributes]["0"]["message"]))
+    if valid_takeover_attempt?
+      if can_be_taken?
+        params[:location][:character_locations_attributes]["0"][:success] = true
+        @location.update(location_params.merge(content: @address[:message]))
+      else
+        params[:location][:character_locations_attributes]["0"][:success] = false
+        @location.update(location_params.delete_if{|key, value| key == "controlled_by"})
+        flash[:message] = "Attempt to take over location failed."
+        flash.keep(:message)
+      end
+      ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
       @game.switch_turn
       redirect_to status_path(current_game)
     else
@@ -40,11 +50,23 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:content, :controlled_by, :character_ids, characters_attributes: [:energy, :status], character_locations_attributes: [:message, :character_id, :location_id, :troops_sent])
+      params.require(:location).permit(:content, :controlled_by, character_locations_attributes: [:message, :character_id, :location_id, :troops_sent, :success])
     end
 
-    def valid_takeover?
-      c_l_params = params[:location][:character_locations_attributes]["0"]
-      CharacterLocation.new(message: c_l_params[:message], troops_sent: c_l_params[:troops_sent]).valid?
+    def valid_takeover_attempt?
+      CharacterLocation.new(message: @address[:message], troops_sent: @address[:troops_sent]).valid?
     end
+
+    def can_be_taken?   ###REFACTOR THIS !!!!
+      @location.defense
+      character = Character.find(@address[:character_id])
+      trial = character.attack(@address[:troops_sent].to_i)
+      energy = character.game_characters.detect{|gc| gc.game_id == current_game.id}.troops
+      @location.defense < trial && @address[:troops_sent].to_i < energy
+    end
+
+    def quick_hash_access
+      @address = location_params[:character_locations_attributes]["0"]
+    end
+
 end

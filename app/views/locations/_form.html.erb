@@ -2,12 +2,7 @@
 
   <%= f.hidden_field :controlled_by, value: current_player.id %>
   <h4>Current message: <%= location.content%></h4>
-<p>
 
-</p>
-<%= f.fields_for :characters, location.characters.build do |characters_fields| %>
-
-<% end %> <br>
 <p>
   <%= f.fields_for :character_locations, location.character_locations.build do |character_locations_fields| %>
   Choose your character:  <%= character_locations_fields.collection_select :character_id, active_characters, :id, :name %><br>
