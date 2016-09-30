@@ -1,13 +1,9 @@
 <h1>Character Details for <%= @character.name%>:</h1>
 
-<!-- use MODEL printer or _character_template here-->
-
 <%= image_tag("#{@character.image_link}", width: "150") %> <br>
 
 <p>
   Personality: <%= @character.personality %> <br>
 </p>
 
-  TBA: option to edit<br>
-  TBA: character status in current game if in use <br>
-  TBA: list of games this character has been used in? <br>
+  <%=   print_character_status(current_game.id, @character.id)  if in_use?(current_game.id, @character.id) %>

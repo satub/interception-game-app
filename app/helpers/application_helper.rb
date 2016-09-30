@@ -42,11 +42,24 @@ module ApplicationHelper
     current_game.status == "active"
   end
 
+  def game_joinable?
+    current_game.joinable? && !current_game.game_players.detect { |gp| current_player.id == gp.player_id }
+  end
+
   def successful?(event)
      event.success ? "success" : "failure"
   end
 
   def defense(location)
     "Current defense: #{location.defense}" if location.controlled_by == current_player.id
+  end
+
+  def in_use?(game_id, character_id)
+    GameCharacter.character_in_use?(game_id, character_id)
+  end
+
+  def print_character_status(game_id, character_id)
+    gc = GameCharacter.find_by(game_id: game_id, character_id: character_id) if in_use?(game_id, character_id)
+    "Troops: #{gc.troops}"
   end
 end

@@ -9,7 +9,7 @@
 
 
 <p>
-  <%= (link_to "Join This Game", join_path(@game)) if @game.joinable?%>
+  <%= (link_to "Join This Game", join_path(@game)) if game_joinable?%>
 </p>
 
 

@@ -19,7 +19,7 @@ class Location < ApplicationRecord
 
   def set_defense(troops_sent)
     new_defense = self.defense - troops_sent
-    self.update(defense: new_defense.abs)
+    self.defense = new_defense.abs
   end
 
   def character_locations_attributes=(character_location_attributes)
