@@ -10,5 +10,4 @@ class ApplicationController < ActionController::Base
     flash.clear
   end
 
-  
 end

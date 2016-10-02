@@ -21,6 +21,10 @@ class Game < ApplicationRecord
     self.joins(:players).where("players.id = ?", player.id)
   end
 
+  def no_more_characters?(player)
+    self.class.joins(:characters).where('characters.player_id = ? AND game_characters.game_id = ?', player.id, self.id).size >= 2
+  end
+
   def joinable?
     self.status == "pending"
   end

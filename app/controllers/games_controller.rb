@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     if @game.errors.empty?
       GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
       current_player.current_game = @game
-      flash[:error].clear unless flash[:error].nil?
+      
       redirect_to new_player_character_path(current_player)
     else
       flash[:error] = "Game creation failed."

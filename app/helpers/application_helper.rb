@@ -12,10 +12,9 @@ module ApplicationHelper
     if player.nil?
       content_tag :h3, "Please log in or signup to continue! :D"
     else
-      link_to "Currently playing in #{current_game.title}", game_path(current_game) if current_game
+      link_to "Last played: #{current_game.title}", game_path(current_game) if current_game
     end
   end
-
 
   def game_status_message
     if current_game
@@ -34,6 +33,10 @@ module ApplicationHelper
     Character.active_characters(current_game, current_player)
   end
 
+  def no_more?(player)
+    current_game.no_more_characters?(player)
+  end
+
   def who(player_id)
     Player.player_who(player_id)
   end
@@ -42,9 +45,9 @@ module ApplicationHelper
     Character.who_am_i(id)
   end
 
-  def can_be_added?
+  def can_be_added?(player)
     if current_game
-      current_game.joinable?
+      current_game.joinable? && !current_game.no_more_characters?(player)
     end
   end
 

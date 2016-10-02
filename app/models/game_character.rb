@@ -11,7 +11,6 @@ class GameCharacter < ApplicationRecord
   end
 
   def self.character_in_use?(game_id, character_id)
-
     !GameCharacter.find_by(game_id: game_id, character_id: character_id).nil?
   end
 

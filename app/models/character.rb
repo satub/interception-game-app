@@ -9,8 +9,18 @@ class Character < ApplicationRecord
   accepts_nested_attributes_for :game_characters
 
   validates :name, presence: true
-  validate :unique_for_this_player
+  validate :unique_for_this_player, if: :player_id
 
+
+  def game_characters_attributes=(game_character_attributes)
+    binding.pry
+    game_character_attributes.values.each do |gc_attrib|
+      default_troops = 1000  #this will be decided by game size
+      gc_attrib[:character_id].each_with_index do |char, i|
+        GameCharacter.find_or_create_by(game_id: gc_attrib[:game_id], character_id: gc_attrib[:character_id][i], troops: default_troops) unless i == 0
+      end
+    end
+  end
 
   def self.who_am_i(id)
     Character.find(id).name

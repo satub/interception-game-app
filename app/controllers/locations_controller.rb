@@ -3,6 +3,7 @@ class LocationsController < ApplicationController
   before_action :choose_location, only: [:show, :edit, :update]
   before_action :choose_game, only: [:index]
   before_action :quick_hash_access, only: [:update]
+  before_action :authenticate_player!
 
   def index
     @locations = Location.where(game_id: params[:game_id]).order(:id)
@@ -27,7 +28,6 @@ class LocationsController < ApplicationController
         flash[:message] = "Attempt to take over location failed."
         flash.keep(:message)
       end
-      ##use model methods to check if this location can be overtaken. If not, notify of a failed attempt
       @game.switch_turn
       redirect_to status_path(current_game)
     else
@@ -40,13 +40,13 @@ class LocationsController < ApplicationController
 
 
   private
-    def choose_location
-      @game = Game.find(params[:game_id])
-      @location = Location.find(params[:id])
-    end
-
     def choose_game
       @game = Game.find(params[:game_id])
+    end
+
+    def choose_location
+      choose_game
+      @location = Location.find(params[:id])
     end
 
     def location_params
