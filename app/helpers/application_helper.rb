@@ -16,6 +16,20 @@ module ApplicationHelper
     end
   end
 
+  def player_status
+    "Logged in as #{current_player.alias}" if current_player
+  end
+
+  def game_status
+    link_to("Game: #{current_game.title}; Status: #{current_game.status}", game_path(current_game)) if current_game
+  end
+
+  def turn_status
+    if current_game
+      "#{current_game.whose_turn_is_it_anyway}'s turn." if game_active?
+    end
+  end
+
   def game_status_message
     if current_game
       case current_game.status
@@ -28,6 +42,11 @@ module ApplicationHelper
       end
     end
   end
+
+
+
+
+
 
   def active_characters
     Character.active_characters(current_game, current_player)

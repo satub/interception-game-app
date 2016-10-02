@@ -17,10 +17,9 @@
     </div>
     <div class = "status">
       <p>
-        <% if current_player %>
-          <%= "Playing as #{current_player.alias}" %> <br>
-          <%= "Game: #{current_game.title}; Status: #{current_game.status}; #{current_game.whose_turn_is_it_anyway}'s turn." if current_game %><br>
-        <% end %>
+        <%= player_status %><br>
+        <%= game_status %><br>
+        <%= turn_status %>
       </p>
     </div>
     <%= yield %>
