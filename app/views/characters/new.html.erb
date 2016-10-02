@@ -14,8 +14,8 @@
   <%= f.label "Personality type (optional): " %><br>
   <%= f.text_field :personality %> <br>
 
-  Choose from existing characters: <br>  
-<!-- will be limited to only two when frontend jQuery will be implemented-->
+  Choose from existing characters: <br>
+<!-- choice will be limited to only two when frontend jQuery will be implemented-->
   <% if !can_be_added?(current_player) %>
     <%= (f.submit "Create character") %>
   <% else %>

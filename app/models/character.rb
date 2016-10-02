@@ -13,7 +13,6 @@ class Character < ApplicationRecord
 
 
   def game_characters_attributes=(game_character_attributes)
-    binding.pry
     game_character_attributes.values.each do |gc_attrib|
       default_troops = 1000  #this will be decided by game size
       gc_attrib[:character_id].each_with_index do |char, i|
