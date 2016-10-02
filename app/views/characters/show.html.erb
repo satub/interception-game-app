@@ -1,9 +1,9 @@
 <h1>Character Details for <%= @character.name%>:</h1>
 
-<%= image_tag("#{@character.image_link}", width: "150") %> <br>
+<%= image_tag("#{@character.image_link}", width: "250") %> <br>
 
 <p>
   Personality: <%= @character.personality %> <br>
 </p>
 
-  <%=   print_character_status(current_game.id, @character.id)  if in_use?(current_game.id, @character.id) %>
+<%=   print_character_status(current_game.id, @character.id)  if in_use?(current_game.id, @character.id) %>

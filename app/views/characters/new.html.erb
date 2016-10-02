@@ -1,7 +1,4 @@
-<% if current_game %>
-<h5>  <%= "Can't assign any more characters to this game to this game. You can still create new characters to be used in other games." if no_more?(current_player) %>
-</h5>
-<% end %>
+<%= no_more? %>
 
 <%= form_for [@player, @character] do |f| %>
   <%= f.label "Name Your Character: " %><br>
@@ -14,17 +11,16 @@
   <%= f.label "Personality type (optional): " %><br>
   <%= f.text_field :personality %> <br>
 
-  Choose from existing characters: <br>
-<!-- choice will be limited to only two when frontend jQuery will be implemented-->
   <% if !can_be_added?(current_player) %>
-    <%= (f.submit "Create character") %>
+    <%= f.submit "Create character" %>
   <% else %>
-
+    Choose from existing characters: <br>
+    <!-- choice will be limited to only two when frontend jQuery will be implemented-->
     <%= f.fields_for :game_characters, @character.game_characters.build do |game_characters_fields| %>
       <%= game_characters_fields.collection_check_boxes :character_id, current_player.characters, :id, :name %> <br>
       <%= game_characters_fields.hidden_field :game_id, value: current_game.id %>
     <% end %>
 
-    <%= (f.submit "Assign to this game") if can_be_added?(current_player) %>
+    <%= f.submit "Assign to this game" %>
   <% end %>
 <% end %>

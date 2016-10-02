@@ -30,6 +30,11 @@ module ApplicationHelper
     end
   end
 
+  def print_character_status(game_id, character_id)
+    gc = GameCharacter.find_by(game_id: game_id, character_id: character_id) if in_use?(game_id, character_id)
+    "Troops: #{gc.troops}"
+  end
+
   def game_status_message
     if current_game
       case current_game.status
@@ -43,17 +48,16 @@ module ApplicationHelper
     end
   end
 
-
-
-
-
+  def no_more?
+    if current_game
+      if current_game.no_more_characters?(current_player)
+        content_tag :h5, "Can't assign any more characters to this game. You can still create new characters to be used in other games."
+      end
+    end
+  end
 
   def active_characters
     Character.active_characters(current_game, current_player)
-  end
-
-  def no_more?(player)
-    current_game.no_more_characters?(player)
   end
 
   def who(player_id)
@@ -96,8 +100,5 @@ module ApplicationHelper
     GameCharacter.character_in_use?(game_id, character_id)
   end
 
-  def print_character_status(game_id, character_id)
-    gc = GameCharacter.find_by(game_id: game_id, character_id: character_id) if in_use?(game_id, character_id)
-    "Troops: #{gc.troops}"
-  end
+
 end
