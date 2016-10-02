@@ -1,5 +1,6 @@
 class Character < ApplicationRecord
   belongs_to :player
+  
   has_many :character_locations
   has_many :locations, through: :character_locations
   has_many :game_characters
@@ -29,6 +30,7 @@ class Character < ApplicationRecord
      self.joins(:games, :player).where("games.id = ? AND players.id = ?", game.id, player.id)
   end
 
+  ###Variable character levels are not supported atm, but this is set ready for that
   def attack(troops)
     troops + self.level * troops
   end
