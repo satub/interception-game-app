@@ -18,6 +18,9 @@ GamePlayer.create(game_id: game1.id, player_id: enrico.id, creator: true)
 GamePlayer.create(game_id: game2.id, player_id: major.id, creator: true)
 
 game1.update(turn: integra.id)
+integra.update(current_game_id: game1.id)
+enrico.update(current_game_id: game1.id)
+major.update(current_game_id: game2.id)
 
 4.times do
   Location.create(controlled_by: integra.id, game_id: game1.id, content: Faker::ChuckNorris.fact, defense: 100)

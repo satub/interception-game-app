@@ -17,15 +17,4 @@ class CharacterLocation < ApplicationRecord
     end
   end
 
-
-  def valid_action?
-  end
-
-  def successful_action?
-  end
-
-  def log_it
-  end
-
-
 end
