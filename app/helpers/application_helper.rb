@@ -31,8 +31,12 @@ module ApplicationHelper
   end
 
   def print_character_status(game_id, character_id)
-    gc = GameCharacter.find_by(game_id: game_id, character_id: character_id) if in_use?(game_id, character_id)
-    "Troops: #{gc.troops}"
+    gc = in_use?(game_id, character_id)
+    gc.nil? ? "Character not in use in this game" : "Troops: #{gc.troops}"
+  end
+
+  def in_use?(game_id, character_id)
+    GameCharacter.character_in_use?(game_id, character_id)
   end
 
   def game_status_message
@@ -54,6 +58,18 @@ module ApplicationHelper
         content_tag :h5, "Can't assign any more characters to this game. You can still create new characters to be used in other games."
       end
     end
+  end
+
+  def game_active?
+    current_game.status == "active"
+  end
+
+  def successful?(event)
+     event.success ? "success" : "failure"
+  end
+
+  def defense(location)
+    location.controlled_by == current_player.id ? (content_tag :h5, "Current defense: #{location.defense}") : ""
   end
 
   def active_characters
@@ -78,26 +94,10 @@ module ApplicationHelper
     current_player.id == current_game.turn && location.controlled_by != current_player.id
   end
 
-  def game_active?
-    current_game.status == "active"
-  end
-
   def game_joinable?
     if current_game
       current_game.joinable? && !current_game.game_players.detect { |gp| current_player.id == gp.player_id }
     end
-  end
-
-  def successful?(event)
-     event.success ? "success" : "failure"
-  end
-
-  def defense(location)
-    "Current defense: #{location.defense}" if location.controlled_by == current_player.id
-  end
-
-  def in_use?(game_id, character_id)
-    GameCharacter.character_in_use?(game_id, character_id)
   end
 
 

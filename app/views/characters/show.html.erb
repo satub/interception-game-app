@@ -6,4 +6,4 @@
   Personality: <%= @character.personality %> <br>
 </p>
 
-<%=   print_character_status(current_game.id, @character.id)  if in_use?(current_game.id, @character.id) %>
+<%=  print_character_status(current_game.id, @character.id) %>
