@@ -4,12 +4,12 @@ module ApplicationHelper
     current_player.current_game
   end
 
-  def greeting(player)
-    player.nil? ? (content_tag :h1, "Welcome to Interception!") : (content_tag :h1, "Welcome to Interception, #{player.alias}!")
+  def greeting
+    current_player.nil? ? (content_tag :h1, "Welcome to Interception!") : (content_tag :h1, "Welcome to Interception, #{current_player.alias}!")
   end
 
-  def page_content(player)
-    if player.nil?
+  def page_content
+    if current_player.nil?
       content_tag :h3, "Please log in or signup to continue! :D"
     else
       link_to "Last played: #{current_game.title}", game_path(current_game) if current_game
@@ -21,12 +21,16 @@ module ApplicationHelper
   end
 
   def game_status
-    link_to("Game: #{current_game.title}; Status: #{current_game.status}", game_path(current_game)) if current_game
+    if current_player
+      link_to("Game: #{current_game.title}; Status: #{current_game.status}", game_path(current_game)) if current_game
+    end
   end
 
   def turn_status
-    if current_game
-      "#{current_game.whose_turn_is_it_anyway}'s turn." if game_active?
+    if current_player
+      if current_game
+        "#{current_game.whose_turn_is_it_anyway}'s turn." if game_active?
+      end
     end
   end
 

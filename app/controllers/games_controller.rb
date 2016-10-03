@@ -33,7 +33,6 @@ class GamesController < ApplicationController
   end
 
   def show
-    # binding.pry
   end
 
   def generate_locations
@@ -51,7 +50,7 @@ class GamesController < ApplicationController
     turn = @game.players.sample.id  #randomly choose first player
     @game.update(status: params[:status], turn: turn)
     @game.assign_locations(@game.players)
-
+    @game.configure_characters
     redirect_to game_locations_path(@game)
   end
 

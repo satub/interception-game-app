@@ -7,7 +7,7 @@ class Game < ApplicationRecord
 
   validates :title, presence: true
   validates :map_size, numericality: {only_integer: true}, inclusion: {in: (4..20)}
-  
+
   def self.pending_games
     Game.where(status: "pending").order(:id)
   end
@@ -62,6 +62,11 @@ class Game < ApplicationRecord
         i += 1
       end
     end
+  end
+
+  def configure_characters
+    start_with = self.map_size/2 * 500
+    self.game_characters.each{|character| character.update(troops: start_with * character.level)}
   end
 
 
