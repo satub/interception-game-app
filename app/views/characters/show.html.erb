@@ -2,8 +2,6 @@
 
 <%= image_tag("#{@character.image_link}", width: "250") %> <br>
 
-<p>
-  Personality: <%= @character.personality %> <br>
-</p>
+<%= @character.personality %> <br>
 
-<%=  print_character_status(current_game.id, @character.id) %>
+<%=  print_character_status(current_game.id, character.id) if current_game %> <br>

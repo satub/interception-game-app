@@ -1,9 +1,7 @@
 Characters found: <br>
 
 <p>
-<% @characters.each do |character| %>
-  <%= render partial: "characters/character", locals: {character: character} %>
-<% end %>
+<%= render partial: "characters/character", collection: @characters %>
 </p>
 
 <%= link_to "Add character", new_player_character_path(current_player) %><br>

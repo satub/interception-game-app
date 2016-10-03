@@ -1,1 +1,2 @@
-<%= link_to character.name, player_character_path(current_player, character) %> <br>
+<%= link_to character.name, player_character_path(current_player, character) %>
+<%=  print_character_status(current_game.id, character.id) if current_game %> <br>
