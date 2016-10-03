@@ -1,3 +1,1 @@
-<% @games.each do |game|%>
-  <%= link_to game.title, game_path(game) %>
-<% end %>
+<%= render partial: "games/game", collection: @games %>

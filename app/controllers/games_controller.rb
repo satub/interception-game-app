@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     if @game.errors.empty?
       GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
       current_player.current_game = @game
-      
+
       redirect_to new_player_character_path(current_player)
     else
       flash[:error] = "Game creation failed."
@@ -28,7 +28,8 @@ class GamesController < ApplicationController
 
   def my_games
     @games = Game.my_games(current_player)
-    flash[:notice] = "You don'thave any games yet" if @games.empty?
+    flash[:notice] = "You don't have any games yet" if @games.empty?
+    render :index
   end
 
   def show
