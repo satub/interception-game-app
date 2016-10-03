@@ -90,6 +90,15 @@ module ApplicationHelper
     end
   end
 
+  def location_status(location, i)
+      link_to "#{i+1}. In control: #{location.player_in_control}", game_location_path(current_game, location)
+  end
+
+  def location_action(location)
+    (link_to "Take Over!", edit_game_location_path(current_game, location)) if possible_target?(location) && game_active?
+  end
+
+
   def possible_target?(location)
     current_player.id == current_game.turn && location.controlled_by != current_player.id
   end

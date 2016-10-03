@@ -3,8 +3,8 @@
 <p>
   <% @locations.each_with_index do |location, i| %>
     <div class="location">
-      <%= link_to "#{i+1}. In control: #{location.player_in_control}", game_location_path(current_game, location) %><br>
-      <%= (link_to "Take Over!", edit_game_location_path(current_game, location)) if possible_target?(location) && game_active? %><br>
+      <%= location_status(location, i) %><br>
+      <%= location_action(location) %><br>
     </div>
   <% end %>
   <div class = "game_status_message">
