@@ -66,7 +66,7 @@ class Game < ApplicationRecord
 
   def configure_characters
     start_with = self.map_size/2 * 500
-    self.game_characters.each{|character| character.update(troops: start_with * character.level)}
+    self.game_characters.each{|character| character.update(troops: start_with * character.character.level)}
   end
 
 

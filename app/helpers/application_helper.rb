@@ -4,6 +4,10 @@ module ApplicationHelper
     current_player.current_game
   end
 
+  def has_characters?
+    !current_player.characters.empty?
+  end
+
   def greeting
     current_player.nil? ? (content_tag :h1, "Welcome to Interception!") : (content_tag :h1, "Welcome to Interception, #{current_player.alias}!")
   end

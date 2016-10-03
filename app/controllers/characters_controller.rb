@@ -14,8 +14,7 @@ class CharactersController < ApplicationController
     else
       @character = Character.create(character_params)
       if @character.errors.empty?
-        @character.game_characters.build(game_id: current_game.id)
-        @character.save
+        @character.game_characters.create(game_id: current_game.id, character_id: @character.id) if current_game
         redirect_to player_characters_path(current_player)
       else
         flash[:error] = "Character creation failed. #{@character.errors.full_messages_for(:name).first}"
