@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :players, :controllers =>  {:registrations => 'players/registrations', :omniauth_callbacks => "players/omniauth_callbacks" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  
   #Static Routes
   root to: "welcome#home"
   get '/about' => "welcome#about"

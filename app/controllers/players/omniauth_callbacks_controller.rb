@@ -4,9 +4,9 @@ class Players::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in_and_redirect @player
   end
 
-  protected
-   def after_sign_up_path_for(@player)
-     root_path(@player)
-   end
+   # 
+  #  def after_sign_up_path_for(resource)
+  #    signed_in_root_path(resource)
+  #  end
 
 end
