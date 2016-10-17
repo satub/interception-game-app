@@ -31,3 +31,13 @@ div.location {
 div.game_status_message {
   clear: left;
 }
+
+div.pending {
+  color: green;
+}
+div.active {
+  color: purple;
+}
+div.finished {
+  color: grey;
+}

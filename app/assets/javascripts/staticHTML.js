@@ -7,3 +7,7 @@ function printRules(){
 function eraseStatusBox(){
   $('.status').html('');
 }
+
+function eraseGameList(){
+  $('#games').html('')
+}
