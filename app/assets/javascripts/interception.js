@@ -8,7 +8,8 @@ function addMenuListeners(){
   $(".nav a:contains('About')").bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log("Here we will print the rules")
+    console.log("Here we will print the rules");
+    printRules();
   });
 
   $('.nav a[href="/games"]').bind("click", function(event){
@@ -43,5 +44,4 @@ $(function(){
   addMenuListeners();
   console.log("You think this is a game???");
   // debugger;
-  console.log("Common JS functions should go to interception.js");
 });

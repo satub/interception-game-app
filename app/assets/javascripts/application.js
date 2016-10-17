@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require_tree .
 //= require interception
+//= require staticHTML
