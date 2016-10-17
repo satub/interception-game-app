@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
   before_action :housekeeping, except: :status
   before_action :authenticate_player!
   before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
