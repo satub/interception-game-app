@@ -1,5 +1,6 @@
 # README
-This app was creted for the Flatironschool Webdev-Fellowship Rails Assessment Project
+This app was created for the Flatironschool Webdev-Fellowship Rails Assessment Project
+The Jails branch is for adding JavaScript to the domain as per JavaScript and Rails Assessment requirements.
 
 * Configuration
   You'll need github keys to enable the omniauth sign-in and login-in features. To prevent these keys from being pushed up to github, you need to exclude the file you have them in the .gitignore file. The devise.rb initializer in this repo has been set to read them from a separate Key class located in a non-tracked directory:
@@ -33,7 +34,7 @@ This app was creted for the Flatironschool Webdev-Fellowship Rails Assessment Pr
 
   end`
 
-  
+
 
 * Database creation
   rake db:migrate
