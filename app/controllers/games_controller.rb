@@ -28,6 +28,7 @@ class GamesController < ApplicationController
     #### Move this to different action OR into JS object Model property yada thingy
     # @games = Game.pending_games
     # flash[:notice] = "No open games found" if @games.empty?
+    
     render json: @games
   end
 
