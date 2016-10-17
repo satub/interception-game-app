@@ -16,6 +16,7 @@ function addMenuListeners(){
     event.preventDefault();
     event.stopPropagation();
     console.log("Here we will fetch the games")
+    fetchGames();
   });
 
   $('.nav a[href="/games/new"]').bind("click", function(event){
@@ -43,5 +44,4 @@ function addMenuListeners(){
 $(function(){
   addMenuListeners();
   console.log("You think this is a game???");
-  // debugger;
 });

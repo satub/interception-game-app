@@ -3,3 +3,7 @@ function printRules(){
     $('.status').html(response);
   })
 }
+
+function eraseStatusBox(){
+  $('.status').html('');
+}

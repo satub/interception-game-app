@@ -4,6 +4,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'faker'
+
+gem 'active_model_serializers', '~> 0.9.5'
 # gem 'omniauth-google-oauth2' #add later when everything else works with github
 # gem 'omniauth-twitter' #add later when everything else works with github and google
 

@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require interception
 //= require staticHTML
+//= require games
+//= require interception
