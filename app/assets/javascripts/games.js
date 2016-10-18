@@ -41,9 +41,14 @@ function loadGame(gameAsJSON){
   $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
 
 
-  //TODO: Add location listeners...hover over and click???
   addLocationTakeOverListeners();
-  
+
+  $('div.location').mouseenter(function(event){
+    var locationId = $(this).attr('data-locationid');
+    event.preventDefault(); console.log("Message from location number " + locationId + ": Stop Hovering over me, you pervert!!")
+    fetchLocation(locationId);
+  });
+
   resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..
 }
 

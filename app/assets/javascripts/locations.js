@@ -1,5 +1,5 @@
 function fetchLocation(locationId){
-  console.log("'That would be intimidating, if you were, well, intimidating.. '");
+
 }
 
 function addLocationTakeOverListeners(){
@@ -7,12 +7,13 @@ function addLocationTakeOverListeners(){
     event.preventDefault();
     event.stopPropagation();
     var locationId = $(this).attr('data-locationid');
+    console.log("'That would be intimidating, if you were, well, intimidating.. '");
     fetchLocation(locationId);
   });
 }
 
 
 /// Hopefully can be added without revealing too much information :P
-function addLocationHoverListeners(){
+function showInfo(){
 
 }

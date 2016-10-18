@@ -8,14 +8,14 @@ function addMenuListeners(){
   $(".nav a:contains('About')").bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log("Here we will print the rules");
+    console.log("Here we will print the rules! (Not Vanderpump)");
     printRules();
   });
 
   $('.nav a[href="/games"]').bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log("Here we will fetch the games")
+    console.log("Fetch ALL the games, my demon doggy!")
     fetchGames();
   });
 
