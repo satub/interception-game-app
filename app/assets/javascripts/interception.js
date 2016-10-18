@@ -2,6 +2,10 @@ function addMenuListeners(){
   $(".nav a:contains('Home')").bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
+    eraseGameList();
+    eraseGame();
+    removeForms();
+    eraseStatusBox();
     console.log("Definitely Maybe You're My Wonderwall")
   });
 
@@ -22,8 +26,7 @@ function addMenuListeners(){
   $('.nav a[href="/games/new"]').bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
-    console.log("We will probably get rid of this menu link and instead produce a form in the games page instead for creating a new game :D");
-    generateNewGameForm();
+    generateNewForm("games");
   });
 
   $('.nav a[href="/mygames"]').bind("click", function(event){
@@ -36,6 +39,7 @@ function addMenuListeners(){
     event.preventDefault();
     event.stopPropagation();
     console.log("Here we will show all the characters owned by the current_player")
+    fetchMyCharacters();
   });
 
 }

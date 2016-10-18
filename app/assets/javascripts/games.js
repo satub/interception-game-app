@@ -3,14 +3,6 @@ function objectifyGames(gamesAsJSON){
 }
 
 
-function generateNewGameForm(){
-  removeForms();
-  $('#forms').html('Generate a form for a new game here');
-  $.get('/games/new').done(function(response){
-    $('#forms').html(response);
-  });
-}
-
 
 function resetCurrentGame(gameId){
  //this should go and set the player's current game to this game --- IF needed
@@ -34,7 +26,6 @@ function gamesToHTML(gamesAsJSON){
 
 function loadGame(gameAsJSON){
   eraseGame();
-
   let game = gameAsJSON.game;
   let gameTitle = $('<h3></h3>').text(game.title);
   let map = $('<div id="map"></div>');
@@ -57,7 +48,7 @@ function loadGame(gameAsJSON){
     var locationId = $(this).attr('data-locationid');
     event.preventDefault();
     event.stopPropagation();
-    console.log("Message from location number " + locationId + ": Stop Hovering over me, you pervert!!")
+    console.log(locationId + ": Stop Hovering over me, you pervert!!")
     fetchLocation(game.id, locationId);
     $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
   });

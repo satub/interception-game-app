@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-
   before_action :housekeeping, except: :status
   before_action :authenticate_player!
   before_action :choose_game, only: [:join, :show, :start, :status, :generate_locations]
@@ -14,11 +13,13 @@ class GamesController < ApplicationController
     if @game.errors.empty?
       GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: true)
       current_player.current_game = @game
-
-      redirect_to new_player_character_path(current_player)
+      generate_locations
+      render json: @game
+      # redirect_to new_player_character_path(current_player)
     else
-      flash[:error] = "Game creation failed."
-      render :new
+      flash[:error] = "Game creation failed."   ##doesn't work with json :(
+      render json: @game.errors, status: 422
+      # render :json => { :errors => @game.errors.full_messages}, :status => 422
     end
   end
 
@@ -45,7 +46,7 @@ class GamesController < ApplicationController
 
   def generate_locations
     @game.assign_locations([current_player])
-    redirect_to game_path(@game)
+    # redirect_to game_path(@game)
   end
 
   def join
