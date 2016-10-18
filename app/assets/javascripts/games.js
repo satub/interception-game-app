@@ -31,11 +31,14 @@ function loadGame(gameAsJSON){
   $("#currentGame").append(gameTitle,map);
 
   let mapName = $('<h4></h4>').text(game.map_name);
-  let location = $('<div class="location"></div>');
-  debugger;
-
   $('#map').append(mapName);
 
+  game.locations.forEach(function(loc){
+    let location = $('<div class="location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
+    $('#map').append(location);
+  });
+
+  $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
   resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..
 }
 

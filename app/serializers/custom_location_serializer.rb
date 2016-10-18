@@ -1,3 +1,3 @@
 class CustomLocationSerializer < ActiveModel::Serializer
-  attributes :content, :defense, :controlled_by
+  attributes :id, :content, :defense, :controlled_by
 end
