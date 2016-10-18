@@ -39,6 +39,11 @@ function loadGame(gameAsJSON){
   });
 
   $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
+
+
+  //TODO: Add location listeners...hover over and click???
+  addLocationTakeOverListeners();
+  
   resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..
 }
 

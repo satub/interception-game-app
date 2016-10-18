@@ -15,5 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require staticHTML
+//= require characters
+//= require locations
 //= require games
 //= require interception
