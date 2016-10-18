@@ -9,12 +9,11 @@
   </head>
 
   <body>
+
     <div class = "nav">
       <%= render partial: 'layouts/navbar' %>
     </div>
-    <div class = "messages">
-      <%= render partial: 'layouts/messages' %>
-    </div>
+
     <div class = "status">
       <p>
         <%= player_status %><br>
@@ -22,6 +21,11 @@
         <%= turn_status %>
       </p>
     </div>
+
+    <div class = "messages">
+      <%= render partial: 'layouts/messages' %>
+    </div>
+
     <%= yield %>
 
   </body>

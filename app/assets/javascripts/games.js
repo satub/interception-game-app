@@ -2,9 +2,10 @@ function objectifyGames(gamesAsJSON){
   console.log("Don't objectify us, it's not nice! D: ");
 }
 
+
 function resetCurrentGame(gameId){
  //this should go and set the player's current game to this game --- IF needed
-  console.log("In ur machina, resettin' ur dreams...")
+  console.log("In ur machina, resettin' ur dreams...");
 }
 
 function gamesToHTML(gamesAsJSON){
@@ -41,12 +42,21 @@ function loadGame(gameAsJSON){
   $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
 
 
-  addLocationTakeOverListeners();
+  addLocationTakeOverListeners(game.id);
 
   $('div.location').mouseenter(function(event){
     var locationId = $(this).attr('data-locationid');
-    event.preventDefault(); console.log("Message from location number " + locationId + ": Stop Hovering over me, you pervert!!")
-    fetchLocation(locationId);
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("Message from location number " + locationId + ": Stop Hovering over me, you pervert!!")
+    fetchLocation(game.id, locationId);
+    $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
+  });
+
+  $('div.location').mouseleave(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $("#hover_data").html('');
   });
 
   resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..

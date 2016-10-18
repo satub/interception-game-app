@@ -1,14 +1,23 @@
-function fetchLocation(locationId){
-
+function showLocationStatus(loc){
+    let content = $('<strong></strong>').text(loc.content);
+    let defense = $('<strong></strong>').text(loc.defense);
+    $("#hover_data").append(content, defense);
 }
 
-function addLocationTakeOverListeners(){
+function fetchLocation(gameId, locationId){
+  var locationUrl = "/games/" + gameId + "/locations/" + locationId;
+  $.get(locationUrl).done(function(response){
+    showLocationStatus(response.location);
+  });
+}
+
+function addLocationTakeOverListeners(gameId){
   $('div.location').bind("click", function(event){
     event.preventDefault();
     event.stopPropagation();
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
-    fetchLocation(locationId);
+    fetchLocation(gameId, locationId);
   });
 }
 

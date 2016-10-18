@@ -12,6 +12,7 @@ class LocationsController < ApplicationController
 
   def show
     @history = @location.history
+    render json: @location
   end
 
   def edit

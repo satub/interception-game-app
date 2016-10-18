@@ -70,7 +70,6 @@ class GamesController < ApplicationController
     redirect_to game_locations_path(current_game)
   end
 
-
   private
     def choose_game
       !params[:game_id].nil? ? @game = Game.find(params[:game_id]) : @game = Game.find(params[:id])
