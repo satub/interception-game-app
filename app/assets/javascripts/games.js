@@ -2,8 +2,12 @@ function objectifyGames(gamesAsJSON){
   console.log("Don't objectify us, it's not nice! D: ");
 }
 
+function resetCurrentGame(gameId){
+ //this should go and set the player's current game to this game --- IF needed
+  console.log("In ur machina, resettin' ur dreams...")
+}
+
 function gamesToHTML(gamesAsJSON){
-  // debugger;
   eraseGameList();
   var gameList = '<h5>List of Games</h5>';
   var allGames =  gamesAsJSON.games;
@@ -15,18 +19,30 @@ function gamesToHTML(gamesAsJSON){
     }
     gameList += '</div>';
   }
-  // $('#games').html(JSON.stringify(gamesAsJSON)); ///for test data dumping only
   $('#games').html(gameList);
 }
 
-function loadGame(){
+function loadGame(gameAsJSON){
+  eraseGame();
+
+  let game = gameAsJSON.game;
+  let gameTitle = $('<h3></h3>').text(game.title);
+  let map = $('<div id="map"></div>');
+  $("#currentGame").append(gameTitle,map);
+
+  let mapName = $('<h4></h4>').text(game.map_name);
+  let location = $('<div class="location"></div>');
   debugger;
+
+  $('#map').append(mapName);
+
+  resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..
 }
 
 function fetchGame(gameId){
   var gameUrl = "/games/" + gameId
   $.get(gameUrl).done(function(response){
-    loadGame();
+    loadGame(response);
   });
 }
 

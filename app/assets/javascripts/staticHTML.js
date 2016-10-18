@@ -9,5 +9,9 @@ function eraseStatusBox(){
 }
 
 function eraseGameList(){
-  $('#games').html('')
+  $('#games').html('');
+}
+
+function eraseGame(){
+  $('#currentGame').html('');
 }
