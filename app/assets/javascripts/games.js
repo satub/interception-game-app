@@ -19,9 +19,30 @@ function gamesToHTML(gamesAsJSON){
   $('#games').html(gameList);
 }
 
+function loadGame(){
+  debugger;
+}
+
+function fetchGame(gameId){
+  var gameUrl = "/games/" + gameId
+  $.get(gameUrl).done(function(response){
+    loadGame();
+  });
+}
+
+function addGameListListeners(){
+  $('div[data-gameid]').bind("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var gameId = $(this).attr('data-gameid');
+    fetchGame(gameId);
+  });
+}
+
 function fetchGames(){
   $.get("/games").done(function(response){
     objectifyGames(response);
     gamesToHTML(response);
+    addGameListListeners();
   });
 }
