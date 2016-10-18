@@ -3,6 +3,15 @@ function objectifyGames(gamesAsJSON){
 }
 
 
+function generateNewGameForm(){
+  removeForms();
+  $('#forms').html('Generate a form for a new game here');
+  $.get('/games/new').done(function(response){
+    $('#forms').html(response);
+  });
+}
+
+
 function resetCurrentGame(gameId){
  //this should go and set the player's current game to this game --- IF needed
   console.log("In ur machina, resettin' ur dreams...");

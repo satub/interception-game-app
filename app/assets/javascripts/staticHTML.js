@@ -15,3 +15,7 @@ function eraseGameList(){
 function eraseGame(){
   $('#currentGame').html('');
 }
+
+function removeForms(){
+  $('#forms').html('');
+}

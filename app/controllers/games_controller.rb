@@ -6,6 +6,7 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    render layout: false
   end
 
   def create

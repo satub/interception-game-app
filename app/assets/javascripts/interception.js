@@ -23,6 +23,7 @@ function addMenuListeners(){
     event.preventDefault();
     event.stopPropagation();
     console.log("We will probably get rid of this menu link and instead produce a form in the games page instead for creating a new game :D");
+    generateNewGameForm();
   });
 
   $('.nav a[href="/mygames"]').bind("click", function(event){
