@@ -41,3 +41,6 @@ div.active {
 div.finished {
   color: grey;
 }
+div.clearfix {
+  visibility: hidden;
+}
