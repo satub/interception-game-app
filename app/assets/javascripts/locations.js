@@ -13,8 +13,7 @@ function fetchLocation(gameId, locationId){
 
 function addLocationTakeOverListeners(gameId){
   $('div.location').bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
     fetchLocation(gameId, locationId);

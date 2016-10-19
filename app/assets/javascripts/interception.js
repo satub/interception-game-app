@@ -1,7 +1,6 @@
 function addMenuListeners(){
   $(".nav a:contains('Home')").bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     eraseGameList();
     eraseGame();
     removeForms();
@@ -10,41 +9,34 @@ function addMenuListeners(){
   });
 
   $(".nav a:contains('About')").bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+      defaultStopper(event);
     console.log("Here we will print the rules! (Not Vanderpump)");
     printRules();
   });
 
   $('.nav a[href="/games"]').bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     console.log("Fetch ALL the games, my demon doggy!")
     fetchGames();
   });
 
   $('.nav a[href="/games/new"]').bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+      defaultStopper(event);
     generateNewForm("games");
   });
 
   $('.nav a[href="/mygames"]').bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     console.log("Here we will show all the games owned by the current_player")
   });
 
   $(".nav a:contains('My Characters')").bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+      defaultStopper(event);
     console.log("Here we will show all the characters owned by the current_player")
     fetchMyCharacters();
   });
 
 }
-
-
 
 $(function(){
   addMenuListeners();

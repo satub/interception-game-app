@@ -1,3 +1,8 @@
+function defaultStopper(event){
+  event.preventDefault();
+  event.stopPropagation();
+}
+
 function printRules(){
   $.get("/about").done(function(response){
     $('.status').html(response);

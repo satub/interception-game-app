@@ -1,9 +1,3 @@
-function objectifyGames(gamesAsJSON){
-  console.log("Don't objectify us, it's not nice! D: ");
-}
-
-
-
 function resetCurrentGame(gameId){
  //this should go and set the player's current game to this game --- IF needed
   console.log("In ur machina, resettin' ur dreams...");
@@ -46,16 +40,14 @@ function loadGame(gameAsJSON){
 
   $('div.location').mouseenter(function(event){
     var locationId = $(this).attr('data-locationid');
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     console.log(locationId + ": Stop Hovering over me, you pervert!!")
     fetchLocation(game.id, locationId);
     $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
   });
 
   $('div.location').mouseleave(function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     $("#hover_data").html('');
   });
 
@@ -71,8 +63,7 @@ function fetchGame(gameId){
 
 function addGameListListeners(){
   $('div[data-gameid]').bind("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
+    defaultStopper(event);
     var gameId = $(this).attr('data-gameid');
     fetchGame(gameId);
   });
@@ -80,7 +71,6 @@ function addGameListListeners(){
 
 function fetchGames(){
   $.get("/games").done(function(response){
-    objectifyGames(response);
     gamesToHTML(response);
     addGameListListeners();
   });
