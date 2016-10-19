@@ -64,6 +64,7 @@ function addGameListListeners(){
   $('div[data-gameid]').bind("click", function(event){
     defaultStopper(event);
     var gameId = $(this).attr('data-gameid');
+    ///assign current_game here;
     fetchGame(gameId);
   });
 }

@@ -35,6 +35,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    current_player.current_game = @game
     render json: @game
   end
 
