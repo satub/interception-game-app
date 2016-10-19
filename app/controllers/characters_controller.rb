@@ -4,21 +4,25 @@ class CharactersController < ApplicationController
 
   def new
     @character = Character.new
+    render layout: false
   end
 
   def create
     if assign_only?
       new_hash = character_params.delete_if{|key, value| key != "game_characters_attributes"}
-      Character.create(new_hash)
-      redirect_to player_characters_path(current_player)
+      character = Character.create(new_hash)
+      # redirect_to player_characters_path(current_player)
+      render json: character
     else
       @character = Character.create(character_params)
       if @character.errors.empty?
         @character.game_characters.create(game_id: current_game.id, character_id: @character.id) if current_game
-        redirect_to player_characters_path(current_player)
+        # redirect_to player_characters_path(current_player)
+        render json: @character
       else
         flash[:error] = "Character creation failed. #{@character.errors.full_messages_for(:name).first}"
-        render :new
+        render json: @character.errors, status: 422
+        # render :new
       end
     end
   end

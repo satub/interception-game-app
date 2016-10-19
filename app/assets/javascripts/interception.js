@@ -21,17 +21,18 @@ function addMenuListeners(){
   });
 
   $('.nav a[href="/games/new"]').bind("click", function(event){
-      defaultStopper(event);
+    defaultStopper(event);
     generateNewForm("games");
   });
 
-  $('.nav a[href="/mygames"]').bind("click", function(event){
+  $('.nav a[href="/players/' + playerId + '/characters/new"]').bind("click", function(event){
     defaultStopper(event);
-    console.log("Here we will show all the games owned by the current_player")
+    generateNewForm('players/' + playerId + '/characters');
+    console.log("Let's create a new character!!!")
   });
 
   $(".nav a:contains('My Characters')").bind("click", function(event){
-      defaultStopper(event);
+    defaultStopper(event);
     console.log("Here we will show all the characters owned by the current_player")
     fetchMyCharacters();
   });

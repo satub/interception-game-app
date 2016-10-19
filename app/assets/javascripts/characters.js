@@ -32,3 +32,7 @@ function fetchMyCharacters(){
     }
   });
 }
+
+function createNewCharacter(){
+  
+}

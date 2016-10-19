@@ -41,10 +41,11 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
 
       $.post(formUrl, params).done(function(response){
         removeForms();
+        debugger;
         loadGame(response);
       }).fail(function (error){
         var failures = JSON.parse(error.responseText);
-
+        debugger;
         //this needs to be abstracted
         $('#game_title').attr("placeholder", failures["title"][0]).css("border","2px solid red");
         $('#game_map_size').attr("placeholder", failures["map_size"][0]).css("border","2px solid red");

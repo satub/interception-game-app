@@ -9,8 +9,9 @@
     <%= link_to "Sign Out", destroy_player_session_path,:method => :delete  %>
     <%= link_to "Open Games", games_path %>
     <%= link_to "New Game", new_game_path %>
-    <%= link_to "My Games", mygames_path%>
+    <%# link_to "My Games", mygames_path %>
     <%= link_to "My Characters", player_characters_path(current_player) %>
+    <%= link_to "New Character", new_player_character_path(current_player) %>
     <% link_to "Edit Profile", edit_player_path(current_player) %>
   <% end %>
 
