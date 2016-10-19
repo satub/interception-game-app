@@ -21,6 +21,9 @@ function eraseGame(){
   $('#currentGame').html('');
 }
 
+function eraseCharacterList(){
+  $('#characters').html('');
+}
 function removeForms(){
   $('#forms').html('');
 }
@@ -39,17 +42,33 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
       var params = $form.serialize();
       // var type = $form.attr("method");   //needed maybe later for other than post requests, commented out for now
 
-      $.post(formUrl, params).done(function(response){
-        removeForms();
-        debugger;
-        loadGame(response);
-      }).fail(function (error){
-        var failures = JSON.parse(error.responseText);
-        debugger;
-        //this needs to be abstracted
-        $('#game_title').attr("placeholder", failures["title"][0]).css("border","2px solid red");
-        $('#game_map_size').attr("placeholder", failures["map_size"][0]).css("border","2px solid red");
-      });
+
+          //this needs to be abstracted  and / or moved to a separate method!!!
+      if (resource === "games"){
+        $.post(formUrl, params).done(function(response){
+          removeForms();
+          loadGame(response);
+        }).fail(function (error){
+          var failures = JSON.parse(error.responseText);
+
+          $('#game_title').attr("placeholder", failures["title"][0]).css("border","2px solid red");
+          $('#game_map_size').attr("placeholder", failures["map_size"][0]).css("border","2px solid red");
+        });
+      } else {
+        $.post(formUrl, params).done(function(response){
+          removeForms();
+          var char = new Character(response.character);
+          char.renderChar();
+        }).fail(function (error){
+          var failures = JSON.parse(error.responseText);
+          debugger;
+
+          $('#character_name').attr("placeholder", failures["name"][0]).css("border","2px solid red");
+        });
+      }
+
+
+
     });
   });
 }

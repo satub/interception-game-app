@@ -23,6 +23,7 @@ Character.prototype.renderChar = function(){
 }
 
 function fetchMyCharacters(){
+  eraseCharacterList();
   var charsUrl = "/players/" + playerId + "/characters";
   $.get(charsUrl).done(function(response){
     var chars = response.characters;
@@ -34,5 +35,5 @@ function fetchMyCharacters(){
 }
 
 function createNewCharacter(){
-  
+
 }
