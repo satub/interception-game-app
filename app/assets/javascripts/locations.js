@@ -23,11 +23,7 @@ Location.prototype.renderHistory = function(){
   debugger;
 }
 
-// function showLocationStatus(loc){
-//     let content = $('<strong></strong>').text(loc.content);
-//     let defense = $('<strong></strong>').text(loc.defense);
-//     $("#hover_data").append(content, defense);
-// }
+
 
 function fetchLocation(gameId, locationId){
   var locationUrl = "/games/" + gameId + "/locations/" + locationId;

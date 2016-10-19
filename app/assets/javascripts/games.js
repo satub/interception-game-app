@@ -41,7 +41,6 @@ function loadGame(gameAsJSON){
   $('div.location').mouseenter(function(event){
     var locationId = $(this).attr('data-locationid');
     defaultStopper(event);
-    console.log(locationId + ": Stop Hovering over me, you pervert!!")
     fetchLocation(game.id, locationId);
     $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
   });

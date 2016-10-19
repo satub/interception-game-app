@@ -14,7 +14,7 @@ class CharactersController < ApplicationController
     else
       @character = Character.create(character_params)
       if @character.errors.empty?
-        @character.game_characters.create(game_id: current_game.id, character_id: @character.id) if current_game 
+        @character.game_characters.create(game_id: current_game.id, character_id: @character.id) if current_game
         redirect_to player_characters_path(current_player)
       else
         flash[:error] = "Character creation failed. #{@character.errors.full_messages_for(:name).first}"
@@ -31,11 +31,13 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find(params[:id])
+    render json: @character
   end
 
   def index
     ##only shows the characters for the current player
     @characters = @player.characters
+    render json: @characters
   end
 
 
