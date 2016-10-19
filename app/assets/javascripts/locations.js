@@ -9,29 +9,35 @@ function Location(attributes){
 Location.prototype.constructor = Location;
 
 Location.prototype.renderOwned = function(){
-  debugger;
+  let content = $('<strong></strong>').text(this.content);
+  let defense = $('<strong></strong>').text(this.defense);
+  $("#hover_data").append(content, defense);
 }
 
 Location.prototype.renderNotOwned = function(){
-  debugger;
+  let content = $('<strong></strong>').text(this.content);
+  $("#hover_data").append(content);
 }
 
 Location.prototype.renderHistory = function(){
   debugger;
 }
 
-function showLocationStatus(loc){
-    let content = $('<strong></strong>').text(loc.content);
-    let defense = $('<strong></strong>').text(loc.defense);
-    $("#hover_data").append(content, defense);
-}
+// function showLocationStatus(loc){
+//     let content = $('<strong></strong>').text(loc.content);
+//     let defense = $('<strong></strong>').text(loc.defense);
+//     $("#hover_data").append(content, defense);
+// }
 
 function fetchLocation(gameId, locationId){
   var locationUrl = "/games/" + gameId + "/locations/" + locationId;
   $.get(locationUrl).done(function(response){
     var loc = new Location(response.location);
-    showLocationStatus(response.location);
-    Location(response.location);
+    if (loc.controlled_by === playerId){
+      loc.renderOwned();
+    } else {
+      loc.renderNotOwned();
+    }
   });
 }
 
@@ -42,10 +48,4 @@ function addLocationTakeOverListeners(gameId){
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
     fetchLocation(gameId, locationId);
   });
-}
-
-
-/// Hopefully can be added without revealing too much information :P
-function showInfo(){
-
 }

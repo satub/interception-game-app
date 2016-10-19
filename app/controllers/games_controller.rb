@@ -19,20 +19,14 @@ class GamesController < ApplicationController
     else
       flash[:error] = "Game creation failed."   ##doesn't work with json :(
       render json: @game.errors, status: 422
-      # render :json => { :errors => @game.errors.full_messages}, :status => 422
     end
   end
 
-
   def index
     @games = Game.all
-
-    #### Move this to different action OR into JS object Model property yada thingy
-    # @games = Game.pending_games
-    # flash[:notice] = "No open games found" if @games.empty?
-
     render json: @games
   end
+
 
   def my_games
     @games = Game.my_games(current_player)
@@ -46,7 +40,6 @@ class GamesController < ApplicationController
 
   def generate_locations
     @game.assign_locations([current_player])
-    # redirect_to game_path(@game)
   end
 
   def join
