@@ -44,7 +44,5 @@ function addLocationTakeOverListeners(gameId){
     defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
-
-    generateEditForm('/games/' + gameId + '/locations/' + locationId);
   });
 }

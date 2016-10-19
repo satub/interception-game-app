@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   before_action :housekeeping, except: :index
-  before_action :choose_location, only: [:show, :edit, :update]
+  before_action :choose_location, only: [:show, :update]
   before_action :choose_game, only: [:index]
   before_action :quick_hash_access, only: [:update]
   before_action :authenticate_player!
@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
   end
 
   def edit
-    render json: [@game, @location]
+    render :plain
   end
 
   def update
