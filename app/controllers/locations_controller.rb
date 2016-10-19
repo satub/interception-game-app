@@ -16,6 +16,7 @@ class LocationsController < ApplicationController
   end
 
   def edit
+    render json: [@game, @location]
   end
 
   def update

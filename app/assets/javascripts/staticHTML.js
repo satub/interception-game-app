@@ -55,13 +55,16 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
           $('#game_map_size').attr("placeholder", failures["map_size"][0]).css("border","2px solid red");
         });
       } else {
+        ///For now, character assignment to a game needs a different method
+        params = $form.serializeArray();
         $.post(formUrl, params).done(function(response){
           removeForms();
           var char = new Character(response.character);
-          char.renderChar();
+          if (char.id){
+            char.renderChar();
+          }
         }).fail(function (error){
           var failures = JSON.parse(error.responseText);
-          debugger;
 
           $('#character_name').attr("placeholder", failures["name"][0]).css("border","2px solid red");
         });
@@ -69,6 +72,33 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
 
 
 
+    });
+  });
+}
+
+
+function generateEditForm(resource){
+  removeForms();
+  $.get(resource).done(function(response){
+    $('#forms').html(response);
+    debugger;
+    $('#forms form').on("submit", function(event){
+      event.preventDefault();
+      var $form = $(this);
+      var formUrl = $form.attr("action");
+        params = $form.serializeArray();
+        $.post(formUrl, params).done(function(response){
+          removeForms();
+          debugger;
+          // var char = new Character(response.character);
+          // if (char.id){
+          //   char.renderChar();
+          // }
+        }).fail(function (error){
+          var failures = JSON.parse(error.responseText);
+          debugger;
+          // $('#character_name').attr("placeholder", failures["name"][0]).css("border","2px solid red");
+        });
     });
   });
 }

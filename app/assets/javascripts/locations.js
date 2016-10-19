@@ -23,7 +23,9 @@ Location.prototype.renderHistory = function(){
   debugger;
 }
 
-
+Location.prototype.takeOver = function (){
+  debugger;
+}
 
 function fetchLocation(gameId, locationId){
   var locationUrl = "/games/" + gameId + "/locations/" + locationId;
@@ -42,6 +44,7 @@ function addLocationTakeOverListeners(gameId){
     defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
-    fetchLocation(gameId, locationId);
+
+    generateEditForm('/games/' + gameId + '/locations/' + locationId);
   });
 }
