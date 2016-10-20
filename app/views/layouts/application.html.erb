@@ -16,21 +16,16 @@
 
   <body>
 
-    <div id = "navbar">
+    <div id = "navbar" class="clearfix">
       <%= render partial: 'layouts/navbar' %>
     </div>
 
-    <div class = "status">
-      <p>
+    <div id = "status" class="clearfix">
         <%= player_status %><br>
         <%= game_status %><br>
         <%= turn_status %>
-      </p>
     </div>
 
-    <div class = "messages">
-      <%= render partial: 'layouts/messages' %>
-    </div>
 
     <%= yield %>
 

@@ -5,11 +5,11 @@
   z-index: 10;
 }
 
-#navbar a {
+a {
   text-decoration: none;
 }
 
-#navbar a:hover {
+a:hover {
   background-color: grey;
 }
 
@@ -53,8 +53,21 @@ div.field_with_errors input[type="text"]{
   color: purple;
 }
 
-div.status, div.history {
+#status {
+  width: 90%;
+  position: absolute;
+  top: 40px;
+  left: 5%;
+}
+
+#status, div.history {
   border: 1px dotted blue;
+}
+
+#about, #currentGame, #forms, #games, #characters {
+  position: relative;
+  top: 80px;
+  clear: both;
 }
 
 div.location {
@@ -77,6 +90,12 @@ div.active {
 div.finished {
   color: grey;
 }
-div.clearfix {
-  visibility: hidden;
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
 }
