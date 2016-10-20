@@ -1,15 +1,19 @@
+/// This is the last JS file to be loaded!
+
+
 function addMenuListeners(){
   $("#navbar a:contains('Home')").bind("click", function(event){
     defaultStopper(event);
     eraseGameList();
     eraseGame();
     removeForms();
-    eraseStatusBox();
+    eraseAbout();
+    eraseCharacterList();
     console.log("Definitely Maybe You're My Wonderwall")
   });
 
   $("#navbar a:contains('About')").bind("click", function(event){
-      defaultStopper(event);
+    defaultStopper(event);
     console.log("Here we will print the rules! (Not Vanderpump)");
     printRules();
   });
@@ -29,19 +33,16 @@ function addMenuListeners(){
     $('#navbar a[href="/players/' + playerId + '/characters/new"]').bind("click", function(event){
       defaultStopper(event);
       generateNewForm('players/' + playerId + '/characters');
-      console.log("Let's create a new character!!!")
     });
   }
 
   $("#navbar a:contains('My Characters')").bind("click", function(event){
     defaultStopper(event);
-    console.log("Here we will show all the characters owned by the current_player")
     fetchMyCharacters();
   });
 
-  $("#status a:contains('Current game')").bind("click", function(event){
+  $("#shortcut a:contains('Current game')").bind("click", function(event){
     defaultStopper(event);
-    console.log("Jump straight to the last game played")
     fetchGameViaUrl(event.currentTarget.href);
   });
 

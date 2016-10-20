@@ -1,6 +1,18 @@
-function resetCurrentGame(gameId){
- //this should go and set the player's current game to this game --- IF needed
-  console.log("In ur machina, resettin' ur dreams...");
+function Game(attributes){
+  this.title = attributes.title;
+  this.id = attributes.id;
+  this.turn= attributes.turn;
+  this.winner = attributes.winner;
+  this.status = attributes.status;
+  this.map_name = attributes.map_name;
+  this.map_size = attributes.map_size;
+  this.locations = attributes.locations;
+}
+
+Game.prototype.constructor = Game;
+
+Game.prototype.joinable = function(){
+  return this.status === "pending";
 }
 
 function gamesToHTML(gamesAsJSON){
@@ -35,6 +47,14 @@ function loadGame(gameAsJSON){
 
   $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
 
+  //// Reload the link in the status box
+  $("#shortcut")[0].innerHTML = '<a href="/games/' + game.id + '">Current game: ' + game.title + '</a>';
+
+  ///Reattach event listener....maybe move this elsewhere....
+  $("#shortcut a:contains('Current game')").bind("click", function(event){
+    defaultStopper(event);
+    fetchGameViaUrl(event.currentTarget.href);
+  });
 
   addLocationTakeOverListeners(game.id);
 
@@ -49,15 +69,6 @@ function loadGame(gameAsJSON){
     defaultStopper(event);
     $("#hover_data").html('');
   });
-
-  resetCurrentGame(game.id);  //this should go and set the player's current game to this game IF we still need this feature..
-}
-
-function fetchGame(gameId){
-  var gameUrl = "/games/" + gameId
-  $.get(gameUrl).done(function(response){
-    loadGame(response);
-  });
 }
 
 function fetchGameViaUrl(gameUrl){
@@ -66,11 +77,15 @@ function fetchGameViaUrl(gameUrl){
   });
 }
 
+function fetchGame(gameId){
+  var gameUrl = "/games/" + gameId;
+  fetchGameViaUrl(gameUrl);
+}
+
 function addGameListListeners(){
   $('div[data-gameid]').bind("click", function(event){
     defaultStopper(event);
     var gameId = $(this).attr('data-gameid');
-    ///assign current_game here;
     fetchGame(gameId);
   });
 }

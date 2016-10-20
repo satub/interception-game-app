@@ -1,3 +1,5 @@
+//// This is the first JS file to be loaded.
+
 var playerId;
 var playerAlias;
 
@@ -12,8 +14,8 @@ function printRules(){
   })
 }
 
-function eraseStatusBox(){
-  $('.status').html('');
+function eraseAbout(){
+  $('#about').html('');
 }
 
 function eraseGameList(){
