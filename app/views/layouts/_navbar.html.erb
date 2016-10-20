@@ -1,18 +1,29 @@
 <p>
-  <%= link_to "Home", root_path %>
+  <div id = "nav_left">
+    <%= link_to "Home", root_path %>
   <%= link_to "About", about_path %>
+  </div>
 
   <% if !current_player %>
-    <%= link_to "Sign In", new_player_session_path %>
-    <%= link_to "Sign Up", new_player_registration_path %>
+
+    <div id = "nav_right">
+      <%= link_to "Sign In", new_player_session_path %>
+      <%= link_to "Sign Up", new_player_registration_path %>
+    </div>
+
   <% else %>
-    <%= link_to "Sign Out", destroy_player_session_path,:method => :delete  %>
-    <%= link_to "Open Games", games_path %>
-    <%= link_to "New Game", new_game_path %>
-    <%= link_to "My Characters", player_characters_path(current_player) %>
-    <%= link_to "New Character", new_player_character_path(current_player) %>
-    <% link_to "Edit Profile", edit_player_path(current_player) %>
+
+    <div id = "nav_right">
+      <%= link_to "Sign Out", destroy_player_session_path,:method => :delete  %>
+    </div>
+
+    <div id = "nav_center">
+      <%= link_to "Open Games", games_path %>
+      <%= link_to "New Game", new_game_path %>
+      <%= link_to "My Characters", player_characters_path(current_player) %>
+      <%= link_to "New Character", new_player_character_path(current_player) %>
+    </div>
+
   <% end %>
 
-  TRANSFORMING TO JS!!! DO NOT EXPECT ANY LINKS TO WORK ATM! :D
 </p>
