@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-  before_action :housekeeping, except: :index
   before_action :choose_location, only: [:show, :update, :edit]
   before_action :choose_game, only: [:index]
   before_action :quick_hash_access, only: [:update]

@@ -6,6 +6,7 @@ function Game(attributes){
   this.status = attributes.status;
   this.map_name = attributes.map_name;
   this.map_size = attributes.map_size;
+  this.background = attributes.background_image_link;
   this.locations = attributes.locations;
 }
 

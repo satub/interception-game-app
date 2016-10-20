@@ -19,10 +19,10 @@ module ApplicationHelper
       link_to "Current game: #{current_game.title}", game_path(current_game) if current_game
     end
   end
-  # 
-  # def player_status
-  #   "Logged in as #{current_player.alias}" if current_player
-  # end
+  
+  def player_status
+    "Logged in as #{current_player.alias}" if current_player
+  end
 
   def game_status
     if current_player
