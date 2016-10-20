@@ -1,3 +1,6 @@
+var playerId;
+var playerAlias;
+
 function defaultStopper(event){
   event.preventDefault();
   event.stopPropagation();
@@ -24,8 +27,17 @@ function eraseGame(){
 function eraseCharacterList(){
   $('#characters').html('');
 }
+
 function removeForms(){
   $('#forms').html('');
+}
+
+function showPlayer(){
+  $('#status').append('Logged in as: ' + playerAlias);
+}
+
+function loggedIn(){
+  return !!playerId;
 }
 
 function generateNewForm(resource){  ///currently also creates the resource!! :O

@@ -25,11 +25,13 @@ function addMenuListeners(){
     generateNewForm("games");
   });
 
-  $('#navbar a[href="/players/' + playerId + '/characters/new"]').bind("click", function(event){
-    defaultStopper(event);
-    generateNewForm('players/' + playerId + '/characters');
-    console.log("Let's create a new character!!!")
-  });
+  if (loggedIn()){
+    $('#navbar a[href="/players/' + playerId + '/characters/new"]').bind("click", function(event){
+      defaultStopper(event);
+      generateNewForm('players/' + playerId + '/characters');
+      console.log("Let's create a new character!!!")
+    });
+  }
 
   $("#navbar a:contains('My Characters')").bind("click", function(event){
     defaultStopper(event);
@@ -40,6 +42,9 @@ function addMenuListeners(){
 }
 
 $(function(){
+  if (loggedIn()){
+    showPlayer();
+  }
   addMenuListeners();
   console.log("You think this is a game???");
 });

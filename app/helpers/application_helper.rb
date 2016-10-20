@@ -14,15 +14,15 @@ module ApplicationHelper
 
   def page_content
     if current_player.nil?
-      content_tag :h3, "Please log in or signup to continue! :D"
+      "Please log in or sign up to continue! :D"
     else
-      link_to "Last played: #{current_game.title}", game_path(current_game) if current_game
+      link_to "Current game: #{current_game.title}", game_path(current_game) if current_game
     end
   end
-
-  def player_status
-    "Logged in as #{current_player.alias}" if current_player
-  end
+  # 
+  # def player_status
+  #   "Logged in as #{current_player.alias}" if current_player
+  # end
 
   def game_status
     if current_player

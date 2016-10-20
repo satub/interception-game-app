@@ -7,9 +7,12 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%# Makes the current_player id visible to javascript when logged in: %>
+    <%# Makes the current_player id and alias visible to javascript when logged in: %>
     <% if current_player %>
-      <%= javascript_tag do %> const playerId = <%= current_player.id %> <% end %>
+      <%= javascript_tag do %>
+        playerId = <%= current_player.id %>;
+        playerAlias = "<%= current_player.alias %>";
+      <% end %>
     <% end %>
 
   </head>
@@ -21,9 +24,8 @@
     </div>
 
     <div id = "status" class="clearfix">
-        <%= player_status %><br>
-        <%= game_status %><br>
-        <%= turn_status %>
+        <%= page_content %>
+        <%= turn_status %> <br>
     </div>
 
 
