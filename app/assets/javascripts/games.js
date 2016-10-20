@@ -60,6 +60,12 @@ function fetchGame(gameId){
   });
 }
 
+function fetchGameViaUrl(gameUrl){
+  $.get(gameUrl).done(function(response){
+    loadGame(response);
+  });
+}
+
 function addGameListListeners(){
   $('div[data-gameid]').bind("click", function(event){
     defaultStopper(event);

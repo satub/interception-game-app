@@ -39,6 +39,12 @@ function addMenuListeners(){
     fetchMyCharacters();
   });
 
+  $("#status a:contains('Current game')").bind("click", function(event){
+    defaultStopper(event);
+    console.log("Jump straight to the last game played")
+    fetchGameViaUrl(event.currentTarget.href);
+  });
+
 }
 
 $(function(){
