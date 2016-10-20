@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require staticHTML
+//= require houseKeeping
 //= require characters
 //= require locations
 //= require games

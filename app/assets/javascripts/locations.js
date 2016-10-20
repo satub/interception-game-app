@@ -23,9 +23,9 @@ Location.prototype.renderHistory = function(){
   debugger;
 }
 
-Location.prototype.takeOver = function (){
-  debugger;
-}
+// Location.prototype.takeOver = function (){
+//   debugger;
+// }
 
 function takeOver(gameId, locationId){
   removeForms();
@@ -37,7 +37,6 @@ function takeOver(gameId, locationId){
       var $form = $(this);
       var formUrl = $form.attr("action");
       var params = $form.serialize();
-      debugger;
 
 
       $.ajax({
