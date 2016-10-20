@@ -45,7 +45,9 @@ function takeOver(gameId, locationId){
         method: 'PATCH',
         data: params
       }).done(function (response){
-        debugger;
+        // debugger;
+        loadGame(response);
+        removeForms();
       }).fail(function (error){
         debugger;
       });

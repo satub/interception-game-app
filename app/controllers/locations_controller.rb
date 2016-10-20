@@ -20,7 +20,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    binding.pry
+    # binding.pry
     if valid_takeover_attempt?
       if can_be_taken?
         params[:location][:character_locations_attributes]["0"][:success] = true
@@ -32,10 +32,16 @@ class LocationsController < ApplicationController
         flash.keep(:message)
       end
       @game.switch_turn
-      redirect_to status_path(current_game)
+      if @game.game_over?
+        ###if game over redirect somewhere else??
+        @game.update(status: "finished", winner: @game.winner_id, turn: nil)
+      end
+        render :json => @game
+      # redirect_to status_path(current_game)
     else
       flash[:error] = "Something went oh-so wrong. Check the following: 1) Message can't be empty. 2) Number of troops must be a number."
-      render :edit
+      render json: @location.errors, layout: false, status: 422
+      # render :edit
     end
   end
 

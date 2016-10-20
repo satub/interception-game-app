@@ -63,7 +63,8 @@ class GamesController < ApplicationController
       @game.update(status: "finished", winner: @game.winner_id, turn: nil)
     end
     flash.keep(:message)
-    redirect_to game_locations_path(current_game)
+    # redirect_to game_locations_path(current_game)
+    render json: @game
   end
 
   private
