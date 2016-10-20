@@ -27,6 +27,32 @@ Location.prototype.takeOver = function (){
   debugger;
 }
 
+function takeOver(gameId, locationId){
+  removeForms();
+  var resourceUrl = '/games/' + gameId + '/locations/' + locationId + '/edit';
+  $.get(resourceUrl).done(function(response){
+    $('#forms').html(response);
+    $('#forms form').on("submit", function(event){
+      event.preventDefault();
+      var $form = $(this);
+      var formUrl = $form.attr("action");
+      var params = $form.serialize();
+      debugger;
+
+
+      $.ajax({
+        url: formUrl,
+        method: 'PATCH',
+        data: params
+      }).done(function (response){
+        debugger;
+      }).fail(function (error){
+        debugger;
+      });
+    });
+  });
+}
+
 function fetchLocation(gameId, locationId){
   var locationUrl = "/games/" + gameId + "/locations/" + locationId;
   $.get(locationUrl).done(function(response){
@@ -44,5 +70,6 @@ function addLocationTakeOverListeners(gameId){
     defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
+    takeOver(gameId, locationId);
   });
 }

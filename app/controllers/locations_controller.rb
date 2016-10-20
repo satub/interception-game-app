@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   before_action :housekeeping, except: :index
-  before_action :choose_location, only: [:show, :update]
+  before_action :choose_location, only: [:show, :update, :edit]
   before_action :choose_game, only: [:index]
   before_action :quick_hash_access, only: [:update]
   before_action :authenticate_player!
@@ -16,10 +16,11 @@ class LocationsController < ApplicationController
   end
 
   def edit
-    render :plain
+    render layout: false
   end
 
   def update
+    binding.pry
     if valid_takeover_attempt?
       if can_be_taken?
         params[:location][:character_locations_attributes]["0"][:success] = true
