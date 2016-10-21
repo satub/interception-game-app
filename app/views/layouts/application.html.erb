@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://npmcdn.com/basscss@8.0.1/css/basscss.min.css" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%# Makes the current_player id and alias visible to javascript when logged in: %>
@@ -19,7 +20,7 @@
 
   <body>
 
-    <div id = "navbar" class="clearfix">
+    <div id = "navbar "class = "flex col-12 p1 border-box clearfix border rounded">
       <%= render partial: 'layouts/navbar' %>
     </div>
 
