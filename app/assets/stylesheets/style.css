@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700&subset=latin-ext');
 
-
+div.flex {
+  background-color: #EEE;
+  opacity: 0.8;
+}
 div.history {
   border: 1px dotted blue;
 }

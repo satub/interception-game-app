@@ -35,10 +35,10 @@ Game.prototype.renderGame = function(){
 
   $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
 
-  ///Call setStyle function if these parameters were given:
-  // $("body").css("background-image",'url("' + game.background_image_link + '")');
-
-
+  if(this.background){
+    ///Call setStyle function if these parameters were given:
+    $("body").css("background-image",'url("' + this.background + '")');
+  }
 
   //// Reload the link in the status box
   $("#shortcut")[0].innerHTML = '<a href="/games/' + this.id + '">Current game: ' + this.title + '</a>';
