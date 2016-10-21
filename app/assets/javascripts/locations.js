@@ -23,6 +23,7 @@ Location.prototype.renderHistory = function(){
   debugger;
 }
 
+
 // Location.prototype.takeOver = function (){
 //   debugger;
 // }

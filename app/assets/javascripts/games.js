@@ -16,37 +16,49 @@ Game.prototype.joinable = function(){
   return this.status === "pending";
 }
 
-Game.prototype.renderGame = function(){
-  eraseGame();
 
-  let gameTitle = $('<div id = "title"></div>').text(this.title);
-
-  let map = $('<div id = "map"></div>');
-
-  $("#currentGame").append(gameTitle,map);
-
-  let mapName = $('<div id = "mapName"></div>').text(this.map_name);
-  $('#map').append(mapName);
-
-  this.locations.forEach(function(loc){
-    let location = $('<div class="location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
-    $('#map').append(location);
-  });
-
-  $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
-
+Game.prototype.setBackground = function(){
   if(this.background){
-    ///Call setStyle function if these parameters were given:
     $("body").css("background-image",'url("' + this.background + '")');
+  } else {
+    $("body").css('background', '0');
   }
+}
 
-  //// Reload the link in the status box
+Game.prototype.setShortcut = function(){
   $("#shortcut")[0].innerHTML = '<a href="/games/' + this.id + '">Current game: ' + this.title + '</a>';
 
-  ///Reattach event listener....maybe move this elsewhere....
+  ///Reattach event listener to the shortcut
   $("#shortcut a:contains('Current game')").bind("click", function(event){
     defaultStopper(event);
     fetchGameViaUrl(event.currentTarget.href);
+  });
+}
+
+Game.prototype.showLocation = function(locationId){
+  let loc = this.locations[locationId];
+
+  if (loc.controlled_by === playerId){
+    loc.renderOwned();
+  } else {
+    loc.renderNotOwned();
+  }
+
+}
+
+Game.prototype.renderGame = function(){
+  eraseGame();
+
+  let map = $('<div id = "map" class="col-9 clearfix rounded"></div>');
+
+  $("#currentGame").append(map);
+
+  let mapName = $('<div id = "mapName" class="center"></div>').text(this.map_name);
+  $('#map').append(mapName);
+
+  this.locations.forEach(function(loc){
+    let location = $('<div class="col col-2 mx-auto p1 border-box border rounded location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
+    $('#map').append(location);
   });
 
   ///attach LocationTakeOverListeners;
@@ -56,6 +68,7 @@ Game.prototype.renderGame = function(){
   $('div.location').mouseenter(function(event){
     var locationId = $(this).attr('data-locationid');
     defaultStopper(event);
+    // showLocation(locationId);
     fetchLocation(gameId, locationId);
     $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
   });
@@ -80,13 +93,18 @@ function gamesToHTML(gamesAsJSON){
     gameList += '</div>';
   }
   $('#games').html(gameList);
+
 }
 
 
 function fetchGameViaUrl(gameUrl){
   $.get(gameUrl).done(function(response){
+
     var g = new Game(response.game);
     g.renderGame();
+    g.setBackground();
+    g.setShortcut();
+
     if (g.joinable()){
 
 
@@ -104,6 +122,8 @@ function fetchGameViaUrl(gameUrl){
     }
   });
 }
+
+
 
 function fetchGame(gameId){
   var gameUrl = "/games/" + gameId;
