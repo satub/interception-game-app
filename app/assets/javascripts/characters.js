@@ -1,10 +1,13 @@
 function Character(attributes)  {
+
   this.id = attributes.id;
   this.name = attributes.name;
   this.personality = attributes.personality;
   this.image = attributes.image_link;
-  this.ownerId = attributes.player.id;
-  this.ownerAlias = attributes.player.alias;
+  if (this.player){
+    this.ownerId = attributes.player.id;
+    this.ownerAlias = attributes.player.alias;
+  }
   this.level = attributes.level;
 }
 

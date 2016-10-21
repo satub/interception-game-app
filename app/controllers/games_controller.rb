@@ -45,7 +45,7 @@ class GamesController < ApplicationController
   def join
     GamePlayer.create(player_id: current_player.id, game_id: @game.id, creator: false)
     current_player.current_game = @game
-    redirect_to new_player_character_path(current_player)
+    render json: @game
   end
 
   def start
@@ -53,7 +53,7 @@ class GamesController < ApplicationController
     @game.update(status: params[:status], turn: turn)
     @game.assign_locations(@game.players)
     @game.configure_characters
-    redirect_to game_locations_path(@game)
+    render json: @game
   end
 
 

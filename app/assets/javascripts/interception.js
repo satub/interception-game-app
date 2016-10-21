@@ -4,11 +4,7 @@
 function addMenuListeners(){
   $("#navbar a:contains('Home')").bind("click", function(event){
     defaultStopper(event);
-    eraseGameList();
-    eraseGame();
-    removeForms();
-    eraseAbout();
-    eraseCharacterList();
+    cleanScreen();
     console.log("Definitely Maybe You're My Wonderwall")
   });
 

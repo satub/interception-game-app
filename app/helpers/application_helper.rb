@@ -19,7 +19,7 @@ module ApplicationHelper
       link_to "Current game: #{current_game.title}", game_path(current_game) if current_game
     end
   end
-  
+
   def player_status
     "Logged in as #{current_player.alias}" if current_player
   end
@@ -63,7 +63,7 @@ module ApplicationHelper
   def no_more?
     if current_game
       if current_game.no_more_characters?(current_player)
-        content_tag :h5, "Can't assign any more characters to this game. You can still create new characters to be used in other games."
+        content_tag(:div, "Can't assign any more characters to this game. You can still create new characters to be used in other games.", id: "gameFull")
       end
     end
   end

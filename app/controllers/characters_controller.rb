@@ -9,7 +9,6 @@ class CharactersController < ApplicationController
 
   def create
     if assign_only?
-      binding.pry
       new_hash = character_params.delete_if{|key, value| key != "game_characters_attributes"}
       character = Character.create(new_hash)
       render json: character

@@ -44,14 +44,15 @@ function takeOver(gameId, locationId){
         method: 'PATCH',
         data: params
       }).done(function (response){
-        // debugger;
-        loadGame(response);
+        var game = new Game(response.game);
+        game.renderGame();
         removeForms();
       }).fail(function (error){
         debugger;
       });
     });
   });
+  showTurn();
 }
 
 function fetchLocation(gameId, locationId){

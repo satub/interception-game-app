@@ -10,7 +10,7 @@ integra = Player.create(email: 'integra@hellsing.org', password: 'ihatemyuncle',
 enrico = Player.create(email: 'enrico@iscariot.org', password: 'thenextpope', alias: 'Conquistador')
 major = Player.create(email: 'major@millenium.org', password: 'ilovewar', alias: 'Deus Ex Machina')
 
-game1 = Game.create(title: 'Purge', status: 'active', map_name: 'Asylum', map_size: 8)
+game1 = Game.create(title: 'Purge', status: 'active', map_name: 'Asylum', map_size: 8, background_image_link: "http://vignette2.wikia.nocookie.net/hellsing/images/5/50/Hellsing-sign.jpg/revision/latest?cb=20090913020525")
 game2 = Game.create(title: 'Battle of Millennia', status: 'pending', map_name: 'Skies Above London', map_size: 12)
 
 GamePlayer.create(game_id: game1.id, player_id: integra.id, creator: false)

@@ -16,6 +16,57 @@ Game.prototype.joinable = function(){
   return this.status === "pending";
 }
 
+Game.prototype.renderGame = function(){
+  eraseGame();
+
+  let gameTitle = $('<div id = "title"></div>').text(this.title);
+
+  let map = $('<div id = "map"></div>');
+
+  $("#currentGame").append(gameTitle,map);
+
+  let mapName = $('<div id = "mapName"></div>').text(this.map_name);
+  $('#map').append(mapName);
+
+  this.locations.forEach(function(loc){
+    let location = $('<div class="location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
+    $('#map').append(location);
+  });
+
+  $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
+
+  ///Call setStyle function if these parameters were given:
+  // $("body").css("background-image",'url("' + game.background_image_link + '")');
+
+
+
+  //// Reload the link in the status box
+  $("#shortcut")[0].innerHTML = '<a href="/games/' + this.id + '">Current game: ' + this.title + '</a>';
+
+  ///Reattach event listener....maybe move this elsewhere....
+  $("#shortcut a:contains('Current game')").bind("click", function(event){
+    defaultStopper(event);
+    fetchGameViaUrl(event.currentTarget.href);
+  });
+
+  ///attach LocationTakeOverListeners;
+  var gameId = this.id;
+  addLocationTakeOverListeners(gameId);
+
+  $('div.location').mouseenter(function(event){
+    var locationId = $(this).attr('data-locationid');
+    defaultStopper(event);
+    fetchLocation(gameId, locationId);
+    $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
+  });
+
+  $('div.location').mouseleave(function(event){
+    defaultStopper(event);
+    $("#hover_data").html('');
+  });
+
+}
+
 function gamesToHTML(gamesAsJSON){
   eraseGameList();
   var gameList = '<h5>List of Games</h5>';
@@ -31,50 +82,26 @@ function gamesToHTML(gamesAsJSON){
   $('#games').html(gameList);
 }
 
-function loadGame(gameAsJSON){
-  eraseGame();
-  let game = gameAsJSON.game;
-  let gameTitle = $('<h3></h3>').text(game.title);
-  let map = $('<div id="map"></div>');
-  $("#currentGame").append(gameTitle,map);
-
-  let mapName = $('<h4></h4>').text(game.map_name);
-  $('#map').append(mapName);
-
-  game.locations.forEach(function(loc){
-    let location = $('<div class="location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
-    $('#map').append(location);
-  });
-
-  $("#currentGame").append('<br><br>'); ///Replace this later with better div styling!!
-
-  //// Reload the link in the status box
-  $("#shortcut")[0].innerHTML = '<a href="/games/' + game.id + '">Current game: ' + game.title + '</a>';
-
-  ///Reattach event listener....maybe move this elsewhere....
-  $("#shortcut a:contains('Current game')").bind("click", function(event){
-    defaultStopper(event);
-    fetchGameViaUrl(event.currentTarget.href);
-  });
-
-  addLocationTakeOverListeners(game.id);
-
-  $('div.location').mouseenter(function(event){
-    var locationId = $(this).attr('data-locationid');
-    defaultStopper(event);
-    fetchLocation(game.id, locationId);
-    $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
-  });
-
-  $('div.location').mouseleave(function(event){
-    defaultStopper(event);
-    $("#hover_data").html('');
-  });
-}
 
 function fetchGameViaUrl(gameUrl){
   $.get(gameUrl).done(function(response){
-    loadGame(response);
+    var g = new Game(response.game);
+    g.renderGame();
+    if (g.joinable()){
+
+
+      var joinButton = $('<button/>').text('Join Game!');
+      $('#currentGame').append(joinButton);
+
+      $('#currentGame button').bind("click", function (event){
+        defaultStopper(event);
+        var joinUrl = '/games/' + g.id + '/join';
+        $.get(joinUrl).done(function(response){
+          cleanScreen();
+          generateNewForm('players/' + playerId + '/characters');
+        });
+      })
+    }
   });
 }
 
