@@ -1,35 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700&subset=latin-ext');
 
 
-
-#status {
-  width: 90%;
-  position: absolute;
-  top: 40px;
-  left: 5%;
-}
-
-#status, div.history {
+div.history {
   border: 1px dotted blue;
 }
-
-#about, #currentGame, #forms, #games, #characters {
-  position: relative;
-  top: 80px;
-  clear: both;
-}
-
-div.location {
-  border: 1px dotted blue;
-  display: inline;
-  float: left;
-  width: 20%
-}
-
-div.game_status_message {
-  clear: left;
-}
-
 div.pending {
   color: green;
 }
@@ -40,23 +14,16 @@ div.finished {
   color: grey;
 }
 
-a {
+body {
   font-family: 'Amatic SC';
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.25em;
+}
+
+a {
   text-decoration: none;
 }
 
 a:hover {
   background-color: grey;
 }
-
-/*
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
-}*/

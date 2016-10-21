@@ -20,16 +20,17 @@
 
   <body>
 
-    <div id = "navbar "class = "flex col-12 p1 border-box clearfix border rounded">
+    <div id = "navbar" class = "flex col-12 p1 border-box clearfix border rounded">
       <%= render partial: 'layouts/navbar' %>
     </div>
+    <div id = "container" class = "p1 border-box clearfix border rounded">
+      <div id = "status" class="flex col-10 mx-auto p1 border-box border rounded clearfix block">
+          <div id="shortcut" class="flex"><%= page_content %></div> <br>
+      </div>
 
-    <div id = "status" class="clearfix">
-        <div id="shortcut"><%= page_content %></div> <br>
+      <%= yield %>
+
+
     </div>
-
-
-    <%= yield %>
-
   </body>
 </html>
