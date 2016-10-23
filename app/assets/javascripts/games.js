@@ -8,6 +8,7 @@ function Game(attributes){
   this.map_size = attributes.map_size;
   this.background = attributes.background_image_link;
   this.locations = attributes.locations;
+  this.players = attributes.game_players;
 }
 
 Game.prototype.constructor = Game;
@@ -16,6 +17,16 @@ Game.prototype.joinable = function(){
   return this.status === "pending";
 }
 
+Game.prototype.notInYet = function(){
+  var gamePlayers = this.players.map(function(player){
+    return player.player_id
+  });
+  return gamePlayers.indexOf(playerId) === -1;
+}
+
+Game.prototype.launchable = function(){
+  return (this.players.length > 1 && !this.notInYet() && this.status === "pending");
+}
 
 Game.prototype.setBackground = function(){
   if(this.background){
@@ -35,6 +46,7 @@ Game.prototype.setShortcut = function(){
   });
 }
 
+
 Game.prototype.showLocation = function(locationId){
   let loc = this.locations[locationId];
 
@@ -47,6 +59,7 @@ Game.prototype.showLocation = function(locationId){
 }
 
 Game.prototype.renderGame = function(){
+  // debugger;
   eraseGame();
   turn = this.turn;
   showTurn();
@@ -78,8 +91,41 @@ Game.prototype.renderGame = function(){
     defaultStopper(event);
     $("#hover_data").html('');
   });
+}
+
+Game.prototype.addJoinFunction = function(){
+  var joinUrl = '/games/' + this.id + '/join';
+
+  $('#turn').html("Join This Game");
+
+  $('#turn:contains("Join This Game")').bind("click", function (event){
+    defaultStopper(event);
+
+    $.get(joinUrl).done(function(response){
+      cleanScreen();
+      generateNewForm('players/' + playerId + '/characters');
+    });
+  })
 
 }
+
+Game.prototype.addLaunchFunction = function(){
+  var startUrl = '/games/' + this.id + '/start';
+
+  $('#turn').html("Launch Game!");
+
+  $('#turn:contains("Launch Game!")').bind("click", function (event){
+    defaultStopper(event);
+    var data =  {status: "active"}
+    $.post(startUrl, data).done(function(response){
+      cleanScreen();
+      turn = response.game.turn;
+      showTurn();
+      ////add a message here and point to render game page!!
+    });
+  });
+}
+
 
 function gamesToHTML(gamesAsJSON){
   eraseGameList();
@@ -107,21 +153,12 @@ function fetchGameViaUrl(gameUrl){
     g.setBackground();
     g.setShortcut();
 
-    if (g.joinable()){
-
-
-      var joinButton = $('<button/>').text('Join Game!');
-      $('#currentGame').append(joinButton);
-
-      $('#currentGame button').bind("click", function (event){
-        defaultStopper(event);
-        var joinUrl = '/games/' + g.id + '/join';
-        $.get(joinUrl).done(function(response){
-          cleanScreen();
-          generateNewForm('players/' + playerId + '/characters');
-        });
-      })
+    if (g.joinable() && g.notInYet()){
+      g.addJoinFunction();
+    } else if (g.launchable()){
+      g.addLaunchFunction();
     }
+    
   });
 }
 

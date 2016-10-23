@@ -121,28 +121,6 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
   $.get(resourceUrl).done(function(response){
     $('#forms').html(response);
 
-    if($("#gameFull")){
-      var startUrl = ('#shortcut a')[0].href + '/start';
-
-
-      var launchButton = $('<button/>').text('Launch Game!');
-      $('#currentGame').append(launchButton);
-      $('#currentGame button').bind("click", function (event){
-        defaultStopper(event);
-        var startUrl = $('#shortcut a')[0].href + '/start';
-
-        var data =  {status: "active"}
-
-        $.post(startUrl, data).done(function(response){
-          cleanScreen();
-          debugger;
-          turn = response.game.turn;
-          showTurn();
-          ////add a message here and point to render game page!!
-        });
-      })
-    }
-
     $('#forms form').on("submit", function(event){
       event.preventDefault();
       var $form = $(this);
@@ -155,8 +133,9 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
       if (resource === "games"){
         $.post(formUrl, params).done(function(response){
           removeForms();
-          debugger;
-          loadGame(response);
+          var g = new Game(response.game);
+          g.renderGame();
+          showGame();
         }).fail(function (error){
           var failures = JSON.parse(error.responseText);
 
