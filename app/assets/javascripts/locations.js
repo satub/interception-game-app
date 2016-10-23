@@ -73,6 +73,12 @@ function addLocationTakeOverListeners(gameId){
     defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
     console.log("'That would be intimidating, if you were, well, intimidating.. '");
-    takeOver(gameId, locationId);
+    if (myTurn()){
+      takeOver(gameId, locationId);
+      showForms();
+    } else {
+      $('#turn').html("Please wait for your turn!")
+      setTimeout(function(){fetchGame(gameId);}, 5000);
+    }
   });
 }

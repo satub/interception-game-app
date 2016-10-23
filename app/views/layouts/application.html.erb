@@ -24,8 +24,10 @@
       <%= render partial: 'layouts/navbar' %>
     </div>
     <div id = "container" class = "p1 border-box clearfix border rounded">
-      <div id = "status" class="flex col-10 mx-auto p1 border-box border rounded clearfix block">
-          <div id="shortcut" class="flex"><%= page_content %></div> <br>
+      <div id = "status" class = "flex col-10 mx-auto p1 border-box border rounded clearfix block">
+          <div id = "shortcut" class = "flex col-3 mx-auto p1 border-box border rounded"><%= page_content %></div>
+          <div id = "alias" class = "flex col-3 mx-auto p1 border-box border rounded"></div>
+          <div id = "turn" class = "flex col-3 mx-auto p1 border-box border rounded"></div>
       </div>
 
       <%= yield %>

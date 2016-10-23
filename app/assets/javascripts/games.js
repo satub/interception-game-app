@@ -48,12 +48,13 @@ Game.prototype.showLocation = function(locationId){
 
 Game.prototype.renderGame = function(){
   eraseGame();
-
+  turn = this.turn;
+  showTurn();
   let map = $('<div id = "map" class="col-9 clearfix rounded"></div>');
 
   $("#currentGame").append(map);
 
-  let mapName = $('<div id = "mapName" class="center"></div>').text(this.map_name);
+  let mapName = $('<div id = "mapName" class="center"></div>').text("Map: " + this.map_name);
   $('#map').append(mapName);
 
   this.locations.forEach(function(loc){
@@ -82,18 +83,19 @@ Game.prototype.renderGame = function(){
 
 function gamesToHTML(gamesAsJSON){
   eraseGameList();
-  var gameList = '<h5>List of Games</h5>';
+  var gameList = 'List of Games<ul>';
   var allGames =  gamesAsJSON.games;
   for (var i = 0; i < allGames.length; i++){
-    gameList += '<div data-gameid="' + allGames[i].id + '" class="' + allGames[i].status + '">';
+    gameList += '<li data-gameid="' + allGames[i].id + '" class="' + allGames[i].status + '">';
     gameList += allGames[i].title + ' at ' + allGames[i].map_name + '; Map Size: ' + allGames[i].map_size;
     if (allGames[i].winner){
       gameList += 'Winner: ' + allGames[i].winner;
     }
-    gameList += '</div>';
+    gameList += '</li>';
   }
+  gameList += '</ul>';
   $('#games').html(gameList);
-
+  showGames();
 }
 
 
@@ -124,17 +126,17 @@ function fetchGameViaUrl(gameUrl){
 }
 
 
-
 function fetchGame(gameId){
   var gameUrl = "/games/" + gameId;
   fetchGameViaUrl(gameUrl);
 }
 
 function addGameListListeners(){
-  $('div[data-gameid]').bind("click", function(event){
+  $('li[data-gameid]').bind("click", function(event){
     defaultStopper(event);
     var gameId = $(this).attr('data-gameid');
     fetchGame(gameId);
+    showGame();
   });
 }
 

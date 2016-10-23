@@ -9,20 +9,54 @@ function defaultStopper(event){
   event.stopPropagation();
 }
 
+function hideAbout(){
+  $('#about').hide();
+}
+function showAbout(){
+  $('#about').show();
+}
+
 function printRules(){
   $.get("/about").done(function(response){
     $('#about').html(response);
+    showAbout();
   })
 }
 
-function eraseAbout(){
-  $('#about').html('');
+function hideGame(){
+  $('#currentGame').hide();
+}
+function showGame(){
+  $('#currentGame').show();
+}
+function hideGames(){
+  $('#games').hide();
+}
+function showGames(){
+  $('#games').show();
+}
+function hideCharacters(){
+  $('#characters').hide();
+}
+function hideHistory(){
+  $('#history').hide();
+}
+function hideForms(){
+  $('#forms').hide();
+}
+function showCharacters(){
+  $('#characters').show();
+}
+function showHistory(){
+  $('#history').show();
+}
+function showForms(){
+  $('#forms').show();
 }
 
 function eraseGameList(){
   $('#games').html('');
 }
-
 function eraseGame(){
   $('#currentGame').html('');
 }
@@ -30,17 +64,15 @@ function eraseGame(){
 function eraseCharacterList(){
   $('#characters').html('');
 }
-
 function removeForms(){
   $('#forms').html('');
 }
-
 function removeHover(){
   $("#hover_data").html("");
 }
 
 function showPlayer(){
-  $('#status').append('Logged in as: ' + playerAlias);
+  $('#alias').html('Logged in as: ' + playerAlias);
 }
 
 function loggedIn(){
@@ -51,19 +83,37 @@ function cleanScreen(){
   eraseGameList();
   eraseGame();
   removeForms();
-  eraseAbout();
+  hideAbout();
   eraseCharacterList();
   removeHover();
+  $("body").css('background', '0');
+}
+
+function hideLayout(){
+  hideAbout();
+  removeHover();
+  hideGame();
+  hideGames();
+  hideForms();
+  hideCharacters();
+  hideHistory();
+}
+
+function myTurn(){
+  return turn === playerId;
 }
 
 function showTurn(){
-  if (turn == playerId){
-    $('#status').append('Make your Move');
+  if (myTurn()){
+    $('#turn').html('Make your Move');
   } else {
-    $('#status').append('Waiting for turn...');
+    $('#turn').html('Waiting for turn...');
   }
 }
 
+
+
+/////This needs serious refactoring
 function generateNewForm(resource){  ///currently also creates the resource!! :O
   removeForms();
   var resourceUrl = "/" + resource + "/new"

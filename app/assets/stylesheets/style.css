@@ -2,18 +2,18 @@
 
 div.flex {
   background-color: #EEE;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 div.history {
   border: 1px dotted blue;
 }
-div.pending {
+li.pending {
   color: green;
 }
-div.active {
+li.active {
   color: purple;
 }
-div.finished {
+li.finished {
   color: grey;
 }
 
