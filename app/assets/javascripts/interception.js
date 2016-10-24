@@ -48,6 +48,14 @@ function addMenuListeners(){
 
 function addDynamicEventListeners(){
 
+  $('#main').on("click", 'li[data-gameid]', function(event){
+    defaultStopper(event);
+    var gameId = $(this).attr('data-gameid');
+    fetchGame(gameId);
+    showGame();
+    hideAbout();
+  });
+
 }
 
 $(function(){
@@ -56,4 +64,5 @@ $(function(){
   }
   hideLayout();
   addMenuListeners();
+  addDynamicEventListeners();
 });

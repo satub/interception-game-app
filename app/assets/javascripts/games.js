@@ -174,19 +174,9 @@ function fetchGame(gameId){
   fetchGameViaUrl(gameUrl);
 }
 
-function addGameListListeners(){
-  $('li[data-gameid]').bind("click", function(event){
-    defaultStopper(event);
-    var gameId = $(this).attr('data-gameid');
-    fetchGame(gameId);
-    showGame();
-    hideAbout();
-  });
-}
 
 function fetchGames(){
   $.get("/games").done(function(response){
     gamesToHTML(response);
-    addGameListListeners();
   });
 }
