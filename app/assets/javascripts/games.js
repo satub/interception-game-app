@@ -1,3 +1,23 @@
+// ES6 Class example
+// class Game {
+//   constructor(attributes){
+//     this.title = attributes.title;
+//     this.id = attributes.id;
+//     this.turn= attributes.turn;
+//     this.winner = attributes.winner;
+//     this.status = attributes.status;
+//     this.map_name = attributes.map_name;
+//     this.map_size = attributes.map_size;
+//     this.background = attributes.background_image_link;
+//     this.locations = attributes.locations;
+//     this.players = attributes.game_players;
+//   }
+//   joinable(){
+//       return this.status === "pending";
+//   }
+//
+// }
+
 function Game(attributes){
   this.title = attributes.title;
   this.id = attributes.id;
@@ -127,7 +147,7 @@ Game.prototype.addLaunchFunction = function(){
       // cleanScreen();
       turn = response.game.turn;
       showTurn();
-      
+
       ////add a message here and point to render game page!!
     });
   });

@@ -27,8 +27,8 @@ class LocationsController < ApplicationController
       else
         params[:location][:character_locations_attributes]["0"][:success] = false
         @location.update(location_params.delete_if{|key, value| key == "controlled_by"})
-        flash[:message] = "Attempt to take over location failed."
-        flash.keep(:message)
+        # flash[:message] = "Attempt to take over location failed."
+        # flash.keep(:message)
       end
       @game.switch_turn
       if @game.game_over?
@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
         render :json => @game
       # redirect_to status_path(current_game)
     else
-      flash[:error] = "Something went oh-so wrong. Check the following: 1) Message can't be empty. 2) Number of troops must be a number."
+      # flash[:error] = "Something went oh-so wrong. Check the following: 1) Message can't be empty. 2) Number of troops must be a number."
       render json: @location.errors, layout: false, status: 422
       # render :edit
     end
@@ -65,7 +65,7 @@ class LocationsController < ApplicationController
       CharacterLocation.new(message: @address[:message], troops_sent: @address[:troops_sent]).valid?
     end
 
-    def can_be_taken?   ###REFACTOR THIS !!!!
+    def can_be_taken?  
       @location.defense
       character = Character.find(@address[:character_id])
       trial = character.attack(@address[:troops_sent].to_i)

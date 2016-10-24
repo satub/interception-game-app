@@ -6,7 +6,7 @@ function Location(attributes){
   this.defense = attributes.defense;
 }
 
-Location.prototype.constructor = Location;
+Location.prototype.constructor = Location; ///lose this
 
 Location.prototype.renderOwned = function(){
   let content = $('<strong></strong>').text(this.content);
@@ -94,10 +94,10 @@ function addLocationTakeOverListeners(gameId){
       takeOver(gameId, locationId);
     } else if (myTurn() && controller == playerId){
       $('#turn').html("You already own this location!")
-      setTimeout(function(){fetchGame(gameId);}, 2000);
+      setTimeout(function(){fetchGame(gameId);}, 3000);
     } else {
       $('#turn').html("Please wait for your turn!")
-      setTimeout(function(){fetchGame(gameId);}, 2000);
+      setTimeout(function(){fetchGame(gameId);}, 3000);
     }
   });
 }

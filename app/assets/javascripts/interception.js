@@ -46,6 +46,10 @@ function addMenuListeners(){
 
 }
 
+function addDynamicEventListeners(){
+  
+}
+
 $(function(){
   if (loggedIn()){
     showPlayer();

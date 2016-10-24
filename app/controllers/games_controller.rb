@@ -16,7 +16,7 @@ class GamesController < ApplicationController
       render json: @game
       # redirect_to new_player_character_path(current_player)
     else
-      flash[:error] = "Game creation failed."   ##doesn't work with json :(
+      # flash[:error] = "Game creation failed."   ##doesn't work with json :(
       render json: @game.errors, status: 422
     end
   end
@@ -26,11 +26,11 @@ class GamesController < ApplicationController
     render json: @games
   end
 
-
+  ###This is not used atm
   def my_games
     @games = Game.my_games(current_player)
-    flash[:notice] = "You don't have any games yet" if @games.empty?
-    render :index
+    # flash[:notice] = "You don't have any games yet" if @games.empty?
+    render json: @games
   end
 
   def show

@@ -129,11 +129,14 @@ function showTurn(){
 }
 
 function instruction(){
-  $('#turn').html('To assign characters to this game: Click "New Character"');
+  $('#turn').html('To assign characters to this game: Fill the form for "New Character"');
 }
 
 
-/////This needs serious refactoring
+///// This form generator is for adding new entries to the DB, namely New Characters and games
+///// It might make sense to split this up and move it to characters.js and games.js, unless it can be abstracted
+///// Form for location takeovers is in locations.js
+///// This STILL needs serious refactoring
 function generateNewForm(resource){  ///currently also creates the resource!! :O
   removeForms();
   var resourceUrl = "/" + resource + "/new"
