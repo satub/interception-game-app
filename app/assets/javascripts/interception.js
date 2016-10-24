@@ -57,7 +57,15 @@ function addDynamicEventListeners(){
     hideAbout();
   });
 
+  // Listen to game Launch link
+  $('body').on("click", '#turn div:contains("Launch Game!")', function (event){
+    defaultStopper(event);
+    let startUrl = $(this).attr("data-starturl")
+    launchGame(startUrl);
+  });
+
 }
+
 
 $(function(){
   if (loggedIn()){

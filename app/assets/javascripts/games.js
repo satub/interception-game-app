@@ -114,21 +114,9 @@ Game.prototype.addJoinFunction = function(){
 
 }
 
-Game.prototype.addLaunchFunction = function(){
+Game.prototype.addLaunchLink = function(){
   var startUrl = '/games/' + this.id + '/start';
-
-  $('#turn').html("Launch Game!");
-
-  $('#turn:contains("Launch Game!")').bind("click", function (event){
-    defaultStopper(event);
-    var data =  {status: "active"}
-    $.post(startUrl, data).done(function(response){
-      turn = response.game.turn;
-      showTurn();
-
-      ////add a message here and point to render game page!!
-    });
-  });
+  $('#turn').html('<div data-startUrl="' + startUrl + '" class = "clickable">Launch Game!</div>');
 }
 
 
@@ -162,7 +150,7 @@ function fetchGameViaUrl(gameUrl){
     if (g.joinable() && g.notInYet()){
       g.addJoinFunction();
     } else if (g.launchable()){
-      g.addLaunchFunction();
+      g.addLaunchLink();
     }
   });
 }
@@ -177,5 +165,17 @@ function fetchGame(gameId){
 function fetchGames(){
   $.get("/games").done(function(response){
     gamesToHTML(response);
+  });
+}
+
+function launchGame(startUrl){
+  var data =  {status: "active"}
+  $.post(startUrl, data).done(function(response){
+    turn = response.game.turn;
+    showTurn();
+    hideGames();
+    var g = new Game(response.game);
+    g.renderGame();
+    fetchMyCharacters();
   });
 }

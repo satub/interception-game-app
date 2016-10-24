@@ -36,6 +36,7 @@ function showKey(){
 function mapKey(){
   var key = 'Color Key:<ul>';
   key += '<div class = "notOwned">You do not control this location</div>';
+  key += '<div">You are in control of this location</div>';
   $('#about').html(key);
   showAbout();
 }
