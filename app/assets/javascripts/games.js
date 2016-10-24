@@ -123,7 +123,6 @@ Game.prototype.addLaunchFunction = function(){
     defaultStopper(event);
     var data =  {status: "active"}
     $.post(startUrl, data).done(function(response){
-      // cleanScreen();
       turn = response.game.turn;
       showTurn();
 
@@ -138,7 +137,7 @@ function gamesToHTML(gamesAsJSON){
   var gameList = 'List of Games<ul>';
   var allGames =  gamesAsJSON.games;
   for (var i = 0; i < allGames.length; i++){
-    gameList += '<li data-gameid="' + allGames[i].id + '" class="' + allGames[i].status + '">';
+    gameList += '<li data-gameid="' + allGames[i].id + '" class="clickable ' + allGames[i].status + '">';
     gameList += allGames[i].title + ' at ' + allGames[i].map_name + '; Map Size: ' + allGames[i].map_size;
     if (allGames[i].winner){
       gameList += 'Winner: ' + allGames[i].winner;

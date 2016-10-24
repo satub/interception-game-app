@@ -48,6 +48,7 @@ function addMenuListeners(){
 
 function addDynamicEventListeners(){
 
+  // Listen to game list
   $('#main').on("click", 'li[data-gameid]', function(event){
     defaultStopper(event);
     var gameId = $(this).attr('data-gameid');

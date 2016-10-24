@@ -34,3 +34,12 @@ a {
 a:hover {
   background-color: grey;
 }
+
+li.clickable:hover {
+  cursor: pointer;
+  background-color: grey;
+}
+
+div.clickable:hover {
+  cursor: pointer;
+}
