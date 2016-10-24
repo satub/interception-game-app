@@ -1,11 +1,10 @@
 /// This is the last JS file to be loaded!
 
 function addMenuListeners(){
-  $("a:contains('Home')").bind("click", function(event){
+  $("a:contains('Clear')").bind("click", function(event){
     defaultStopper(event);
     cleanScreen();
     hideLayout();
-    console.log("Definitely Maybe You're My Wonderwall")
   });
 
   $("a:contains('About')").bind("click", function(event){
