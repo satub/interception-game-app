@@ -101,8 +101,10 @@ Game.prototype.addJoinFunction = function(){
     defaultStopper(event);
 
     $.get(joinUrl).done(function(response){
-      cleanScreen();
+      removeForms();
       generateNewForm('players/' + playerId + '/characters');
+      showForms();
+
     });
   })
 
@@ -117,7 +119,7 @@ Game.prototype.addLaunchFunction = function(){
     defaultStopper(event);
     var data =  {status: "active"}
     $.post(startUrl, data).done(function(response){
-      cleanScreen();
+      // cleanScreen();
       turn = response.game.turn;
       showTurn();
       ////add a message here and point to render game page!!

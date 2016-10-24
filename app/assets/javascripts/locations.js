@@ -20,13 +20,23 @@ Location.prototype.renderNotOwned = function(){
 }
 
 Location.prototype.renderHistory = function(){
+  var history = this.history;
   debugger;
+  var locationHistory = 'Previous messages: <ul>';
+  for (var i = 0; i < history.length; i++){
+    locationHistory += '<li>' + history[i].message + ' by ' + history[i].character.name;
+
+    if (history[i].success){
+      locationHistory += "; Attempt success with"
+    } else {
+      locationHistory += ": Attempt failure with"
+    }
+    locationHistory += history[i].troops_sent + ' troops sent.</li>';
+  }
+  locationHistory  += '</ul>';
+  $('#history').html(locationHistory);
 }
 
-
-// Location.prototype.takeOver = function (){
-//   debugger;
-// }
 
 function takeOver(gameId, locationId){
   removeForms();
@@ -47,7 +57,7 @@ function takeOver(gameId, locationId){
       }).done(function (response){
         var game = new Game(response.game);
         game.renderGame();
-        removeForms();
+        hideForms();
       }).fail(function (error){
         debugger;
       });
@@ -72,13 +82,23 @@ function addLocationTakeOverListeners(gameId){
   $('div.location').bind("click", function(event){
     defaultStopper(event);
     var locationId = $(this).attr('data-locationid');
-    console.log("'That would be intimidating, if you were, well, intimidating.. '");
-    if (myTurn()){
-      takeOver(gameId, locationId);
+    var controller = this.innerHTML;
+
+    var locationUrl = "/games/" + gameId + "/locations/" + locationId;
+    $.get(locationUrl).done(function(response){
+      var loc = new Location(response.location);
+      loc.renderHistory();
+      showHistory();
+    });
+    if (myTurn() && controller !== playerId){
       showForms();
+      takeOver(gameId, locationId);
+    } else if (myTurn() && controller === playerId){
+      $('#turn').html("You already own this location!")
+      setTimeout(function(){fetchGame(gameId);}, 2000);
     } else {
       $('#turn').html("Please wait for your turn!")
-      setTimeout(function(){fetchGame(gameId);}, 5000);
+      setTimeout(function(){fetchGame(gameId);}, 2000);
     }
   });
 }

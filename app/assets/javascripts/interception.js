@@ -1,6 +1,5 @@
 /// This is the last JS file to be loaded!
 
-
 function addMenuListeners(){
   $("a:contains('Home')").bind("click", function(event){
     defaultStopper(event);
@@ -11,13 +10,11 @@ function addMenuListeners(){
 
   $("a:contains('About')").bind("click", function(event){
     defaultStopper(event);
-    console.log("Here we will print the rules! (Not Vanderpump)");
     printRules();
   });
 
   $('a[href="/games"]').bind("click", function(event){
     defaultStopper(event);
-    console.log("Fetch ALL the games, my demon doggy!")
     fetchGames();
     showGames();
   });
@@ -56,5 +53,4 @@ $(function(){
   }
   hideLayout();
   addMenuListeners();
-  console.log("You think this is a game???");
 });
