@@ -64,6 +64,18 @@ function addDynamicEventListeners(){
     launchGame(startUrl);
   });
 
+  // Listen to game Join link
+  $('body').on("click", '#turn div:contains("Join This Game")', function (event){
+      defaultStopper(event);
+      let joinUrl = $(this).attr("data-joinurl")
+      joinGame(joinUrl);
+    });
+
+ // Listen to current game shortcut link
+ $('body').on("click", '#shortcut a:contains("Current game")', function(event){
+   defaultStopper(event);
+   fetchGameViaUrl(event.currentTarget.href);
+ });
 }
 
 

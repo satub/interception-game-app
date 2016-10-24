@@ -37,12 +37,6 @@ Game.prototype.setBackground = function(){
 
 Game.prototype.setShortcut = function(){
   $("#shortcut")[0].innerHTML = '<a href="/games/' + this.id + '">Current game: ' + this.title + '</a>';
-
-  ///Reattach event listener to the shortcut
-  $("#shortcut a:contains('Current game')").bind("click", function(event){
-    defaultStopper(event);
-    fetchGameViaUrl(event.currentTarget.href);
-  });
 }
 
 
@@ -96,22 +90,9 @@ Game.prototype.renderGame = function(){
   mapKey();
 }
 
-Game.prototype.addJoinFunction = function(){
+Game.prototype.addJoinLink = function(){
   var joinUrl = '/games/' + this.id + '/join';
-
-  $('#turn').html("Join This Game");
-
-  $('#turn:contains("Join This Game")').bind("click", function (event){
-    defaultStopper(event);
-
-    $.get(joinUrl).done(function(response){
-      removeForms();
-      generateNewForm('players/' + playerId + '/characters');
-      showForms();
-      instruction();
-    });
-  })
-
+  $('#turn').html('<div data-joinUrl="' + joinUrl + '" class = "clickable">Join This Game</div>');
 }
 
 Game.prototype.addLaunchLink = function(){
@@ -148,10 +129,11 @@ function fetchGameViaUrl(gameUrl){
     g.setShortcut();
 
     if (g.joinable() && g.notInYet()){
-      g.addJoinFunction();
+      g.addJoinLink();
     } else if (g.launchable()){
       g.addLaunchLink();
     }
+    showGame();
   });
 }
 
@@ -177,5 +159,14 @@ function launchGame(startUrl){
     var g = new Game(response.game);
     g.renderGame();
     fetchMyCharacters();
+  });
+}
+
+function joinGame(joinUrl){
+  $.get(joinUrl).done(function(response){
+    removeForms();
+    generateNewForm('players/' + playerId + '/characters');
+    showForms();
+    instruction();
   });
 }
