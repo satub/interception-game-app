@@ -12,8 +12,6 @@ function Character(attributes)  {
   this.level = attributes.level;
 }
 
-// Character.prototype.constructor = Character;
-
 Character.prototype.renderChar = function(){
   let div = $('<div data-characterId="' + this.id + '"></div>');
   let img = $('<img />',
