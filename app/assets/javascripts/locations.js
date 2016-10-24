@@ -75,27 +75,21 @@ function fetchLocation(gameId, locationId){
   });
 }
 
-function addLocationTakeOverListeners(gameId){
-  $('div.location').bind("click", function(event){
-    defaultStopper(event);
-    var locationId = $(this).attr('data-locationid');
-    var controller = this.innerHTML;
-
-    var locationUrl = "/games/" + gameId + "/locations/" + locationId;
-    $.get(locationUrl).done(function(response){
-      var loc = new Location(response.location);
-      loc.renderHistory();
-      showHistory();
-    });
-    if (myTurn() && controller != playerId){
-      showForms();
-      takeOver(gameId, locationId);
-    } else if (myTurn() && controller == playerId){
-      $('#turn').html("You already own this location!")
-      setTimeout(function(){fetchGame(gameId);}, 3000);
-    } else {
-      $('#turn').html("Please wait for your turn!")
-      setTimeout(function(){fetchGame(gameId);}, 3000);
-    }
+function fetchHistoryAndTakeOver(gameId, locationId, controller){
+  var locationUrl = "/games/" + gameId + "/locations/" + locationId;
+  $.get(locationUrl).done(function(response){
+    var loc = new Location(response.location);
+    loc.renderHistory();
+    showHistory();
   });
+  if (myTurn() && controller != playerId){
+    showForms();
+    takeOver(gameId, locationId);
+  } else if (myTurn() && controller == playerId){
+    $('#turn').html("You already own this location!")
+    setTimeout(function(){fetchGame(gameId);}, 3000);
+  } else {
+    $('#turn').html("Please wait for your turn!")
+    setTimeout(function(){fetchGame(gameId);}, 3000);
+  }
 }

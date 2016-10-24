@@ -80,7 +80,6 @@ function addDynamicEventListeners(){
 
  // Listen to mouseover events on the map
  $('body').on("mouseenter", 'div.location', function(event){
-
   let locationId = $(this).attr('data-locationid');
   let gameId = $("a:contains('Current game')")[0].href.match(/\d+$/)[0];
   defaultStopper(event);
@@ -93,6 +92,14 @@ function addDynamicEventListeners(){
      $("#hover_data").html('');
    });
 
+   // Listen to location takeover attempts
+  $('body').on("click", 'div.location', function(event){
+    defaultStopper(event);
+    let locationId = $(this).attr('data-locationid');
+    let controller = this.innerHTML;
+    let gameId = $("a:contains('Current game')")[0].href.match(/\d+$/)[0];
+    fetchHistoryAndTakeOver(gameId, locationId, controller);
+  });
 }
 
 

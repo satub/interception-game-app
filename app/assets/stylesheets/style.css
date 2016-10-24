@@ -35,11 +35,7 @@ a:hover {
   background-color: grey;
 }
 
-li.clickable:hover {
+div.clickable:hover, li.clickable:hover {
   cursor: pointer;
   background-color: grey;
-}
-
-div.clickable:hover {
-  cursor: pointer;
 }

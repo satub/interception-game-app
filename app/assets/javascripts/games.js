@@ -55,10 +55,9 @@ Game.prototype.renderGame = function(){
   eraseGame();
   turn = this.turn;
   showTurn();
+  
   let map = $('<div id = "map" class="col-9 clearfix rounded"></div>');
-
   $("#currentGame").append(map);
-
   let mapName = $('<div id = "mapName" class="center"></div>').text("Map: " + this.map_name);
   $('#map').append(mapName);
 
@@ -72,8 +71,6 @@ Game.prototype.renderGame = function(){
     $('#map').append(location);
   });
 
-  var gameId = this.id;
-  addLocationTakeOverListeners(gameId);
   mapKey();
 }
 
