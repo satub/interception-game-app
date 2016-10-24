@@ -109,7 +109,7 @@ Game.prototype.addJoinFunction = function(){
       removeForms();
       generateNewForm('players/' + playerId + '/characters');
       showForms();
-
+      instruction();
     });
   })
 
@@ -127,6 +127,7 @@ Game.prototype.addLaunchFunction = function(){
       // cleanScreen();
       turn = response.game.turn;
       showTurn();
+      
       ////add a message here and point to render game page!!
     });
   });

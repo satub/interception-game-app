@@ -183,7 +183,6 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
           $('#character_name').attr("placeholder", failures["name"][0]).css("border","2px solid red");
         });
 
-        //// Render message or error to screen and launch game if ready!
       }
 
 
