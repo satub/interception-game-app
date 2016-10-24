@@ -74,19 +74,6 @@ Game.prototype.renderGame = function(){
 
   var gameId = this.id;
   addLocationTakeOverListeners(gameId);
-
-  $('div.location').mouseenter(function(event){
-    var locationId = $(this).attr('data-locationid');
-    defaultStopper(event);
-    // showLocation(locationId);
-    fetchLocation(gameId, locationId);
-    $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
-  });
-
-  $('div.location').mouseleave(function(event){
-    defaultStopper(event);
-    $("#hover_data").html('');
-  });
   mapKey();
 }
 

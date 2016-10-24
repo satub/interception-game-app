@@ -76,6 +76,23 @@ function addDynamicEventListeners(){
    defaultStopper(event);
    fetchGameViaUrl(event.currentTarget.href);
  });
+
+
+ // Listen to mouseover events on the map
+ $('body').on("mouseenter", 'div.location', function(event){
+
+  let locationId = $(this).attr('data-locationid');
+  let gameId = $("a:contains('Current game')")[0].href.match(/\d+$/)[0];
+  defaultStopper(event);
+  fetchLocation(gameId, locationId);
+  $("#hover_data").css( {position:"absolute", top:event.pageY, left: event.pageX});
+});
+
+ $('body').on("mouseleave", 'div.location', function(event){
+     defaultStopper(event);
+     $("#hover_data").html('');
+   });
+
 }
 
 
