@@ -31,7 +31,7 @@ function Game(attributes){
   this.players = attributes.game_players;
 }
 
-Game.prototype.constructor = Game;
+// Game.prototype.constructor = Game;
 
 Game.prototype.joinable = function(){
   return this.status === "pending";

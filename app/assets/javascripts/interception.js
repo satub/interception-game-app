@@ -47,7 +47,7 @@ function addMenuListeners(){
 }
 
 function addDynamicEventListeners(){
-  
+
 }
 
 $(function(){

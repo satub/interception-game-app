@@ -6,7 +6,7 @@ function Location(attributes){
   this.defense = attributes.defense;
 }
 
-Location.prototype.constructor = Location; ///lose this
+// Location.prototype.constructor = Location; ///lose this
 
 Location.prototype.renderOwned = function(){
   let content = $('<strong></strong>').text(this.content);
