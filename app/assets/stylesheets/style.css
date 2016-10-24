@@ -16,6 +16,10 @@ li.active {
 li.finished {
   color: grey;
 }
+div.notOwned {
+  background-color: #222;
+  color: #EEE;
+}
 
 body {
   font-family: 'Amatic SC';

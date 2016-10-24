@@ -27,7 +27,15 @@ function showKey(){
   var key = 'Color Key:<ul>';
   key += '<li class = "active">Active game</li>';
   key += '<li class = "pending">Waiting for more players</li>';
-  key += '<li class = "finished">This game has finished</li></ul>';
+  key += '<li class = "finished">This game has finished</li></ul>'
+
+  $('#about').html(key);
+  showAbout();
+}
+
+function mapKey(){
+  var key = 'Color Key:<ul>';
+  key += '<div class = "notOwned">You do not control this location</div>';
   $('#about').html(key);
   showAbout();
 }
@@ -81,7 +89,7 @@ function removeHover(){
 }
 
 function showPlayer(){
-  $('#alias').html('Logged in as: ' + playerAlias);
+  $('#alias').html('Logged in as: ' + playerAlias + '; Your player id is ' + playerId);
 }
 
 function loggedIn(){

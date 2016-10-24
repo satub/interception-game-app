@@ -71,10 +71,14 @@ Game.prototype.renderGame = function(){
 
   this.locations.forEach(function(loc){
     let location = $('<div class="col col-2 mx-auto p1 border-box border rounded location" data-locationid="' + loc.id + '"></div>').text(loc.controlled_by);
+    if (playerId != loc.controlled_by){
+      location.addClass("notOwned");
+    } else {
+      location.removeClass("notOwned");
+    }
     $('#map').append(location);
   });
 
-  ///attach LocationTakeOverListeners;
   var gameId = this.id;
   addLocationTakeOverListeners(gameId);
 
@@ -90,6 +94,7 @@ Game.prototype.renderGame = function(){
     defaultStopper(event);
     $("#hover_data").html('');
   });
+  mapKey();
 }
 
 Game.prototype.addJoinFunction = function(){

@@ -10,7 +10,7 @@ Location.prototype.constructor = Location;
 
 Location.prototype.renderOwned = function(){
   let content = $('<strong></strong>').text(this.content);
-  let defense = $('<strong></strong>').text(this.defense);
+  let defense = $('<strong></strong>').text(' Defense: ' + this.defense);
   $("#hover_data").append(content, defense);
 }
 
@@ -21,7 +21,6 @@ Location.prototype.renderNotOwned = function(){
 
 Location.prototype.renderHistory = function(){
   var history = this.history;
-  debugger;
   var locationHistory = 'Previous messages: <ul>';
   for (var i = 0; i < history.length; i++){
     locationHistory += '<li>' + history[i].message + ' by ' + history[i].character.name;
@@ -90,10 +89,10 @@ function addLocationTakeOverListeners(gameId){
       loc.renderHistory();
       showHistory();
     });
-    if (myTurn() && controller !== playerId){
+    if (myTurn() && controller != playerId){
       showForms();
       takeOver(gameId, locationId);
-    } else if (myTurn() && controller === playerId){
+    } else if (myTurn() && controller == playerId){
       $('#turn').html("You already own this location!")
       setTimeout(function(){fetchGame(gameId);}, 2000);
     } else {
