@@ -59,7 +59,6 @@ Game.prototype.showLocation = function(locationId){
 }
 
 Game.prototype.renderGame = function(){
-  // debugger;
   eraseGame();
   turn = this.turn;
   showTurn();
@@ -158,7 +157,6 @@ function fetchGameViaUrl(gameUrl){
     } else if (g.launchable()){
       g.addLaunchFunction();
     }
-    
   });
 }
 

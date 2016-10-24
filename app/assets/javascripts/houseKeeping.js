@@ -111,13 +111,16 @@ function showTurn(){
   }
 }
 
+function instruction(){
+  $('#turn').html('To assign characters to this game: Click "New Character"');
+}
 
 
 /////This needs serious refactoring
 function generateNewForm(resource){  ///currently also creates the resource!! :O
   removeForms();
   var resourceUrl = "/" + resource + "/new"
-  $('#forms').html('Generate a new form here');
+
   $.get(resourceUrl).done(function(response){
     $('#forms').html(response);
 
@@ -133,9 +136,13 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
       if (resource === "games"){
         $.post(formUrl, params).done(function(response){
           removeForms();
+          hideForms();
           var g = new Game(response.game);
           g.renderGame();
+          g.setBackground();
+          g.setShortcut();
           showGame();
+          instruction();
         }).fail(function (error){
           var failures = JSON.parse(error.responseText);
 
@@ -147,10 +154,12 @@ function generateNewForm(resource){  ///currently also creates the resource!! :O
         params = $form.serializeArray();
         $.post(formUrl, params).done(function(response){
           removeForms();
+          hideForms();
           var char = new Character(response.character);
           if (char.id){
             char.renderChar();
           }
+          showCharacters();
         }).fail(function (error){
           var failures = JSON.parse(error.responseText);
 
