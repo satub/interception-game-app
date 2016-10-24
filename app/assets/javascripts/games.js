@@ -143,6 +143,7 @@ function gamesToHTML(gamesAsJSON){
   gameList += '</ul>';
   $('#games').html(gameList);
   showGames();
+  showKey();
 }
 
 
@@ -174,6 +175,7 @@ function addGameListListeners(){
     var gameId = $(this).attr('data-gameid');
     fetchGame(gameId);
     showGame();
+    hideAbout();
   });
 }
 

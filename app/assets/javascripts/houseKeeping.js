@@ -23,6 +23,15 @@ function printRules(){
   })
 }
 
+function showKey(){
+  var key = 'Color Key:<ul>';
+  key += '<li class = "active">Active game</li>';
+  key += '<li class = "pending">Waiting for more players</li>';
+  key += '<li class = "finished">This game has finished</li></ul>';
+  $('#about').html(key);
+  showAbout();
+}
+
 function hideGame(){
   $('#currentGame').hide();
 }
