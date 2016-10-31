@@ -7,7 +7,7 @@ function Game(attributes){
   this.map_name = attributes.map_name;
   this.map_size = attributes.map_size;
   this.background = attributes.background_image_link;
-  this.locations = attributes.locations;
+  this.locations = attributes.ordered_locations;
   this.players = attributes.game_players;
 }
 
@@ -55,7 +55,7 @@ Game.prototype.renderGame = function(){
   eraseGame();
   turn = this.turn;
   showTurn();
-  
+
   let map = $('<div id = "map" class="col-9 clearfix rounded"></div>');
   $("#currentGame").append(map);
   let mapName = $('<div id = "mapName" class="center"></div>').text("Map: " + this.map_name);
